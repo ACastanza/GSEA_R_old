@@ -16,7 +16,11 @@ minsize <- readline(prompt = ("Min size: exclude smaller sets (recommended value
 #collapsedataset <- askYesNo("Collapse data set to Gene Symbols? ")
 #if(collapsedataset == TRUE) {
 #	inputchip <- readline(prompt = ("Input path to CHIP platform file (or drop file into R window) "))
-#	} else {inputchip <- NOCHIP}
+#collapsemode <- menu(c("Max_probe","Median_of_probes","Sum_of_Probes"), graphics = FALSE, title = "Collapsing mode for probe sets => 1 gene")
+#	} else {
+#inputchip <- "NOCHIP"
+collapsemode <- 0
+#}
 outdir <- readline(prompt = ("Drop a directory into R window to use as the output folder or enter directory path: "))
 outname <- readline(prompt = ("Enter a prefix to label output files: "))
 reshuffetype <- menu(c("Phenotype","gene_set"), graphics = FALSE, title = "Select GSEA Permutation Type (recommended: Phenotype)")
@@ -28,13 +32,14 @@ permutation <- "sample.labels"
 permutation <- "gene.labels"
 }
 
-GSEA(                                                                    # Input/Output Files :-------------------------------------------
- input.ds =  inputds,           # Input gene expression dataset file in GCT format
- input.cls = inputcls,           # Input class vector (phenotype) file in CLS format
- gs.db =     gsdb,         # Gene set database in GMT format
-# input.chip = inputchip,         # CHIP File
+GSEA(
+# Input/Output Files :-------------------------------------------------------------------------------
+ input.ds = inputds,                    # Input gene expression dataset file in GCT format
+ input.cls = inputcls,                  # Input class vector (phenotype) file in CLS format
+ gs.db = gsdb,                          # Gene set database in GMT format
+# input.chip = inputchip,               # CHIP File
  output.directory      = outdir,        # Directory where to store output and results (default: "")
-#  Program parameters :-------------------------------------------------------------------------------------------------------------------------
+#  Program parameters :-------------------------------------------------------------------------------
  doc.string            = outname,         # Documentation string used as a prefix to name result files (default: "GSEA.analysis")
  non.interactive.run   = F,               # Run in interactive (i.e. R GUI) or batch (R command line) mode (default: F)
  reshuffling.type      = permutation,     # Type of permutation reshuffling: "sample.labels" or "gene.labels" (default: "sample.labels" 
@@ -54,10 +59,11 @@ GSEA(                                                                    # Input
  fraction              = 1.0,             # For experts only. Subsampling fraction. Set to 1.0 (no resampling) (default: 1.0)
  replace               = F,               # For experts only, Resampling mode (replacement or not replacement) (default: F)
  collapse.dataset      = collapsedataset, # Collapse dataset to gene symbols using a user provided chip file (default: F)
+ collapse.mode          = collapsemode
  save.intermediate.results = F,           # For experts only, save intermediate results (e.g. matrix of random perm. scores) (default: F)
  use.fast.enrichment.routine = T          # Use faster routine to compute enrichment for random permutations (default: T)
 )
-#-----------------------------------------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------
 
 # Overlap and leading gene subset assignment analysis of the GSEA results
 
