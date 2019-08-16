@@ -54,12 +54,12 @@ GSEA(
  gs.size.threshold.max = maxsize,         # Maximum size (in genes) for database gene sets to be considered (default: 500)
  reverse.sign          = F,               # Reverse direction of gene list (pos. enrichment becomes negative, etc.) (default: F)
  preproc.type          = 0,               # Preproc.normalization: 0=none, 1=col(z-score)., 2=col(rank) and row(z-score)., 3=col(rank). (def: 0)
- random.seed           = 3338,            # Random number generator seed. (default: 123456)
+ random.seed           = as.numeric(as.POSIXct(Sys.time())),            # Random number generator seed. (default: 123456)
  perm.type             = 0,               # For experts only. Permutation type: 0 = unbalanced, 1 = balanced (default: 0)
  fraction              = 1.0,             # For experts only. Subsampling fraction. Set to 1.0 (no resampling) (default: 1.0)
  replace               = F,               # For experts only, Resampling mode (replacement or not replacement) (default: F)
  collapse.dataset      = collapsedataset, # Collapse dataset to gene symbols using a user provided chip file (default: F)
- collapse.mode          = collapsemode
+ collapse.mode         = collapsemode,
  save.intermediate.results = F,           # For experts only, save intermediate results (e.g. matrix of random perm. scores) (default: F)
  use.fast.enrichment.routine = T          # Use faster routine to compute enrichment for random permutations (default: T)
 )
