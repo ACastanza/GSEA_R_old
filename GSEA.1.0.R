@@ -16,7 +16,15 @@
 GSEA.ReadCHIPFile <- function(file = "NULL") {
 read.table(file, sep = "\t", comment.char = "", quote = "", stringsAsFactors = FALSE, fill = TRUE, header = T)}
 
-GSEA.CollapseDataset <- function(){}
+GSEA.CollapseDataset <- function(dataplatform = chip, gct = dataset, collapse.mode = collapsemode){
+probemap <- unique(dataplatform[,c("Probe.Set.ID","Gene.Symbol")])
+mappedgct <- merge(x = probemap, y= gct, by.x=1, by.y=1)
+mappedgct = unique(subset(mappedgct, select = -c(1)))
+
+if(collapse.mode == 1){} #MAX
+if(collapse.mode == 2){} #Median
+if(collapse.mode == 3){} #SUM
+}
 
 
 
@@ -552,29 +560,32 @@ GSEA.NormalizeCols <- function(V) {
 
 GSEA <- function(
 input.ds, 
-input.cls, 
+input.cls,
+input.chip, 
 gene.ann = "", 
 gs.db, 
 gs.ann = "",
-output.directory = "", 
-doc.string = "GSEA.analysis", 
+output.directory, 
+doc.string, 
 non.interactive.run = F, 
-reshuffling.type = "sample.labels", 
+reshuffling.type, 
 nperm = 1000, 
 weighted.score.type = 1, 
 nom.p.val.threshold = -1, 
 fwer.p.val.threshold = -1, 
 fdr.q.val.threshold = 0.25, 
-topgs = 10,
+topgs = 20,
 adjust.FDR.q.val = F, 
-gs.size.threshold.min = 25, 
-gs.size.threshold.max = 500, 
+gs.size.threshold.min, 
+gs.size.threshold.max, 
 reverse.sign = F, 
 preproc.type = 0, 
-random.seed = 123456, 
+random.seed, 
 perm.type = 0, 
 fraction = 1.0, 
 replace = F,
+collapse.dataset,
+collapse.mode,
 save.intermediate.results = F,
 use.fast.enrichment.routine = T) {
 
@@ -755,7 +766,7 @@ chip <- GSEA.ReadCHIPFile(file=inputchip)
   } else {
      dataset <- GSEA.Gct2Frame(filename = input.ds)
   }
-collapseddataset <- merge(x=chip,y=dataset, by.x=1, by.y=1)
+collapseddataset <- GSEA.CollapseDataset(chip, dataset)
 }
 
   gene.labels <- row.names(dataset)
@@ -868,6 +879,9 @@ collapseddataset <- merge(x=chip,y=dataset, by.x=1, by.y=1)
   all.gene.symbols <- vector(length = N, mode ="character") 
   all.gs.descs <- vector(length = Ng, mode ="character") 
 
+if(exists("chip") == TRUE)
+{gene.ann <- unique(chip[,c("Gene.Symbol","Gene.Title")])}
+
   if (is.data.frame(gene.ann)) {
      temp <- gene.ann
      a.size <- length(temp[,1])
@@ -882,15 +896,6 @@ collapseddataset <- merge(x=chip,y=dataset, by.x=1, by.y=1)
         all.gene.descs[i] <- gene.labels[i]
         all.gene.symbols[i] <- gene.labels[i]
      }
-  } else {
-     temp <- read.delim(gene.ann, header=T, sep=",", comment.char="", as.is=T)
-     a.size <- length(temp[,1])
-     print(c("Number of gene annotation file entries:", a.size))  
-     accs <- as.character(temp[,1])
-     locs <- match(gene.labels, accs)
-     all.gene.descs <- as.character(temp[locs, "Gene.Title"])
-     all.gene.symbols <- as.character(temp[locs, "Gene.Symbol"])
-     rm(temp)
   }
 
   if (is.data.frame(gs.ann)) {
