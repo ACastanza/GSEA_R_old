@@ -13,7 +13,8 @@
 
 # Auxiliary functions and definitions 
 
-GSEA.ReadCHIPFile <- function(file = "NULL") {}
+GSEA.ReadCHIPFile <- function(file = "NULL") {
+read.table(file, sep = "\t", comment.char = "", quote = "", stringsAsFactors = FALSE, fill = TRUE, header = T)}
 
 GSEA.CollapseDataset <- function(){}
 
@@ -50,15 +51,6 @@ GSEA.GeneRanking <- function(A, class.labels, gene.labels, nperm, permutation.ty
 #   order.matrix: Matrix with the orderings that will sort the columns of the obs.s2n.matrix in decreasing s2n order
 #   obs.order.matrix: Matrix with the orderings that will sort the columns of the s2n.matrix in decreasing s2n order
 #
-# The Broad Institute
-# SOFTWARE COPYRIGHT NOTICE AGREEMENT
-# This software and its documentation are copyright 2003 by the
-# Broad Institute/Massachusetts Institute of Technology.
-# All rights are reserved.
-#
-# This software is supplied without any warranty or guaranteed support
-# whatsoever. Neither the Broad Institute nor MIT can be responsible for
-# its use, misuse, or functionality.
 
      A <- A + 0.00000001
 
@@ -290,15 +282,6 @@ GSEA.EnrichmentScore <- function(gene.list, gene.set, weighted.score.type = 1, c
 #   RES: Numerical vector containing the running enrichment score for all locations in the gene list 
 #   tag.indicator: Binary vector indicating the location of the gene sets (1's) in the gene list 
 #
-# The Broad Institute
-# SOFTWARE COPYRIGHT NOTICE AGREEMENT
-# This software and its documentation are copyright 2003 by the
-# Broad Institute/Massachusetts Institute of Technology.
-# All rights are reserved.
-#
-# This software is supplied without any warranty or guaranteed support
-# whatsoever. Neither the Broad Institute nor MIT can be responsible for
-# its use, misuse, or functionality.
 
    tag.indicator <- sign(match(gene.list, gene.set, nomatch=0))    # notice that the sign is 0 (no tag) or 1 (tag) 
    no.tag.indicator <- 1 - tag.indicator 
@@ -349,15 +332,6 @@ GSEA.EnrichmentScore2 <- function(gene.list, gene.set, weighted.score.type = 1, 
 # Outputs:
 #   ES: Enrichment score (real number between -1 and +1) 
 #
-# The Broad Institute
-# SOFTWARE COPYRIGHT NOTICE AGREEMENT
-# This software and its documentation are copyright 2003 by the
-# Broad Institute/Massachusetts Institute of Technology.
-# All rights are reserved.
-#
-# This software is supplied without any warranty or guaranteed support
-# whatsoever. Neither the Broad Institute nor MIT can be responsible for
-# its use, misuse, or functionality.
 
    N <- length(gene.list) 
    Nh <- length(gene.set) 
@@ -408,15 +382,6 @@ GSEA.HeatMapPlot <- function(V, row.names = F, col.labels, col.classes, col.name
 #
 # Plots a heatmap "pinkogram" of a gene expression matrix including phenotype vector and gene, sample and phenotype labels
 #
-# The Broad Institute
-# SOFTWARE COPYRIGHT NOTICE AGREEMENT
-# This software and its documentation are copyright 2003 by the
-# Broad Institute/Massachusetts Institute of Technology.
-# All rights are reserved.
-#
-# This software is supplied without any warranty or guaranteed support
-# whatsoever. Neither the Broad Institute nor MIT can be responsible for
-# its use, misuse, or functionality.
 
        n.rows <- length(V[,1])
        n.cols <- length(V[1,])
@@ -467,78 +432,14 @@ GSEA.HeatMapPlot <- function(V, row.names = F, col.labels, col.classes, col.name
 
 
 GSEA.Gct2Frame <- function(filename = "NULL") { 
-#
-# Reads a gene expression dataset in GCT format and converts it into an R data frame
-#
-# The Broad Institute
-# SOFTWARE COPYRIGHT NOTICE AGREEMENT
-# This software and its documentation are copyright 2003 by the
-# Broad Institute/Massachusetts Institute of Technology.
-# All rights are reserved.
-#
-# This software is supplied without any warranty or guaranteed support
-# whatsoever. Neither the Broad Institute nor MIT can be responsible for
-# its use, misuse, or functionality.
-   ds <- read.delim(filename, header=T, sep="\t", skip=2, row.names=1, blank.lines.skip=T, comment.char="", as.is=T)
-   ds <- ds[-1]
+   ds <- read.table(filename, sep="\t", comment.char = "", quote = "", stringsAsFactors = FALSE, fill = TRUE, header = F)
    return(ds)
-}
-
-GSEA.Gct2Frame2 <- function(filename = "NULL") { 
-#
-# Reads a gene expression dataset in GCT format and converts it into an R data frame
-#
-# The Broad Institute
-# SOFTWARE COPYRIGHT NOTICE AGREEMENT
-# This software and its documentation are copyright 2003 by the
-# Broad Institute/Massachusetts Institute of Technology.
-# All rights are reserved.
-#
-# This software is supplied without any warranty or guaranteed support
-# whatsoever. Neither the Broad Institute nor MIT can be responsible for
-# its use, misuse, or functionality.
-      content <- readLines(filename)
-      content <- content[-1]
-      content <- content[-1]
-      col.names <- noquote(unlist(strsplit(content[1], "\t")))
-      col.names <- col.names[c(-1, -2)]
-      num.cols <- length(col.names)
-      content <- content[-1]
-      num.lines <- length(content)
-
-
-      row.nam <- vector(length=num.lines, mode="character")
-      row.des <- vector(length=num.lines, mode="character")
-      m <- matrix(0, nrow=num.lines, ncol=num.cols)
-
-      for (i in 1:num.lines) {
-         line.list <- noquote(unlist(strsplit(content[i], "\t")))
-         row.nam[i] <- noquote(line.list[1])
-         row.des[i] <- noquote(line.list[2])
-         line.list <- line.list[c(-1, -2)]
-         for (j in 1:length(line.list)) {
-            m[i, j] <- as.numeric(line.list[j])
-         }
-      }
-      ds <- data.frame(m)
-      names(ds) <- col.names
-      row.names(ds) <- row.nam
-      return(ds)
 }
 
 GSEA.ReadClsFile <- function(file = "NULL") { 
 #
 # Reads a class vector CLS file and defines phenotype and class labels vectors for the samples in a gene expression file (RES or GCT format)
 #
-# The Broad Institute
-# SOFTWARE COPYRIGHT NOTICE AGREEMENT
-# This software and its documentation are copyright 2003 by the
-# Broad Institute/Massachusetts Institute of Technology.
-# All rights are reserved.
-#
-# This software is supplied without any warranty or guaranteed support
-# whatsoever. Neither the Broad Institute nor MIT can be responsible for
-# its use, misuse, or functionality.
 
       cls.cont <- readLines(file)
       num.lines <- length(cls.cont)
@@ -567,15 +468,6 @@ GSEA.Threshold <- function(V, thres, ceil) {
 #
 # Threshold and ceiling pre-processing for gene expression matrix
 #
-# The Broad Institute
-# SOFTWARE COPYRIGHT NOTICE AGREEMENT
-# This software and its documentation are copyright 2003 by the
-# Broad Institute/Massachusetts Institute of Technology.
-# All rights are reserved.
-#
-# This software is supplied without any warranty or guaranteed support
-# whatsoever. Neither the Broad Institute nor MIT can be responsible for
-# its use, misuse, or functionality.
 
         V[V < thres] <- thres
         V[V > ceil] <- ceil
@@ -586,15 +478,6 @@ GSEA.VarFilter <- function(V, fold, delta, gene.names = "NULL") {
 #
 # Variation filter pre-processing for gene expression matrix
 #
-# The Broad Institute
-# SOFTWARE COPYRIGHT NOTICE AGREEMENT
-# This software and its documentation are copyright 2003 by the
-# Broad Institute/Massachusetts Institute of Technology.
-# All rights are reserved.
-#
-# This software is supplied without any warranty or guaranteed support
-# whatsoever. Neither the Broad Institute nor MIT can be responsible for
-# its use, misuse, or functionality.
 
         cols <- length(V[1,])
         rows <- length(V[,1])
@@ -630,15 +513,6 @@ GSEA.NormalizeRows <- function(V) {
 #
 # Stardardize rows of a gene expression matrix
 #
-# The Broad Institute
-# SOFTWARE COPYRIGHT NOTICE AGREEMENT
-# This software and its documentation are copyright 2003 by the
-# Broad Institute/Massachusetts Institute of Technology.
-# All rights are reserved.
-#
-# This software is supplied without any warranty or guaranteed support
-# whatsoever. Neither the Broad Institute nor MIT can be responsible for
-# its use, misuse, or functionality.
 
         row.mean <- apply(V, MARGIN=1, FUN=mean)
                row.sd <- apply(V, MARGIN=1, FUN=sd)
@@ -657,15 +531,6 @@ GSEA.NormalizeCols <- function(V) {
 #
 # Stardardize columns of a gene expression matrix
 #
-# The Broad Institute
-# SOFTWARE COPYRIGHT NOTICE AGREEMENT
-# This software and its documentation are copyright 2003 by the
-# Broad Institute/Massachusetts Institute of Technology.
-# All rights are reserved.
-#
-# This software is supplied without any warranty or guaranteed support
-# whatsoever. Neither the Broad Institute nor MIT can be responsible for
-# its use, misuse, or functionality.
 
         col.mean <- apply(V, MARGIN=2, FUN=mean)
                col.sd <- apply(V, MARGIN=2, FUN=sd)
@@ -723,7 +588,7 @@ use.fast.enrichment.routine = T) {
 # For details see Subramanian et al 2005
 #
 # Inputs:
-#   input.ds: Input gene expression Affymetrix dataset file in RES or GCT format 
+#   input.ds: Input gene expression dataset file in GCT format 
 #   input.cls:  Input class vector (phenotype) file in CLS format 
 #   gene.ann.file: Gene microarray annotation file (Affymetrix Netaffyx *.csv format) (default: none) 
 #   gs.file: Gene set database in GMT format 
@@ -796,15 +661,6 @@ use.fast.enrichment.routine = T) {
 # results1: Global output report for first phenotype 
 # result2:  Global putput report for second phenotype
 #
-# The Broad Institute
-# SOFTWARE COPYRIGHT NOTICE AGREEMENT
-# This software and its documentation are copyright 2003 by the
-# Broad Institute/Massachusetts Institute of Technology.
-# All rights are reserved.
-#
-# This software is supplied without any warranty or guaranteed support
-# whatsoever. Neither the Broad Institute nor MIT can be responsible for
-# its use, misuse, or functionality.
 
   print(" *** Running GSEA Analysis...")
 
@@ -842,6 +698,12 @@ if (is.data.frame(gs.ann)) {
 } else {
     write(paste("gs.ann =", gs.ann, sep=" "), file=filename, append=T) 
 }
+if (is.data.frame(input.chip)) {
+#      write(paste("input.chip=", quote(input.chip), sep=" "), file=filename, append=T)
+} else {
+      write(paste("input.chip=", input.chip, sep=" "), file=filename, append=T)
+}
+
 write(paste("output.directory =", output.directory, sep=" "), file=filename, append=T) 
 write(paste("doc.string = ", doc.string, sep=" "), file=filename, append=T) 
 write(paste("non.interactive.run =", non.interactive.run, sep=" "), file=filename, append=T) 
@@ -880,12 +742,22 @@ write(paste("replace =", replace, sep=" "), file=filename, append=T)
 
   time1 <- proc.time()
 
+if(collapsedataset == FALSE){
   if (is.data.frame(input.ds)) {
      dataset <- input.ds
   } else {
-#         dataset <- GSEA.Gct2Frame(filename = input.ds)
-     dataset <- GSEA.Gct2Frame2(filename = input.ds)
+     dataset <- GSEA.Gct2Frame(filename = input.ds)
   }
+} else if(collapsedataset == TRUE){
+chip <- GSEA.ReadCHIPFile(file=inputchip)
+  if (is.data.frame(input.ds)) {
+     dataset <- input.ds
+  } else {
+     dataset <- GSEA.Gct2Frame(filename = input.ds)
+  }
+collapseddataset <- merge(x=chip,y=dataset, by.x=1, by.y=1)
+}
+
   gene.labels <- row.names(dataset)
   sample.names <- names(dataset)
   A <- data.matrix(dataset)
