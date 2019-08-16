@@ -323,51 +323,6 @@ GSEA.EnrichmentScore <- function(gene.list, gene.set, weighted.score.type = 1, c
 }
 
 
-OLD.GSEA.EnrichmentScore <- function(gene.list, gene.set) {  
-#
-# Computes the original GSEA score from Mootha et al 2003 of gene.set in gene.list 
-#
-# Inputs:
-#   gene.list: The ordered gene list (e.g. integers indicating the original position in the input dataset)  
-#   gene.set: A gene set (e.g. integers indicating the location of those genes in the input dataset) 
-#
-# Outputs:
-#   ES: Enrichment score (real number between -1 and +1) 
-#   arg.ES: Location in gene.list where the peak running enrichment occurs (peak of the "mountain") 
-#   RES: Numerical vector containing the running enrichment score for all locations in the gene list 
-#   tag.indicator: Binary vector indicating the location of the gene sets (1's) in the gene list 
-#
-# The Broad Institute
-# SOFTWARE COPYRIGHT NOTICE AGREEMENT
-# This software and its documentation are copyright 2003 by the
-# Broad Institute/Massachusetts Institute of Technology.
-# All rights are reserved.
-#
-# This software is supplied without any warranty or guaranteed support
-# whatsoever. Neither the Broad Institute nor MIT can be responsible for
-# its use, misuse, or functionality.
-
-   tag.indicator <- sign(match(gene.list, gene.set, nomatch=0))    # notice that the sign is 0 (no tag) or 1 (tag) 
-   no.tag.indicator <- 1 - tag.indicator 
-   N <- length(gene.list) 
-   Nh <- length(gene.set) 
-   Nm <-  N - Nh 
-
-   norm.tag    <- sqrt((N - Nh)/Nh)
-   norm.no.tag <- sqrt(Nh/(N - Nh))
-
-   RES <- cumsum(tag.indicator * norm.tag - no.tag.indicator * norm.no.tag)      
-   max.ES <- max(RES)
-   min.ES <- min(RES)
-   if (max.ES > - min.ES) {
-      ES <- signif(max.ES, digits=5)
-      arg.ES <- which.max(RES)
-   } else {
-      ES <- signif(min.ES, digits=5)
-      arg.ES <- which.min(RES)
-   }
-   return(list(ES = ES, arg.ES = arg.ES, RES = RES, indicator = tag.indicator))    
-}
 
 GSEA.EnrichmentScore2 <- function(gene.list, gene.set, weighted.score.type = 1, correl.vector = NULL) {  
 #
@@ -778,7 +733,6 @@ perm.type = 0,
 fraction = 1.0, 
 replace = F,
 save.intermediate.results = F,
-OLD.GSEA = F,
 use.fast.enrichment.routine = T) {
 
 # This is a methodology for the analysis of global molecular profiles called Gene Set Enrichment Analysis (GSEA). It determines 
@@ -814,7 +768,6 @@ use.fast.enrichment.routine = T) {
 #   perm.type: Permutation type: 0 = unbalanced, 1 = balanced. For experts only (default: 0) 
 #   fraction: Subsampling fraction. Set to 1.0 (no resampling). For experts only (default: 1.0) 
 #   replace: Resampling mode (replacement or not replacement). For experts only (default: F) 
-#   OLD.GSEA: if TRUE compute the OLD GSEA of Mootha et al 2003
 #   use.fast.enrichment.routine: if true it uses a faster version to compute random perm. enrichment "GSEA.EnrichmentScore2"  
 #
 #   Output:
@@ -876,10 +829,6 @@ use.fast.enrichment.routine = T) {
 # its use, misuse, or functionality.
 
   print(" *** Running GSEA Analysis...")
-
-if (OLD.GSEA == T) {
-   print("Running OLD GSEA from Mootha et al 2003")
-}
 
 # Copy input parameters to log file
 
@@ -1194,11 +1143,7 @@ write(paste("replace =", replace, sep=" "), file=filename, append=T)
        gene.set <- gs[i,gs[i,] != "null"]
        gene.set2 <- vector(length=length(gene.set), mode = "numeric")
        gene.set2 <- match(gene.set, gene.labels)
-       if (OLD.GSEA == F) {
-          GSEA.results <- GSEA.EnrichmentScore(gene.list=gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector = obs.s2n)
-       } else {
-          GSEA.results <- OLD.GSEA.EnrichmentScore(gene.list=gene.list2, gene.set=gene.set2)
-       }
+       GSEA.results <- GSEA.EnrichmentScore(gene.list=gene.list2, gene.set=gene.set2, weighted.score.type=weighted.score.type, correl.vector = obs.s2n)
        Obs.ES[i] <- GSEA.results$ES
        Obs.arg.ES[i] <- GSEA.results$arg.ES
        Obs.RES[i,] <- GSEA.results$RES
@@ -1307,34 +1252,22 @@ print("Computing nominal p-values...")
 
 p.vals <- matrix(0, nrow = Ng, ncol = 2)
 
-if (OLD.GSEA == F) {
-   for (i in 1:Ng) {
-      pos.phi <- NULL
-      neg.phi <- NULL
-      for (j in 1:nperm) {
-         if (phi[i, j] >= 0) {
-            pos.phi <- c(pos.phi, phi[i, j]) 
-         } else {
-            neg.phi <- c(neg.phi, phi[i, j]) 
-         }
-      }
-      ES.value <- Obs.ES[i]
-      if (ES.value >= 0) {
-         p.vals[i, 1] <- signif(sum(pos.phi >= ES.value)/length(pos.phi), digits=5)
-      } else {
-         p.vals[i, 1] <- signif(sum(neg.phi <= ES.value)/length(neg.phi), digits=5)
-      }
-   }
-} else {  # For OLD GSEA compute the p-val using positive and negative values in the same histogram
-   for (i in 1:Ng) {
-      if (Obs.ES[i] >= 0) {
-         p.vals[i, 1] <-  sum(phi[i,] >= Obs.ES[i])/length(phi[i,])
-         p.vals[i, 1] <-  signif(p.vals[i, 1], digits=5)
-      } else {
-         p.vals[i, 1] <-  sum(phi[i,] <= Obs.ES[i])/length(phi[i,])
-         p.vals[i, 1] <-  signif(p.vals[i, 1], digits=5)
-      }
-   }
+for (i in 1:Ng) {
+  pos.phi <- NULL
+  neg.phi <- NULL
+  for (j in 1:nperm) {
+     if (phi[i, j] >= 0) {
+        pos.phi <- c(pos.phi, phi[i, j]) 
+     } else {
+        neg.phi <- c(neg.phi, phi[i, j]) 
+     }
+  }
+  ES.value <- Obs.ES[i]
+  if (ES.value >= 0) {
+     p.vals[i, 1] <- signif(sum(pos.phi >= ES.value)/length(pos.phi), digits=5)
+  } else {
+     p.vals[i, 1] <- signif(sum(neg.phi <= ES.value)/length(neg.phi), digits=5)
+  }
 }
 
 # Find effective size 
@@ -1365,19 +1298,18 @@ if (OLD.GSEA == F) {
 
 print("Computing rescaling normalization for each gene set null...")
 
-if (OLD.GSEA == F) {
-   for (i in 1:Ng) {
-         pos.phi <- NULL
-         neg.phi <- NULL
-         for (j in 1:nperm) {
-            if (phi[i, j] >= 0) {
-               pos.phi <- c(pos.phi, phi[i, j]) 
-            } else {
-               neg.phi <- c(neg.phi, phi[i, j]) 
-            }
-         }
-         pos.m <- mean(pos.phi)
-         neg.m <- mean(abs(neg.phi))
+for (i in 1:Ng) {
+      pos.phi <- NULL
+      neg.phi <- NULL
+      for (j in 1:nperm) {
+        if (phi[i, j] >= 0) {
+            pos.phi <- c(pos.phi, phi[i, j]) 
+        } else {
+            neg.phi <- c(neg.phi, phi[i, j]) 
+        }
+      }
+      pos.m <- mean(pos.phi)
+      neg.m <- mean(abs(neg.phi))
 
 #         if (Obs.ES[i] >= 0) {
 #            KS.size[i] <- which.min(abs(KS.mean.table - pos.m))
@@ -1385,39 +1317,29 @@ if (OLD.GSEA == F) {
 #            KS.size[i] <- which.min(abs(KS.mean.table - neg.m))
 #         }
 
-         pos.phi <- pos.phi/pos.m
-         neg.phi <- neg.phi/neg.m
-         for (j in 1:nperm) {
-            if (phi[i, j] >= 0) {
-                phi.norm[i, j] <- phi[i, j]/pos.m
-            } else {
-                phi.norm[i, j] <- phi[i, j]/neg.m
-            }
-          }
-          for (j in 1:nperm) {
-             if (obs.phi[i, j] >= 0) {
-                obs.phi.norm[i, j] <- obs.phi[i, j]/pos.m
-             } else {
-                obs.phi.norm[i, j] <- obs.phi[i, j]/neg.m
-             }
-          }
-          if (Obs.ES[i] >= 0) {
-             Obs.ES.norm[i] <- Obs.ES[i]/pos.m
+      pos.phi <- pos.phi/pos.m
+      neg.phi <- neg.phi/neg.m
+      for (j in 1:nperm) {
+        if (phi[i, j] >= 0) {
+            phi.norm[i, j] <- phi[i, j]/pos.m
+        } else {
+            phi.norm[i, j] <- phi[i, j]/neg.m
+        }
+      }
+      for (j in 1:nperm) {
+          if (obs.phi[i, j] >= 0) {
+            obs.phi.norm[i, j] <- obs.phi[i, j]/pos.m
           } else {
-             Obs.ES.norm[i] <- Obs.ES[i]/neg.m
+            obs.phi.norm[i, j] <- obs.phi[i, j]/neg.m
           }
-   }
-} else {  # For OLD GSEA does not normalize using empirical scaling 
-   for (i in 1:Ng) {
-      for (j in 1:nperm) {
-          phi.norm[i, j] <- phi[i, j]/400
       }
-      for (j in 1:nperm) {
-          obs.phi.norm[i, j] <- obs.phi[i, j]/400
+      if (Obs.ES[i] >= 0) {
+          Obs.ES.norm[i] <- Obs.ES[i]/pos.m
+      } else {
+          Obs.ES.norm[i] <- Obs.ES[i]/neg.m
       }
-      Obs.ES.norm[i] <- Obs.ES[i]/400
-   }
 }
+
 
 # Save intermedite results
 
@@ -1446,55 +1368,34 @@ if (OLD.GSEA == F) {
 
       print("Computing FWER p-values...")
 
-if (OLD.GSEA == F) {
-    max.ES.vals.p <- NULL
-    max.ES.vals.n <- NULL
-    for (j in 1:nperm) {
-       pos.phi <- NULL
-       neg.phi <- NULL
-       for (i in 1:Ng) {
-          if (phi.norm[i, j] >= 0) {
-             pos.phi <- c(pos.phi, phi.norm[i, j]) 
-          } else {
-             neg.phi <- c(neg.phi, phi.norm[i, j]) 
-          }
-       }
-       if (length(pos.phi) > 0) {
-          max.ES.vals.p <- c(max.ES.vals.p, max(pos.phi))
-       }
-       if (length(neg.phi) > 0) {
-          max.ES.vals.n <- c(max.ES.vals.n, min(neg.phi))
-       }
-     }
+max.ES.vals.p <- NULL
+max.ES.vals.n <- NULL
+for (j in 1:nperm) {
+   pos.phi <- NULL
+   neg.phi <- NULL
    for (i in 1:Ng) {
-       ES.value <- Obs.ES.norm[i]
-       if (Obs.ES.norm[i] >= 0) {
-          p.vals[i, 2] <- signif(sum(max.ES.vals.p >= ES.value)/length(max.ES.vals.p), digits=5)
-       } else {
-          p.vals[i, 2] <- signif(sum(max.ES.vals.n <= ES.value)/length(max.ES.vals.n), digits=5)
-       }
-     }
-} else {  # For OLD GSEA compute the FWER using positive and negative values in the same histogram
-    max.ES.vals <- NULL
-    for (j in 1:nperm) {
-       max.NES <- max(phi.norm[,j])
-       min.NES <- min(phi.norm[,j])
-       if (max.NES > - min.NES) {
-          max.val <- max.NES
-       } else {
-          max.val <- min.NES
-       }
-       max.ES.vals <- c(max.ES.vals, max.val)
-    }
-    for (i in 1:Ng) {
-       if (Obs.ES.norm[i] >= 0) {
-          p.vals[i, 2] <- sum(max.ES.vals >= Obs.ES.norm[i])/length(max.ES.vals)
-       } else {
-          p.vals[i, 2] <- sum(max.ES.vals <= Obs.ES.norm[i])/length(max.ES.vals)
-       }
-       p.vals[i, 2] <-  signif(p.vals[i, 2], digits=4)
-     }
+      if (phi.norm[i, j] >= 0) {
+         pos.phi <- c(pos.phi, phi.norm[i, j]) 
+      } else {
+         neg.phi <- c(neg.phi, phi.norm[i, j]) 
+      }
+   }
+   if (length(pos.phi) > 0) {
+      max.ES.vals.p <- c(max.ES.vals.p, max(pos.phi))
+   }
+   if (length(neg.phi) > 0) {
+      max.ES.vals.n <- c(max.ES.vals.n, min(neg.phi))
+   }
 }
+ for (i in 1:Ng) {
+     ES.value <- Obs.ES.norm[i]
+     if (Obs.ES.norm[i] >= 0) {
+        p.vals[i, 2] <- signif(sum(max.ES.vals.p >= ES.value)/length(max.ES.vals.p), digits=5)
+     } else {
+        p.vals[i, 2] <- signif(sum(max.ES.vals.n <= ES.value)/length(max.ES.vals.n), digits=5)
+     }
+ }
+
 
 # Compute FDRs 
 
@@ -2601,12 +2502,3 @@ GSEA.Analyze.Sets <- function(
    }
 
 }
-
-
-
-
-
-
-
-
-
