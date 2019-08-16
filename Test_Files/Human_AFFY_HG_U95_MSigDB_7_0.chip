@@ -877,9 +877,9 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 1680_at	GRB7	2886	growth factor receptor bound protein 7 [Source:HGNC Symbol;Acc:HGNC:4567]
 1681_at	ESR1	2099	estrogen receptor 1 [Source:HGNC Symbol;Acc:HGNC:3467]
 1682_s_at	ABCB1	5243	ATP binding cassette subfamily B member 1 [Source:HGNC Symbol;Acc:HGNC:40]
-1683_at	RF02203
-1683_at	RF02204
-1683_at	RF02205
+1683_at	RF02203		NA
+1683_at	RF02204		NA
+1683_at	RF02205		NA
 1684_s_at	WT1	7490	WT1 transcription factor [Source:HGNC Symbol;Acc:HGNC:12796]
 1685_at	RAB4A	5867	RAB4A, member RAS oncogene family [Source:HGNC Symbol;Acc:HGNC:9781]
 1685_at	SPHAR	10638	S-phase response (cyclin related) [Source:HGNC Symbol;Acc:HGNC:16957]
@@ -1188,12 +1188,12 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 1942_s_at	MIR6759	102466729	microRNA 6759 [Source:HGNC Symbol;Acc:HGNC:50063]
 1943_at	CCNA2	890	cyclin A2 [Source:HGNC Symbol;Acc:HGNC:1578]
 1945_at	CCNB1	891	cyclin B1 [Source:HGNC Symbol;Acc:HGNC:1579]
-1946_at	RF02208
-1946_at	RF02209
-1946_at	RF02210
+1946_at	RF02208		NA
+1946_at	RF02209		NA
+1946_at	RF02210		NA
 1946_at	WT1-AS	51352	WT1 antisense RNA [Source:HGNC Symbol;Acc:HGNC:18135]
-1947_g_at	RF02208
-1947_g_at	RF02209
+1947_g_at	RF02208		NA
+1947_g_at	RF02209		NA
 1947_g_at	WT1-AS	51352	WT1 antisense RNA [Source:HGNC Symbol;Acc:HGNC:18135]
 1948_f_at	NOS2	4843	nitric oxide synthase 2 [Source:HGNC Symbol;Acc:HGNC:7873]
 1950_s_at	SMAD3	4088	SMAD family member 3 [Source:HGNC Symbol;Acc:HGNC:6769]
@@ -1853,11 +1853,11 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 31632_at	ZNF259P1	442240	zinc finger protein 259 pseudogene 1 [Source:HGNC Symbol;Acc:HGNC:13052]
 31633_g_at	ZNF259P1	442240	zinc finger protein 259 pseudogene 1 [Source:HGNC Symbol;Acc:HGNC:13052]
 31633_g_at	ZPR1	8882	ZPR1 zinc finger [Source:HGNC Symbol;Acc:HGNC:13051]
-31634_at	AC006518.7
+31634_at	AC006518.7		NA
 31634_at	AC018630.2		PRH1-PRR4 readthrough
 31634_at	PRH1	5554	proline rich protein HaeIII subfamily 1 [Source:HGNC Symbol;Acc:HGNC:9366]
 31634_at	PRR4	11272	proline rich 4 [Source:HGNC Symbol;Acc:HGNC:18020]
-31635_g_at	AC006518.7
+31635_g_at	AC006518.7		NA
 31635_g_at	AC018630.2		PRH1-PRR4 readthrough
 31635_g_at	PRH1	5554	proline rich protein HaeIII subfamily 1 [Source:HGNC Symbol;Acc:HGNC:9366]
 31635_g_at	PRH2	5555	proline rich protein HaeIII subfamily 2 [Source:HGNC Symbol;Acc:HGNC:9367]
@@ -2585,8 +2585,8 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 32310_f_at	PMS2P10	100288713	PMS1 homolog 2, mismatch repair system component pseudogene 10 [Source:HGNC Symbol;Acc:HGNC:9124]
 32310_f_at	PMS2P5	5383	PMS1 homolog 2, mismatch repair system component pseudogene 5 [Source:HGNC Symbol;Acc:HGNC:9130]
 32310_f_at	PMS2P7	100101440	PMS1 homolog 2, mismatch repair system component pseudogene 7 [Source:HGNC Symbol;Acc:HGNC:33515]
-32310_f_at	RF00019
-32311_r_at	RF00019
+32310_f_at	RF00019		NA
+32311_r_at	RF00019		NA
 32312_at	TPM2	7169	tropomyosin 2 [Source:HGNC Symbol;Acc:HGNC:12011]
 32313_at	TPM2	7169	tropomyosin 2 [Source:HGNC Symbol;Acc:HGNC:12011]
 32314_g_at	TPM2	7169	tropomyosin 2 [Source:HGNC Symbol;Acc:HGNC:12011]
@@ -4204,7 +4204,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 33790_at	CCL14	6358	C-C motif chemokine ligand 14 [Source:HGNC Symbol;Acc:HGNC:10612]
 33790_at	CCL15-CCL14	348249	CCL15-CCL14 readthrough (NMD candidate) [Source:HGNC Symbol;Acc:HGNC:44436]
 33791_at	DLEU1	10301	deleted in lymphocytic leukemia 1 [Source:HGNC Symbol;Acc:HGNC:13747]
-33791_at	RF02104
+33791_at	RF02104		NA
 33792_at	PSCA	8000	prostate stem cell antigen [Source:HGNC Symbol;Acc:HGNC:9500]
 33793_at	TCF20	6942	transcription factor 20 [Source:HGNC Symbol;Acc:HGNC:11631]
 33794_g_at	TCF20	6942	transcription factor 20 [Source:HGNC Symbol;Acc:HGNC:11631]
@@ -4336,7 +4336,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 33897_at	PI4K2A	55361	phosphatidylinositol 4-kinase type 2 alpha [Source:HGNC Symbol;Acc:HGNC:30031]
 33898_at	MCRS1	10445	microspherule protein 1 [Source:HGNC Symbol;Acc:HGNC:6960]
 33899_at	ALDH9A1	223	aldehyde dehydrogenase 9 family member A1 [Source:HGNC Symbol;Acc:HGNC:412]
-33899_at	RF00019
+33899_at	RF00019		NA
 338_at	ATF6	22926	activating transcription factor 6 [Source:HGNC Symbol;Acc:HGNC:791]
 33900_at	FSTL3	10272	follistatin like 3 [Source:HGNC Symbol;Acc:HGNC:3973]
 33901_at	SLC29A1	2030	solute carrier family 29 member 1 (Augustine blood group) [Source:HGNC Symbol;Acc:HGNC:11003]
@@ -4469,7 +4469,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 34029_at	DMP1	1758	dentin matrix acidic phosphoprotein 1 [Source:HGNC Symbol;Acc:HGNC:2932]
 34030_at	TULP1	7287	tubby like protein 1 [Source:HGNC Symbol;Acc:HGNC:12423]
 34031_i_at	KRIT1	889	KRIT1 ankyrin repeat containing [Source:HGNC Symbol;Acc:HGNC:1573]
-34031_i_at	RF00019
+34031_i_at	RF00019		NA
 34032_at	AC022613.3		novel transcript
 34033_s_at	LILRA2	11027	leukocyte immunoglobulin like receptor A2 [Source:HGNC Symbol;Acc:HGNC:6603]
 34034_at	STARD8	9754	StAR related lipid transfer domain containing 8 [Source:HGNC Symbol;Acc:HGNC:19161]
@@ -5767,7 +5767,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 35237_at	COL21A1	81578	collagen type XXI alpha 1 chain [Source:HGNC Symbol;Acc:HGNC:17025]
 35238_at	TRAF5	7188	TNF receptor associated factor 5 [Source:HGNC Symbol;Acc:HGNC:12035]
 35239_at	EMD	2010	emerin [Source:HGNC Symbol;Acc:HGNC:3331]
-35240_at	RF00017
+35240_at	RF00017		NA
 35240_at	WDR73	84942	WD repeat domain 73 [Source:HGNC Symbol;Acc:HGNC:25928]
 35241_at	ZNF518A	9849	zinc finger protein 518A [Source:HGNC Symbol;Acc:HGNC:29009]
 35242_at	CDK18	5129	cyclin dependent kinase 18 [Source:HGNC Symbol;Acc:HGNC:8751]
@@ -6294,7 +6294,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 35748_at	EEF1B2	1933	eukaryotic translation elongation factor 1 beta 2 [Source:HGNC Symbol;Acc:HGNC:3208]
 35748_at	EEF1B2P3	644820	eukaryotic translation elongation factor 1 beta 2 pseudogene 3 [Source:HGNC Symbol;Acc:HGNC:3210]
 35748_at	EEF1B2P6	647030	eukaryotic translation elongation factor 1 beta 2 pseudogene 6 [Source:HGNC Symbol;Acc:HGNC:51453]
-35748_at	RF00134
+35748_at	RF00134		NA
 35748_at	SNORA41	619569	small nucleolar RNA, H/ACA box 41 [Source:HGNC Symbol;Acc:HGNC:32634]
 35748_at	SNORD51	26798	small nucleolar RNA, C/D box 51 [Source:HGNC Symbol;Acc:HGNC:10201]
 35749_at	TADA3	10474	transcriptional adaptor 3 [Source:HGNC Symbol;Acc:HGNC:19422]
@@ -6516,7 +6516,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 35933_f_at	AC091390.2		postmeiotic segregation increased 2-like protein pseudogene
 35933_f_at	PMS2P3	5387	PMS1 homolog 2, mismatch repair system component pseudogene 3 [Source:HGNC Symbol;Acc:HGNC:9128]
 35933_f_at	PMS2P4	5382	PMS1 homolog 2, mismatch repair system component pseudogene 4 [Source:HGNC Symbol;Acc:HGNC:9129]
-35933_f_at	RF00019
+35933_f_at	RF00019		NA
 35934_at	EIF2S3	1968	eukaryotic translation initiation factor 2 subunit gamma [Source:HGNC Symbol;Acc:HGNC:3267]
 35934_at	EIF2S3B	255308	eukaryotic translation initiation factor 2 subunit gamma B [Source:HGNC Symbol;Acc:HGNC:43863]
 35935_at	CHKB-CPT1B	386593	CHKB-CPT1B readthrough (NMD candidate) [Source:HGNC Symbol;Acc:HGNC:41998]
@@ -7039,7 +7039,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 36393_at	DPF1	8193	double PHD fingers 1 [Source:HGNC Symbol;Acc:HGNC:20225]
 36394_at	LY6H	4062	lymphocyte antigen 6 family member H [Source:HGNC Symbol;Acc:HGNC:6728]
 36397_at	CHRNA5	1138	cholinergic receptor nicotinic alpha 5 subunit [Source:HGNC Symbol;Acc:HGNC:1959]
-36398_at	RF00004
+36398_at	RF00004		NA
 36399_at	AC018765.1		tec
 363_at	PRKCG	5582	protein kinase C gamma [Source:HGNC Symbol;Acc:HGNC:9402]
 36400_at	PRIM1	5557	DNA primase subunit 1 [Source:HGNC Symbol;Acc:HGNC:9369]
@@ -9013,9 +9013,9 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 38205_at	NEUROD2	4761	neuronal differentiation 2 [Source:HGNC Symbol;Acc:HGNC:7763]
 38206_at	RPL3L	6123	ribosomal protein L3 like [Source:HGNC Symbol;Acc:HGNC:10351]
 38207_at	NEAT1	283131	nuclear paraspeckle assembly transcript 1 [Source:HGNC Symbol;Acc:HGNC:30815]
-38207_at	RF01955
-38207_at	RF01956
-38207_at	RF01957
+38207_at	RF01955		NA
+38207_at	RF01956		NA
+38207_at	RF01957		NA
 38208_at	SLC35A3	23443	solute carrier family 35 member A3 [Source:HGNC Symbol;Acc:HGNC:11023]
 38209_at	PTGER1	5731	prostaglandin E receptor 1 [Source:HGNC Symbol;Acc:HGNC:9593]
 38210_at	SURF2	6835	surfeit 2 [Source:HGNC Symbol;Acc:HGNC:11475]
@@ -10326,7 +10326,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 39423_f_at	SPOP	8405	speckle type BTB/POZ protein [Source:HGNC Symbol;Acc:HGNC:11254]
 39424_at	TNFRSF14	8764	TNF receptor superfamily member 14 [Source:HGNC Symbol;Acc:HGNC:11912]
 39425_at	TXNRD1	7296	thioredoxin reductase 1 [Source:HGNC Symbol;Acc:HGNC:12437]
-39426_at	RF02271
+39426_at	RF02271		NA
 39426_at	TCERG1	10915	transcription elongation regulator 1 [Source:HGNC Symbol;Acc:HGNC:15630]
 39427_at	UQCRB	7381	ubiquinol-cytochrome c reductase binding protein [Source:HGNC Symbol;Acc:HGNC:12582]
 39428_at	SH2B3	10019	SH2B adaptor protein 3 [Source:HGNC Symbol;Acc:HGNC:29605]
@@ -11297,7 +11297,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 40413_at	DAP3	7818	death associated protein 3 [Source:HGNC Symbol;Acc:HGNC:2673]
 40414_at	VARS	7407	valyl-tRNA synthetase [Source:HGNC Symbol;Acc:HGNC:12651]
 40415_at	ACAA1	30	acetyl-CoA acyltransferase 1 [Source:HGNC Symbol;Acc:HGNC:82]
-40415_at	RF00019
+40415_at	RF00019		NA
 40416_at	SMARCB1	6598	SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily b, member 1 [Source:HGNC Symbol;Acc:HGNC:11103]
 40417_at	CCT5	22948	chaperonin containing TCP1 subunit 5 [Source:HGNC Symbol;Acc:HGNC:1618]
 40418_at	RBBP4	5928	RB binding protein 4, chromatin remodeling factor [Source:HGNC Symbol;Acc:HGNC:9887]
@@ -13097,7 +13097,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 42496_at	AC005009.1		novel transcript
 42497_at	PUS7	54517	pseudouridine synthase 7 [Source:HGNC Symbol;Acc:HGNC:26033]
 42498_at	PAQR9	344838	progestin and adipoQ receptor family member 9 [Source:HGNC Symbol;Acc:HGNC:30131]
-42499_at	RF00191
+42499_at	RF00191		NA
 424_s_at	FGFR1	2260	fibroblast growth factor receptor 1 [Source:HGNC Symbol;Acc:HGNC:3688]
 42502_at	MOV10L1	54456	Mov10 like RISC complex RNA helicase 1 [Source:HGNC Symbol;Acc:HGNC:7201]
 42503_at	C10orf82	143379	chromosome 10 open reading frame 82 [Source:HGNC Symbol;Acc:HGNC:28500]
@@ -13924,9 +13924,9 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 43816_at	NKAIN4	128414	sodium/potassium transporting ATPase interacting 4 [Source:HGNC Symbol;Acc:HGNC:16191]
 43817_f_at	CLU	1191	clusterin [Source:HGNC Symbol;Acc:HGNC:2095]
 43818_at	MALAT1	378938	metastasis associated lung adenocarcinoma transcript 1 [Source:HGNC Symbol;Acc:HGNC:29665]
-43818_at	RF01684
+43818_at	RF01684		NA
 43819_g_at	MALAT1	378938	metastasis associated lung adenocarcinoma transcript 1 [Source:HGNC Symbol;Acc:HGNC:29665]
-43819_g_at	RF01684
+43819_g_at	RF01684		NA
 43820_at	SNHG14	104472715	small nucleolar RNA host gene 14 [Source:HGNC Symbol;Acc:HGNC:37462]
 43821_at	ZNF579	163033	zinc finger protein 579 [Source:HGNC Symbol;Acc:HGNC:26646]
 43822_s_at	ORMDL1	94101	ORMDL sphingolipid biosynthesis regulator 1 [Source:HGNC Symbol;Acc:HGNC:16036]
@@ -14557,7 +14557,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 44660_at	ARRDC2	27106	arrestin domain containing 2 [Source:HGNC Symbol;Acc:HGNC:25225]
 44661_at	SCAMP1	9522	secretory carrier membrane protein 1 [Source:HGNC Symbol;Acc:HGNC:10563]
 44662_at	ATL2	64225	atlastin GTPase 2 [Source:HGNC Symbol;Acc:HGNC:24047]
-44663_at	AL391987.2
+44663_at	AL391987.2		NA
 44663_at	FAM27E3	100131997	family with sequence similarity 27 member E3 [Source:HGNC Symbol;Acc:HGNC:28655]
 44664_at	PTAR1	375743	protein prenyltransferase alpha subunit repeat containing 1 [Source:HGNC Symbol;Acc:HGNC:30449]
 44665_at	MOB1B	92597	MOB kinase activator 1B [Source:HGNC Symbol;Acc:HGNC:29801]
@@ -14642,7 +14642,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 44741_at	RBM33	155435	RNA binding motif protein 33 [Source:HGNC Symbol;Acc:HGNC:27223]
 44742_s_at	AZI2	64343	5-azacytidine induced 2 [Source:HGNC Symbol;Acc:HGNC:24002]
 44743_at	COQ5	84274	coenzyme Q5, methyltransferase [Source:HGNC Symbol;Acc:HGNC:28722]
-44743_at	RF00019
+44743_at	RF00019		NA
 44744_at	SLC12A7	10723	solute carrier family 12 member 7 [Source:HGNC Symbol;Acc:HGNC:10915]
 44745_at	SRP68	6730	signal recognition particle 68 [Source:HGNC Symbol;Acc:HGNC:11302]
 44746_at	ABI2	10152	abl interactor 2 [Source:HGNC Symbol;Acc:HGNC:24011]
@@ -16724,7 +16724,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 47244_at	SNAPC3	6619	small nuclear RNA activating complex polypeptide 3 [Source:HGNC Symbol;Acc:HGNC:11136]
 47247_at	TCERG1	10915	transcription elongation regulator 1 [Source:HGNC Symbol;Acc:HGNC:15630]
 47248_at	KIF13A	63971	kinesin family member 13A [Source:HGNC Symbol;Acc:HGNC:14566]
-47249_r_at	RF00100
+47249_r_at	RF00100		NA
 47249_r_at	RN7SKP88	106480860	RN7SK pseudogene 88 [Source:HGNC Symbol;Acc:HGNC:45812]
 47252_at	MACC1	346389	MET transcriptional regulator MACC1 [Source:HGNC Symbol;Acc:HGNC:30215]
 47260_at	BOLL	66037	boule homolog, RNA binding protein [Source:HGNC Symbol;Acc:HGNC:14273]
@@ -18677,7 +18677,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 49664_s_at	C11orf96	387763	chromosome 11 open reading frame 96 [Source:HGNC Symbol;Acc:HGNC:38675]
 49670_at	AL133330.1		novel transcript
 49671_at	MALAT1	378938	metastasis associated lung adenocarcinoma transcript 1 [Source:HGNC Symbol;Acc:HGNC:29665]
-49671_at	RF01871
+49671_at	RF01871		NA
 49673_at	ZNF692	55657	zinc finger protein 692 [Source:HGNC Symbol;Acc:HGNC:26049]
 49674_at	ISX	91464	intestine specific homeobox [Source:HGNC Symbol;Acc:HGNC:28084]
 49675_at	ESRRB	2103	estrogen related receptor beta [Source:HGNC Symbol;Acc:HGNC:3473]
@@ -19296,7 +19296,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 50561_at	AC010967.1		novel transcript
 50566_at	HOGA1	112817	4-hydroxy-2-oxoglutarate aldolase 1 [Source:HGNC Symbol;Acc:HGNC:25155]
 50567_r_at	RNF138	51444	ring finger protein 138 [Source:HGNC Symbol;Acc:HGNC:17765]
-50569_at	RF02199
+50569_at	RF02199		NA
 50569_at	TTC28-AS1	284900	TTC28 antisense RNA 1 [Source:HGNC Symbol;Acc:HGNC:29336]
 50571_at	AL445669.2		novel pseudogene
 50572_at	SMAD9	4093	SMAD family member 9 [Source:HGNC Symbol;Acc:HGNC:6774]
@@ -19362,10 +19362,10 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 50687_at	FAM178B	51252	family with sequence similarity 178 member B [Source:HGNC Symbol;Acc:HGNC:28036]
 50690_at	NUFIP2	57532	nuclear FMR1 interacting protein 2 [Source:HGNC Symbol;Acc:HGNC:17634]
 50694_at	CA10	56934	carbonic anhydrase 10 [Source:HGNC Symbol;Acc:HGNC:1369]
-50696_at	RF00019
+50696_at	RF00019		NA
 50698_at	AC061975.6		novel transcript
 506_s_at	STAT5A	6776	signal transducer and activator of transcription 5A [Source:HGNC Symbol;Acc:HGNC:11366]
-50700_g_at	RF00019
+50700_g_at	RF00019		NA
 50702_at	CBLN3	643866	cerebellin 3 precursor [Source:HGNC Symbol;Acc:HGNC:20146]
 50703_at	NBPF10	100132406	NBPF member 10 [Source:HGNC Symbol;Acc:HGNC:31992]
 50703_at	NBPF11	200030	NBPF member 11 [Source:HGNC Symbol;Acc:HGNC:31993]
@@ -19560,7 +19560,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 50976_at	PGS1	9489	phosphatidylglycerophosphate synthase 1 [Source:HGNC Symbol;Acc:HGNC:30029]
 50977_i_at	SCML1	6322	Scm polycomb group protein like 1 [Source:HGNC Symbol;Acc:HGNC:10580]
 50978_at	FJX1	24147	four-jointed box kinase 1 [Source:HGNC Symbol;Acc:HGNC:17166]
-50980_at	RF02146
+50980_at	RF02146		NA
 50982_at	SETD3	84193	SET domain containing 3, actin histidine methyltransferase [Source:HGNC Symbol;Acc:HGNC:20493]
 50983_at	AL136295.1		novel protein
 50983_at	AL136295.4		novel protein
@@ -19958,7 +19958,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 51521_at	GUSBP6	653435	GUSB pseudogene 6 [Source:HGNC Symbol;Acc:HGNC:42320]
 51523_at	CNOT7	29883	CCR4-NOT transcription complex subunit 7 [Source:HGNC Symbol;Acc:HGNC:14101]
 51525_at	HULC	728655	hepatocellular carcinoma up-regulated long non-coding RNA [Source:HGNC Symbol;Acc:HGNC:34232]
-51525_at	RF02101
+51525_at	RF02101		NA
 51528_at	KDM5D	8284	lysine demethylase 5D [Source:HGNC Symbol;Acc:HGNC:11115]
 51533_at	LTO1	220064	LTO1 maturation factor of ABCE1 [Source:HGNC Symbol;Acc:HGNC:17589]
 51536_at	AL031985.3		novel transcript, sense overlapping with ZNF643
@@ -20102,7 +20102,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 51740_r_at	GALNT1	2589	polypeptide N-acetylgalactosaminyltransferase 1 [Source:HGNC Symbol;Acc:HGNC:4123]
 51741_at	TFAM	7019	transcription factor A, mitochondrial [Source:HGNC Symbol;Acc:HGNC:11741]
 51742_at	AC073916.1		chromosome 12 open reading frame 10 (C12orf10) pseudogene
-51743_at	RF01233
+51743_at	RF01233		NA
 51744_at	TSPAN18	90139	tetraspanin 18 [Source:HGNC Symbol;Acc:HGNC:20660]
 51745_s_at	AC092683.1		novel transcript
 51745_s_at	AC159540.2		novel transcript
@@ -20737,7 +20737,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 52586_at	BAZ1B	9031	bromodomain adjacent to zinc finger domain 1B [Source:HGNC Symbol;Acc:HGNC:961]
 52587_s_at	ILKAP	80895	ILK associated serine/threonine phosphatase [Source:HGNC Symbol;Acc:HGNC:15566]
 52589_at	ETFA	2108	electron transfer flavoprotein subunit alpha [Source:HGNC Symbol;Acc:HGNC:3481]
-52589_at	RF00017
+52589_at	RF00017		NA
 52591_s_at	GCLC	2729	glutamate-cysteine ligase catalytic subunit [Source:HGNC Symbol;Acc:HGNC:4311]
 52592_r_at	GCLC	2729	glutamate-cysteine ligase catalytic subunit [Source:HGNC Symbol;Acc:HGNC:4311]
 52593_r_at	ADAM22	53616	ADAM metallopeptidase domain 22 [Source:HGNC Symbol;Acc:HGNC:201]
@@ -25310,7 +25310,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 58489_at	TMEM120B	144404	transmembrane protein 120B [Source:HGNC Symbol;Acc:HGNC:32008]
 58490_at	PWWP3B	139221	PWWP domain containing 3B [Source:HGNC Symbol;Acc:HGNC:26583]
 58491_s_at	MALAT1	378938	metastasis associated lung adenocarcinoma transcript 1 [Source:HGNC Symbol;Acc:HGNC:29665]
-58491_s_at	RF01684
+58491_s_at	RF01684		NA
 58492_at	RNF219	79596	ring finger protein 219 [Source:HGNC Symbol;Acc:HGNC:20308]
 58493_at	RNF219	79596	ring finger protein 219 [Source:HGNC Symbol;Acc:HGNC:20308]
 58494_r_at	MALAT1	378938	metastasis associated lung adenocarcinoma transcript 1 [Source:HGNC Symbol;Acc:HGNC:29665]
@@ -25535,7 +25535,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 58822_at	C10orf88	80007	chromosome 10 open reading frame 88 [Source:HGNC Symbol;Acc:HGNC:25822]
 58823_s_at	SPTBN1	6711	spectrin beta, non-erythrocytic 1 [Source:HGNC Symbol;Acc:HGNC:11275]
 58825_at	PTMA	5757	prothymosin alpha [Source:HGNC Symbol;Acc:HGNC:9623]
-58825_at	RF00015
+58825_at	RF00015		NA
 58826_at	AC007383.2		novel transcript
 58827_at	GNA13	10672	G protein subunit alpha 13 [Source:HGNC Symbol;Acc:HGNC:4381]
 58828_at	LINC00608	151300	long intergenic non-protein coding RNA 608 [Source:HGNC Symbol;Acc:HGNC:27179]
@@ -25640,7 +25640,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 58927_at	AK5	26289	adenylate kinase 5 [Source:HGNC Symbol;Acc:HGNC:365]
 58928_at	DRAM2	128338	DNA damage regulated autophagy modulator 2 [Source:HGNC Symbol;Acc:HGNC:28769]
 58929_at	RUBCNL	80183	rubicon like autophagy enhancer [Source:HGNC Symbol;Acc:HGNC:20420]
-58930_s_at	RF00056
+58930_s_at	RF00056		NA
 58930_s_at	SNHG17	388796	small nucleolar RNA host gene 17 [Source:HGNC Symbol;Acc:HGNC:48600]
 58931_i_at	INTS8	55656	integrator complex subunit 8 [Source:HGNC Symbol;Acc:HGNC:26048]
 58932_r_at	INTS8	55656	integrator complex subunit 8 [Source:HGNC Symbol;Acc:HGNC:26048]
@@ -25738,7 +25738,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 59031_at	AL162231.4		novel transcript (novel gene-CCL27 readthrough)
 59033_at	PPP3R2	5535	protein phosphatase 3 regulatory subunit B, beta [Source:HGNC Symbol;Acc:HGNC:9318]
 59034_at	LINC01823	101927801	long intergenic non-protein coding RNA 1823 [Source:HGNC Symbol;Acc:HGNC:52628]
-59036_at	RF02202
+59036_at	RF02202		NA
 59036_at	UCA1	652995	urothelial cancer associated 1 [Source:HGNC Symbol;Acc:HGNC:37126]
 59039_at	CNKSR3	154043	CNKSR family member 3 [Source:HGNC Symbol;Acc:HGNC:23034]
 59040_at	SLCO3A1	28232	solute carrier organic anion transporter family member 3A1 [Source:HGNC Symbol;Acc:HGNC:10952]
@@ -25821,7 +25821,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 59146_s_at	C1GALT1	56913	core 1 synthase, glycoprotein-N-acetylgalactosamine 3-beta-galactosyltransferase 1 [Source:HGNC Symbol;Acc:HGNC:24337]
 59147_at	AC138356.3		novel transcript
 59149_at	VTA1	51534	vesicle trafficking 1 [Source:HGNC Symbol;Acc:HGNC:20954]
-59150_at	AC013791.1
+59150_at	AC013791.1		NA
 59150_at	KCNQ1DN	55539	KCNQ1 downstream neighbor [Source:HGNC Symbol;Acc:HGNC:13335]
 59151_at	ASB7	140460	ankyrin repeat and SOCS box containing 7 [Source:HGNC Symbol;Acc:HGNC:17182]
 59152_at	KDM7A	80853	lysine demethylase 7A [Source:HGNC Symbol;Acc:HGNC:22224]
@@ -26131,7 +26131,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 59543_at	HEBP2	23593	heme binding protein 2 [Source:HGNC Symbol;Acc:HGNC:15716]
 59544_r_at	TTN	7273	titin [Source:HGNC Symbol;Acc:HGNC:12403]
 59546_at	NEK10	152110	NIMA related kinase 10 [Source:HGNC Symbol;Acc:HGNC:18592]
-59547_at	RF00019
+59547_at	RF00019		NA
 59548_at	COL4A1	1282	collagen type IV alpha 1 chain [Source:HGNC Symbol;Acc:HGNC:2202]
 59550_at	SV2C	22987	synaptic vesicle glycoprotein 2C [Source:HGNC Symbol;Acc:HGNC:30670]
 59552_at	SLC35E3	55508	solute carrier family 35 member E3 [Source:HGNC Symbol;Acc:HGNC:20864]
@@ -27215,9 +27215,9 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 61096_at	PIK3C3	5289	phosphatidylinositol 3-kinase catalytic subunit type 3 [Source:HGNC Symbol;Acc:HGNC:8974]
 61097_at	ERICH1	157697	glutamate rich 1 [Source:HGNC Symbol;Acc:HGNC:27234]
 610_at	ADRB2	154	adrenoceptor beta 2 [Source:HGNC Symbol;Acc:HGNC:286]
-61101_at	AL391987.1
+61101_at	AL391987.1		NA
 61101_at	AL591926.5		novel pseudogene
-61101_at	AL627230.3
+61101_at	AL627230.3		NA
 61102_r_at	BCL11A	53335	BAF chromatin remodeling complex subunit BCL11A [Source:HGNC Symbol;Acc:HGNC:13221]
 61103_at	RDH11	51109	retinol dehydrogenase 11 [Source:HGNC Symbol;Acc:HGNC:17964]
 61105_at	MOSPD2	158747	motile sperm domain containing 2 [Source:HGNC Symbol;Acc:HGNC:28381]
@@ -27470,7 +27470,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 61448_at	AL354707.1		novel transcript
 61449_at	MAP10	54627	microtubule associated protein 10 [Source:HGNC Symbol;Acc:HGNC:29265]
 61450_at	PTEN	5728	phosphatase and tensin homolog [Source:HGNC Symbol;Acc:HGNC:9588]
-61452_at	RF02190
+61452_at	RF02190		NA
 61452_at	ST7-OT4	338069	ST7 overlapping transcript 4 [Source:HGNC Symbol;Acc:HGNC:18835]
 61453_at	ANKRD36	375248	ankyrin repeat domain 36 [Source:HGNC Symbol;Acc:HGNC:24079]
 61454_at	HFM1	164045	helicase for meiosis 1 [Source:HGNC Symbol;Acc:HGNC:20193]
@@ -28747,7 +28747,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 63086_at	SPATA33	124045	spermatogenesis associated 33 [Source:HGNC Symbol;Acc:HGNC:26463]
 63087_at	GTF2A1	2957	general transcription factor IIA subunit 1 [Source:HGNC Symbol;Acc:HGNC:4646]
 63091_at	SCRN3	79634	secernin 3 [Source:HGNC Symbol;Acc:HGNC:30382]
-63092_at	RF00019
+63092_at	RF00019		NA
 63095_at	ZNF528-AS1	102724105	ZNF528 antisense RNA 1 [Source:HGNC Symbol;Acc:HGNC:51305]
 63096_at	SCAP	22937	SREBF chaperone [Source:HGNC Symbol;Acc:HGNC:30634]
 630_at	DCTD	1635	dCMP deaminase [Source:HGNC Symbol;Acc:HGNC:2710]
@@ -29916,7 +29916,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 64455_at	NMRAL1	57407	NmrA like redox sensor 1 [Source:HGNC Symbol;Acc:HGNC:24987]
 64456_r_at	STAG1	10274	stromal antigen 1 [Source:HGNC Symbol;Acc:HGNC:11354]
 64457_at	LRRFIP2	9209	LRR binding FLII interacting protein 2 [Source:HGNC Symbol;Acc:HGNC:6703]
-64458_at	RF02220
+64458_at	RF02220		NA
 64458_at	ZNRD1	30834	zinc ribbon domain containing 1 [Source:HGNC Symbol;Acc:HGNC:13182]
 64459_at	CNOT6	57472	CCR4-NOT transcription complex subunit 6 [Source:HGNC Symbol;Acc:HGNC:14099]
 64460_at	C18orf25	147339	chromosome 18 open reading frame 25 [Source:HGNC Symbol;Acc:HGNC:28172]
@@ -31255,7 +31255,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 66057_at	DUX4L51	106481740	double homeobox 4 like 51 (pseudogene) [Source:HGNC Symbol;Acc:HGNC:51810]
 66058_r_at	SLC36A1	206358	solute carrier family 36 member 1 [Source:HGNC Symbol;Acc:HGNC:18761]
 66059_at	RIN3	79890	Ras and Rab interactor 3 [Source:HGNC Symbol;Acc:HGNC:18751]
-66063_at	RF00019
+66063_at	RF00019		NA
 66064_at	TOR1AIP2	163590	torsin 1A interacting protein 2 [Source:HGNC Symbol;Acc:HGNC:24055]
 66067_at	CNTLN	54875	centlein [Source:HGNC Symbol;Acc:HGNC:23432]
 66072_at	MYT1	4661	myelin transcription factor 1 [Source:HGNC Symbol;Acc:HGNC:7622]
@@ -31352,7 +31352,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 66271_at	SPAG17	200162	sperm associated antigen 17 [Source:HGNC Symbol;Acc:HGNC:26620]
 66273_at	PDE9A	5152	phosphodiesterase 9A [Source:HGNC Symbol;Acc:HGNC:8795]
 66274_at	BCL11A	53335	BAF chromatin remodeling complex subunit BCL11A [Source:HGNC Symbol;Acc:HGNC:13221]
-66281_at	RF00156
+66281_at	RF00156		NA
 66283_at	CDRT1	374286	CMT1A duplicated region transcript 1 [Source:HGNC Symbol;Acc:HGNC:14379]
 66283_at	FBXW10	10517	F-box and WD repeat domain containing 10 [Source:HGNC Symbol;Acc:HGNC:1211]
 66284_at	AC034228.4		novel transcript
@@ -31385,7 +31385,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 66368_at	PCDH9-AS3	100874086	PCDH9 antisense RNA 3 [Source:HGNC Symbol;Acc:HGNC:40427]
 66372_at	AP000238.1		novel transcript, antisense to GRIK1
 66374_at	AC106729.1		novel transcript
-66376_at	RF01879
+66376_at	RF01879		NA
 66376_at	TUSC7	285194	tumor suppressor candidate 7 [Source:HGNC Symbol;Acc:HGNC:27701]
 66378_at	FRMD4A	55691	FERM domain containing 4A [Source:HGNC Symbol;Acc:HGNC:25491]
 66379_at	AL354707.2	105375968	novel transcript
@@ -31647,7 +31647,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 66840_at	FAM71A	149647	family with sequence similarity 71 member A [Source:HGNC Symbol;Acc:HGNC:26541]
 66841_at	AL109924.2		novel transcript
 66842_at	IGF2BP2	10644	insulin like growth factor 2 mRNA binding protein 2 [Source:HGNC Symbol;Acc:HGNC:28867]
-66847_at	AC025283.2
+66847_at	AC025283.2		NA
 66849_at	SGMS2	166929	sphingomyelin synthase 2 [Source:HGNC Symbol;Acc:HGNC:28395]
 66853_at	AC069213.1		novel transcript
 66858_at	AL357972.1		novel transcript
@@ -31845,7 +31845,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 67244_at	AC006205.2		novel transcript
 67245_at	IFT43	112752	intraflagellar transport 43 [Source:HGNC Symbol;Acc:HGNC:29669]
 67246_at	G3BP2	9908	G3BP stress granule assembly factor 2 [Source:HGNC Symbol;Acc:HGNC:30291]
-67246_at	RF00019
+67246_at	RF00019		NA
 67248_at	MAGI1	9223	membrane associated guanylate kinase, WW and PDZ domain containing 1 [Source:HGNC Symbol;Acc:HGNC:946]
 67249_at	SRSF11	9295	serine and arginine rich splicing factor 11 [Source:HGNC Symbol;Acc:HGNC:10782]
 67250_at	ANKRD26	22852	ankyrin repeat domain 26 [Source:HGNC Symbol;Acc:HGNC:29186]
@@ -31978,7 +31978,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 67549_at	ZFPM1	161882	zinc finger protein, FOG family member 1 [Source:HGNC Symbol;Acc:HGNC:19762]
 67550_at	HEG1	57493	heart development protein with EGF like domains 1 [Source:HGNC Symbol;Acc:HGNC:29227]
 67551_at	ERICH5	203111	glutamate rich 5 [Source:HGNC Symbol;Acc:HGNC:26823]
-67553_at	RF00019
+67553_at	RF00019		NA
 67562_at	DR1	1810	down-regulator of transcription 1 [Source:HGNC Symbol;Acc:HGNC:3017]
 67564_at	SFXN1	94081	sideroflexin 1 [Source:HGNC Symbol;Acc:HGNC:16085]
 67565_r_at	GUSBP1	728411	GUSB pseudogene 1 [Source:HGNC Symbol;Acc:HGNC:13670]
@@ -32556,7 +32556,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 68908_at	ZCWPW2	152098	zinc finger CW-type and PWWP domain containing 2 [Source:HGNC Symbol;Acc:HGNC:23574]
 68909_at	CA8	767	carbonic anhydrase 8 [Source:HGNC Symbol;Acc:HGNC:1382]
 68913_at	SCARB1	949	scavenger receptor class B member 1 [Source:HGNC Symbol;Acc:HGNC:1664]
-68916_at	RF00012
+68916_at	RF00012		NA
 68916_at	SIGLEC11	114132	sialic acid binding Ig like lectin 11 [Source:HGNC Symbol;Acc:HGNC:15622]
 68917_at	CAPN8	388743	calpain 8 [Source:HGNC Symbol;Acc:HGNC:1485]
 68918_at	NCAPG	64151	non-SMC condensin I complex subunit G [Source:HGNC Symbol;Acc:HGNC:24304]
@@ -32700,7 +32700,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 69197_r_at	HMGN2P46	283651	high mobility group nucleosomal binding domain 2 pseudogene 46 [Source:HGNC Symbol;Acc:HGNC:26817]
 691_g_at	P4HB	5034	prolyl 4-hydroxylase subunit beta [Source:HGNC Symbol;Acc:HGNC:8548]
 69201_at	DAPK3	1613	death associated protein kinase 3 [Source:HGNC Symbol;Acc:HGNC:2676]
-69202_at	RF02143
+69202_at	RF02143		NA
 69207_at	SIRPG	55423	signal regulatory protein gamma [Source:HGNC Symbol;Acc:HGNC:15757]
 69208_at	STK4-AS1	100505826	STK4 antisense RNA 1 (head to head) [Source:HGNC Symbol;Acc:HGNC:43811]
 69209_at	C12orf56	115749	chromosome 12 open reading frame 56 [Source:HGNC Symbol;Acc:HGNC:26967]
@@ -32778,8 +32778,8 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 69378_at	AC073236.1		novel transcript
 69383_r_at	ACVR1	90	activin A receptor type 1 [Source:HGNC Symbol;Acc:HGNC:171]
 69387_at	TANGO6	79613	transport and golgi organization 6 homolog [Source:HGNC Symbol;Acc:HGNC:25749]
-69389_at	RF01947
-69389_at	RF01948
+69389_at	RF01947		NA
+69389_at	RF01948		NA
 69393_at	MANEA	79694	mannosidase endo-alpha [Source:HGNC Symbol;Acc:HGNC:21072]
 69394_at	TMEM30B	161291	transmembrane protein 30B [Source:HGNC Symbol;Acc:HGNC:27254]
 69396_at	FRS2	10818	fibroblast growth factor receptor substrate 2 [Source:HGNC Symbol;Acc:HGNC:16971]
@@ -32921,7 +32921,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 69677_at	ARL6	84100	ADP ribosylation factor like GTPase 6 [Source:HGNC Symbol;Acc:HGNC:13210]
 69678_at	RIC3	79608	RIC3 acetylcholine receptor chaperone [Source:HGNC Symbol;Acc:HGNC:30338]
 69680_at	CCR9	10803	C-C motif chemokine receptor 9 [Source:HGNC Symbol;Acc:HGNC:1610]
-69680_at	RF00019
+69680_at	RF00019		NA
 69681_at	AC243964.3		TEC
 69681_at	PVR	5817	PVR cell adhesion molecule [Source:HGNC Symbol;Acc:HGNC:9705]
 69682_at	TMEM161B	153396	transmembrane protein 161B [Source:HGNC Symbol;Acc:HGNC:28483]
@@ -33113,7 +33113,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 70137_at	SEMA3A	10371	semaphorin 3A [Source:HGNC Symbol;Acc:HGNC:10723]
 70138_at	TMTC1	83857	transmembrane and tetratricopeptide repeat containing 1 [Source:HGNC Symbol;Acc:HGNC:24099]
 70142_at	ERBB3	2065	erb-b2 receptor tyrosine kinase 3 [Source:HGNC Symbol;Acc:HGNC:3431]
-70143_at	RF00334
+70143_at	RF00334		NA
 70144_at	AC005899.6		novel transcript
 70145_at	ANAPC10	10393	anaphase promoting complex subunit 10 [Source:HGNC Symbol;Acc:HGNC:24077]
 70152_r_at	KAT2B	8850	lysine acetyltransferase 2B [Source:HGNC Symbol;Acc:HGNC:8638]
@@ -33264,7 +33264,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 70467_r_at	LINC00379	100874150	long intergenic non-protein coding RNA 379 [Source:HGNC Symbol;Acc:HGNC:42705]
 70471_at	ZFPM1	161882	zinc finger protein, FOG family member 1 [Source:HGNC Symbol;Acc:HGNC:19762]
 70473_at	HOTTIP	100316868	HOXA distal transcript antisense RNA [Source:HGNC Symbol;Acc:HGNC:37461]
-70473_at	RF02043
+70473_at	RF02043		NA
 70474_at	PTDSS2	81490	phosphatidylserine synthase 2 [Source:HGNC Symbol;Acc:HGNC:15463]
 70475_at	HS3ST1	9957	heparan sulfate-glucosamine 3-sulfotransferase 1 [Source:HGNC Symbol;Acc:HGNC:5194]
 70476_at	PDCD6IP	10015	programmed cell death 6 interacting protein [Source:HGNC Symbol;Acc:HGNC:8766]
@@ -33400,7 +33400,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 70717_at	VAV2	7410	vav guanine nucleotide exchange factor 2 [Source:HGNC Symbol;Acc:HGNC:12658]
 70720_at	AL161912.1		novel transcript
 70722_at	ANGPTL3	27329	angiopoietin like 3 [Source:HGNC Symbol;Acc:HGNC:491]
-70723_at	RF00024
+70723_at	RF00024		NA
 70723_at	TERC	7012	telomerase RNA component [Source:HGNC Symbol;Acc:HGNC:11727]
 70724_at	NXPE3	91775	neurexophilin and PC-esterase domain family member 3 [Source:HGNC Symbol;Acc:HGNC:28238]
 70726_at	ITPKB	3707	inositol-trisphosphate 3-kinase B [Source:HGNC Symbol;Acc:HGNC:6179]
@@ -33666,7 +33666,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 71242_at	BCLAF3	256643	BCLAF1 and THRAP3 family member 3 [Source:HGNC Symbol;Acc:HGNC:27413]
 71245_at	HOXC6	3223	homeobox C6 [Source:HGNC Symbol;Acc:HGNC:5128]
 71246_at	LIN7C	55327	lin-7 homolog C, crumbs cell polarity complex component [Source:HGNC Symbol;Acc:HGNC:17789]
-71247_r_at	RF00139
+71247_r_at	RF00139		NA
 71249_at	LINC02603	158257	long intergenic non-protein coding RNA 2603 [Source:HGNC Symbol;Acc:HGNC:37186]
 71250_at	HSD11B1-AS1	101930114	HSD11B1 antisense RNA 1 [Source:HGNC Symbol;Acc:HGNC:54053]
 71251_r_at	OGA	10724	O-GlcNAcase [Source:HGNC Symbol;Acc:HGNC:7056]
@@ -33884,8 +33884,8 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 71668_at	AC074386.1		novel transcript, antisense to OR2A1 and ARHGEF5
 71668_at	OR2A1-AS1	101928492	OR2A1 antisense RNA 1 [Source:HGNC Symbol;Acc:HGNC:49168]
 71669_at	GNL3	26354	G protein nucleolar 3 [Source:HGNC Symbol;Acc:HGNC:29931]
-71669_at	RF00569
-71669_at	RF01183
+71669_at	RF00569		NA
+71669_at	RF01183		NA
 71669_at	SNORD19	692089	small nucleolar RNA, C/D box 19 [Source:HGNC Symbol;Acc:HGNC:32717]
 71670_at	AC068234.3		novel transcript, antisense to ITGB3
 71671_r_at	UBLCP1	134510	ubiquitin like domain containing CTD phosphatase 1 [Source:HGNC Symbol;Acc:HGNC:28110]
@@ -33894,7 +33894,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 71674_at	MIR3936HG	553103	MIR3936 host gene [Source:HGNC Symbol;Acc:HGNC:40538]
 71680_at	MYO9A	4649	myosin IXA [Source:HGNC Symbol;Acc:HGNC:7608]
 71682_at	PAQR5	54852	progestin and adipoQ receptor family member 5 [Source:HGNC Symbol;Acc:HGNC:29645]
-71682_at	RF00019
+71682_at	RF00019		NA
 71684_at	RARS	5917	arginyl-tRNA synthetase [Source:HGNC Symbol;Acc:HGNC:9870]
 71686_at	MED28	80306	mediator complex subunit 28 [Source:HGNC Symbol;Acc:HGNC:24628]
 71688_at	NOB1	28987	NIN1 (RPN12) binding protein 1 homolog [Source:HGNC Symbol;Acc:HGNC:29540]
@@ -33931,7 +33931,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 71754_at	ZNF664	144348	zinc finger protein 664 [Source:HGNC Symbol;Acc:HGNC:25406]
 71757_at	LINC01682	101927504	long intergenic non-protein coding RNA 1682 [Source:HGNC Symbol;Acc:HGNC:52470]
 71758_r_at	NUDT4	11163	nudix hydrolase 4 [Source:HGNC Symbol;Acc:HGNC:8051]
-71760_r_at	RF02198
+71760_r_at	RF02198		NA
 71760_r_at	TTC28-AS1	284900	TTC28 antisense RNA 1 [Source:HGNC Symbol;Acc:HGNC:29336]
 71761_at	AP005273.1		novel transcript
 71762_at	UHMK1	127933	U2AF homology motif kinase 1 [Source:HGNC Symbol;Acc:HGNC:19683]
@@ -34239,7 +34239,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 72440_at	RWDD1	51389	RWD domain containing 1 [Source:HGNC Symbol;Acc:HGNC:20993]
 72441_at	PPP2R1B	5519	protein phosphatase 2 scaffold subunit Abeta [Source:HGNC Symbol;Acc:HGNC:9303]
 72442_at	MOSMO	730094	modulator of smoothened [Source:HGNC Symbol;Acc:HGNC:27087]
-72444_at	RF00017
+72444_at	RF00017		NA
 72444_at	RN7SL331P	106479344	RNA, 7SL, cytoplasmic 331, pseudogene [Source:HGNC Symbol;Acc:HGNC:46347]
 72444_at	RN7SL417P	107080636	RNA, 7SL, cytoplasmic 417, pseudogene [Source:HGNC Symbol;Acc:HGNC:46433]
 72444_at	RN7SL428P	106479379	RNA, 7SL, cytoplasmic 428, pseudogene [Source:HGNC Symbol;Acc:HGNC:46444]
@@ -34616,7 +34616,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 73100_at	MACROD1	28992	mono-ADP ribosylhydrolase 1 [Source:HGNC Symbol;Acc:HGNC:29598]
 73102_at	SPTBN1	6711	spectrin beta, non-erythrocytic 1 [Source:HGNC Symbol;Acc:HGNC:11275]
 73104_s_at	ALDH9A1	223	aldehyde dehydrogenase 9 family member A1 [Source:HGNC Symbol;Acc:HGNC:412]
-73104_s_at	RF00019
+73104_s_at	RF00019		NA
 73106_s_at	NPPA	4878	natriuretic peptide A [Source:HGNC Symbol;Acc:HGNC:7939]
 73108_at	RAP1GAP2	23108	RAP1 GTPase activating protein 2 [Source:HGNC Symbol;Acc:HGNC:29176]
 73111_s_at	KRT18	3875	keratin 18 [Source:HGNC Symbol;Acc:HGNC:6430]
@@ -34720,7 +34720,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 73271_at	TSACC	128229	TSSK6 activating cochaperone [Source:HGNC Symbol;Acc:HGNC:30636]
 73273_at	EHBP1L1	254102	EH domain binding protein 1 like 1 [Source:HGNC Symbol;Acc:HGNC:30682]
 73275_f_at	PRAC2	360205	PRAC2 small nuclear protein [Source:HGNC Symbol;Acc:HGNC:30143]
-73275_f_at	RF02133
+73275_f_at	RF02133		NA
 73277_at	AC008938.1		novel transcript
 73278_s_at	GTSF1	121355	gametocyte specific factor 1 [Source:HGNC Symbol;Acc:HGNC:26565]
 73279_at	GPR107	57720	G protein-coupled receptor 107 [Source:HGNC Symbol;Acc:HGNC:17830]
@@ -35504,7 +35504,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 74474_at	ERI2	112479	ERI1 exoribonuclease family member 2 [Source:HGNC Symbol;Acc:HGNC:30541]
 74475_at	AC104451.2		novel transcript
 74476_at	DUSP5P1	574029	dual specificity phosphatase 5 pseudogene 1 [Source:HGNC Symbol;Acc:HGNC:32020]
-74476_at	RF00432
+74476_at	RF00432		NA
 74477_at	NCKAP1	10787	NCK associated protein 1 [Source:HGNC Symbol;Acc:HGNC:7666]
 74478_at	DUSP5P1	574029	dual specificity phosphatase 5 pseudogene 1 [Source:HGNC Symbol;Acc:HGNC:32020]
 74479_at	AL024508.1		novel transcript
@@ -36057,7 +36057,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 75195_at	AL133520.1		novel transcript, sense intronic to SLC13A3
 75195_at	TP53RK	112858	TP53 regulating kinase [Source:HGNC Symbol;Acc:HGNC:16197]
 75197_at	FARSB	10056	phenylalanyl-tRNA synthetase subunit beta [Source:HGNC Symbol;Acc:HGNC:17800]
-75198_at	RF00019
+75198_at	RF00019		NA
 751_at	PIGC	5279	phosphatidylinositol glycan anchor biosynthesis class C [Source:HGNC Symbol;Acc:HGNC:8960]
 75200_r_at	CA2	760	carbonic anhydrase 2 [Source:HGNC Symbol;Acc:HGNC:1373]
 75203_r_at	CASP4	837	caspase 4 [Source:HGNC Symbol;Acc:HGNC:1505]
@@ -36375,7 +36375,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 75719_at	LINC01497	102723487	long intergenic non-protein coding RNA 1497 [Source:HGNC Symbol;Acc:HGNC:51163]
 75722_at	CHST11	50515	carbohydrate sulfotransferase 11 [Source:HGNC Symbol;Acc:HGNC:17422]
 75723_at	FNBP4	23360	formin binding protein 4 [Source:HGNC Symbol;Acc:HGNC:19752]
-75723_at	RF00019
+75723_at	RF00019		NA
 75724_at	FAM228A	653140	family with sequence similarity 228 member A [Source:HGNC Symbol;Acc:HGNC:34418]
 75726_at	TMEM225	338661	transmembrane protein 225 [Source:HGNC Symbol;Acc:HGNC:32390]
 75727_at	COQ7	10229	coenzyme Q7, hydroxylase [Source:HGNC Symbol;Acc:HGNC:2244]
@@ -36394,8 +36394,8 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 75744_at	TMEM127	55654	transmembrane protein 127 [Source:HGNC Symbol;Acc:HGNC:26038]
 75745_at	AC106820.3		novel transcript, antisense to CCNF
 75746_at	LINC01424	101928689	long intergenic non-protein coding RNA 1424 [Source:HGNC Symbol;Acc:HGNC:40558]
-75749_at	RF00003
-75749_at	RF00003	6063
+75749_at	RF00003		NA
+75749_at	RF00003	6063	NA
 75750_at	PAPOLG	64895	poly(A) polymerase gamma [Source:HGNC Symbol;Acc:HGNC:14982]
 75751_at	C5orf49	134121	chromosome 5 open reading frame 49 [Source:HGNC Symbol;Acc:HGNC:27028]
 75752_at	SP1	6667	Sp1 transcription factor [Source:HGNC Symbol;Acc:HGNC:11205]
@@ -36484,7 +36484,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 758_at	PTGIR	5739	prostaglandin I2 receptor [Source:HGNC Symbol;Acc:HGNC:9602]
 75900_at	CNNM2	54805	cyclin and CBS domain divalent metal cation transport mediator 2 [Source:HGNC Symbol;Acc:HGNC:103]
 75906_at	INPP4B	8821	inositol polyphosphate-4-phosphatase type II B [Source:HGNC Symbol;Acc:HGNC:6075]
-75908_at	AC063961.1
+75908_at	AC063961.1		NA
 75909_at	XPO4	64328	exportin 4 [Source:HGNC Symbol;Acc:HGNC:17796]
 75910_at	P4HA2	8974	prolyl 4-hydroxylase subunit alpha 2 [Source:HGNC Symbol;Acc:HGNC:8547]
 75914_at	SEC23IP	11196	SEC23 interacting protein [Source:HGNC Symbol;Acc:HGNC:17018]
@@ -38041,7 +38041,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 78112_at	VTI1B	10490	vesicle transport through interaction with t-SNAREs 1B [Source:HGNC Symbol;Acc:HGNC:17793]
 78113_r_at	BEST3	144453	bestrophin 3 [Source:HGNC Symbol;Acc:HGNC:17105]
 78114_f_at	PRAC2	360205	PRAC2 small nuclear protein [Source:HGNC Symbol;Acc:HGNC:30143]
-78114_f_at	RF02133
+78114_f_at	RF02133		NA
 78119_r_at	PAQR7	164091	progestin and adipoQ receptor family member 7 [Source:HGNC Symbol;Acc:HGNC:23146]
 78120_at	PES1	23481	pescadillo ribosomal biogenesis factor 1 [Source:HGNC Symbol;Acc:HGNC:8848]
 78121_at	RALGPS1	9649	Ral GEF with PH domain and SH3 binding motif 1 [Source:HGNC Symbol;Acc:HGNC:16851]
@@ -38560,7 +38560,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 788_s_at	EDN3	1908	endothelin 3 [Source:HGNC Symbol;Acc:HGNC:3178]
 78905_at	AC004832.4		novel transcript, sense intonic to
 78907_at	L1TD1	54596	LINE1 type transposase domain containing 1 [Source:HGNC Symbol;Acc:HGNC:25595]
-78907_at	RF00019
+78907_at	RF00019		NA
 78910_i_at	JAK2	3717	Janus kinase 2 [Source:HGNC Symbol;Acc:HGNC:6192]
 78915_at	AC004797.1		novel transcript FLJ40194
 78918_at	RAB7B	338382	RAB7B, member RAS oncogene family [Source:HGNC Symbol;Acc:HGNC:30513]
@@ -39430,8 +39430,8 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 80509_at	FOXN4	121643	forkhead box N4 [Source:HGNC Symbol;Acc:HGNC:21399]
 80513_at	EMC2	9694	ER membrane protein complex subunit 2 [Source:HGNC Symbol;Acc:HGNC:28963]
 80517_at	HOTTIP	100316868	HOXA distal transcript antisense RNA [Source:HGNC Symbol;Acc:HGNC:37461]
-80517_at	RF02041
-80517_at	RF02042
+80517_at	RF02041		NA
+80517_at	RF02042		NA
 80519_s_at	RALY	22913	RALY heterogeneous nuclear ribonucleoprotein [Source:HGNC Symbol;Acc:HGNC:15921]
 80520_at	LINC01229	101928248	long intergenic non-protein coding RNA 1229 [Source:HGNC Symbol;Acc:HGNC:49682]
 80522_at	EIF1B-AS1	440952	EIF1B antisense RNA 1 [Source:HGNC Symbol;Acc:HGNC:44555]
@@ -39446,7 +39446,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 80541_r_at	COA6-AS1	101927765	COA6 antisense RNA 1 [Source:HGNC Symbol;Acc:HGNC:40825]
 80542_at	TTC28-AS1	284900	TTC28 antisense RNA 1 [Source:HGNC Symbol;Acc:HGNC:29336]
 80543_at	SLC15A2	6565	solute carrier family 15 member 2 [Source:HGNC Symbol;Acc:HGNC:10921]
-80544_at	RF02201
+80544_at	RF02201		NA
 80544_at	TTC28-AS1	284900	TTC28 antisense RNA 1 [Source:HGNC Symbol;Acc:HGNC:29336]
 80546_at	CARMN	728264	cardiac mesoderm enhancer-associated non-coding RNA [Source:HGNC Symbol;Acc:HGNC:42872]
 80548_at	TRPM8	79054	transient receptor potential cation channel subfamily M member 8 [Source:HGNC Symbol;Acc:HGNC:17961]
@@ -39990,7 +39990,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 81373_at	PPP2R5C	5527	protein phosphatase 2 regulatory subunit B'gamma [Source:HGNC Symbol;Acc:HGNC:9311]
 81375_at	ZNF471	57573	zinc finger protein 471 [Source:HGNC Symbol;Acc:HGNC:23226]
 81378_at	MIR135A2	406926	microRNA 135a-2 [Source:HGNC Symbol;Acc:HGNC:31521]
-81378_at	RF01971
+81378_at	RF01971		NA
 81378_at	RMST	196475	rhabdomyosarcoma 2 associated transcript [Source:HGNC Symbol;Acc:HGNC:29893]
 81381_at	CUTALP	253039	cutA divalent cation tolerance homolog-like, pseudogene [Source:HGNC Symbol;Acc:HGNC:27367]
 81384_at	LINC00284	121838	long intergenic non-protein coding RNA 284 [Source:HGNC Symbol;Acc:HGNC:26981]
@@ -40240,7 +40240,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 81732_at	CCNC	892	cyclin C [Source:HGNC Symbol;Acc:HGNC:1581]
 81733_at	TPD52	7163	tumor protein D52 [Source:HGNC Symbol;Acc:HGNC:12005]
 81734_f_at	PRAC2	360205	PRAC2 small nuclear protein [Source:HGNC Symbol;Acc:HGNC:30143]
-81734_f_at	RF02133
+81734_f_at	RF02133		NA
 81735_at	PRORSD1P	344405	prolyl-tRNA synthetase associated domain containing 1, pseudogene [Source:HGNC Symbol;Acc:HGNC:34379]
 81736_at	FARP1	10160	FERM, ARH/RhoGEF and pleckstrin domain protein 1 [Source:HGNC Symbol;Acc:HGNC:3591]
 81737_at	AC139256.1		phospholipase A2 group X (PLA2G10) pseudogene
@@ -40343,7 +40343,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 81872_at	LRRC4C	57689	leucine rich repeat containing 4C [Source:HGNC Symbol;Acc:HGNC:29317]
 81873_at	HS1BP3	64342	HCLS1 binding protein 3 [Source:HGNC Symbol;Acc:HGNC:24979]
 81874_at	HOXA11-AS	221883	HOXA11 antisense RNA [Source:HGNC Symbol;Acc:HGNC:24957]
-81874_at	RF02142
+81874_at	RF02142		NA
 81875_at	LINC00964	157381	long intergenic non-protein coding RNA 964 [Source:HGNC Symbol;Acc:HGNC:27226]
 81876_at	MRPS5	64969	mitochondrial ribosomal protein S5 [Source:HGNC Symbol;Acc:HGNC:14498]
 81879_at	PSMA3	5684	proteasome subunit alpha 3 [Source:HGNC Symbol;Acc:HGNC:9532]
@@ -40503,7 +40503,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 82092_at	THEM4	117145	thioesterase superfamily member 4 [Source:HGNC Symbol;Acc:HGNC:17947]
 82099_at	ACP1	52	acid phosphatase 1 [Source:HGNC Symbol;Acc:HGNC:122]
 820_at	MGST2	4258	microsomal glutathione S-transferase 2 [Source:HGNC Symbol;Acc:HGNC:7063]
-82103_r_at	RF01225
+82103_r_at	RF01225		NA
 82104_at	FMNL3	91010	formin like 3 [Source:HGNC Symbol;Acc:HGNC:23698]
 82106_at	SPATA24	202051	spermatogenesis associated 24 [Source:HGNC Symbol;Acc:HGNC:27322]
 82107_at	ZNF577	84765	zinc finger protein 577 [Source:HGNC Symbol;Acc:HGNC:28673]
@@ -40523,7 +40523,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 82124_at	AL606804.1		novel transcript
 82127_at	TMEM207	131920	transmembrane protein 207 [Source:HGNC Symbol;Acc:HGNC:33705]
 82129_at	MIAT	440823	myocardial infarction associated transcript [Source:HGNC Symbol;Acc:HGNC:33425]
-82129_at	RF01875
+82129_at	RF01875		NA
 82130_at	PARP11	57097	poly(ADP-ribose) polymerase family member 11 [Source:HGNC Symbol;Acc:HGNC:1186]
 82131_at	SEPSECS	51091	Sep (O-phosphoserine) tRNA:Sec (selenocysteine) tRNA synthase [Source:HGNC Symbol;Acc:HGNC:30605]
 82133_at	EXOC8	149371	exocyst complex component 8 [Source:HGNC Symbol;Acc:HGNC:24659]
@@ -40967,7 +40967,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 82799_at	WRAP73	49856	WD repeat containing, antisense to TP73 [Source:HGNC Symbol;Acc:HGNC:12759]
 827_s_at	DYRK1A	1859	dual specificity tyrosine phosphorylation regulated kinase 1A [Source:HGNC Symbol;Acc:HGNC:3091]
 82800_at	SLC5A8	160728	solute carrier family 5 member 8 [Source:HGNC Symbol;Acc:HGNC:19119]
-82802_at	AC007244.1
+82802_at	AC007244.1		NA
 82802_at	TTTY14	83869	testis-specific transcript, Y-linked 14 [Source:HGNC Symbol;Acc:HGNC:18495]
 82803_at	COASY	80347	Coenzyme A synthase [Source:HGNC Symbol;Acc:HGNC:29932]
 82805_at	TTTY14	83869	testis-specific transcript, Y-linked 14 [Source:HGNC Symbol;Acc:HGNC:18495]
@@ -41543,7 +41543,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 83705_at	OR2A7	401427	olfactory receptor family 2 subfamily A member 7 [Source:HGNC Symbol;Acc:HGNC:8234]
 83706_at	SNHG18	100505806	small nucleolar RNA host gene 18 [Source:HGNC Symbol;Acc:HGNC:49007]
 83706_at	SNORD123	100113384	small nucleolar RNA, C/D box 123 [Source:HGNC Symbol;Acc:HGNC:33562]
-83707_r_at	RF00019
+83707_r_at	RF00019		NA
 83708_at	BORCS6	54785	BLOC-1 related complex subunit 6 [Source:HGNC Symbol;Acc:HGNC:25939]
 83709_r_at	ULK2	9706	unc-51 like autophagy activating kinase 2 [Source:HGNC Symbol;Acc:HGNC:13480]
 83711_at	ACBD5	91452	acyl-CoA binding domain containing 5 [Source:HGNC Symbol;Acc:HGNC:23338]
@@ -41885,7 +41885,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 84286_at	AC102945.2		TEC
 84287_at	CEP89	84902	centrosomal protein 89 [Source:HGNC Symbol;Acc:HGNC:25907]
 84288_f_at	AC003669.1		novel pseudogene
-84288_f_at	AC112497.1
+84288_f_at	AC112497.1		NA
 84289_at	AL049836.1		novel transcript
 84290_at	HLA-DQB1	3119	major histocompatibility complex, class II, DQ beta 1 [Source:HGNC Symbol;Acc:HGNC:4944]
 84292_at	ITGB3BP	23421	integrin subunit beta 3 binding protein [Source:HGNC Symbol;Acc:HGNC:6157]
@@ -42578,8 +42578,8 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 85556_at	LINC01006	100506380	long intergenic non-protein coding RNA 1006 [Source:HGNC Symbol;Acc:HGNC:48971]
 85557_r_at	SULT2A1	6822	sulfotransferase family 2A member 1 [Source:HGNC Symbol;Acc:HGNC:11458]
 85559_at	GNL3	26354	G protein nucleolar 3 [Source:HGNC Symbol;Acc:HGNC:29931]
-85559_at	RF00569
-85559_at	RF01183
+85559_at	RF00569		NA
+85559_at	RF01183		NA
 85560_at	SLC34A3	142680	solute carrier family 34 member 3 [Source:HGNC Symbol;Acc:HGNC:20305]
 85561_at	AL353608.3		novel transcript
 85561_at	AL449043.1		novel transcript
@@ -42927,7 +42927,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 86272_at	DGLUCY	80017	D-glutamate cyclase [Source:HGNC Symbol;Acc:HGNC:20498]
 86276_at	NCSTN	23385	nicastrin [Source:HGNC Symbol;Acc:HGNC:17091]
 86278_at	FNBP4	23360	formin binding protein 4 [Source:HGNC Symbol;Acc:HGNC:19752]
-86278_at	RF00019
+86278_at	RF00019		NA
 86279_at	C11orf54	28970	chromosome 11 open reading frame 54 [Source:HGNC Symbol;Acc:HGNC:30204]
 86280_at	MIR34AHG	106614088	MIR34A host gene [Source:HGNC Symbol;Acc:HGNC:51913]
 86284_at	URI1	8725	URI1 prefoldin like chaperone [Source:HGNC Symbol;Acc:HGNC:13236]
@@ -43061,7 +43061,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 86506_at	TTC30B	150737	tetratricopeptide repeat domain 30B [Source:HGNC Symbol;Acc:HGNC:26425]
 86507_at	EPPK1	83481	epiplakin 1 [Source:HGNC Symbol;Acc:HGNC:15577]
 86508_at	PADI4	23569	peptidyl arginine deiminase 4 [Source:HGNC Symbol;Acc:HGNC:18368]
-86509_at	RF00019
+86509_at	RF00019		NA
 86511_at	THNSL2	55258	threonine synthase like 2 [Source:HGNC Symbol;Acc:HGNC:25602]
 86513_at	ANKRD36	375248	ankyrin repeat domain 36 [Source:HGNC Symbol;Acc:HGNC:24079]
 86513_at	ANKRD36B	57730	ankyrin repeat domain 36B [Source:HGNC Symbol;Acc:HGNC:29333]
@@ -43694,7 +43694,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 87866_at	CCDC122	160857	coiled-coil domain containing 122 [Source:HGNC Symbol;Acc:HGNC:26478]
 87868_at	SORT1	6272	sortilin 1 [Source:HGNC Symbol;Acc:HGNC:11186]
 87869_at	HOXA11-AS	221883	HOXA11 antisense RNA [Source:HGNC Symbol;Acc:HGNC:24957]
-87869_at	RF02142
+87869_at	RF02142		NA
 87870_at	CTXN3	613212	cortexin 3 [Source:HGNC Symbol;Acc:HGNC:31110]
 87872_at	FOXP1	27086	forkhead box P1 [Source:HGNC Symbol;Acc:HGNC:3823]
 87876_at	GFM2	84340	G elongation factor mitochondrial 2 [Source:HGNC Symbol;Acc:HGNC:29682]
@@ -43805,7 +43805,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 88066_s_at	NPM1	4869	nucleophosmin 1 [Source:HGNC Symbol;Acc:HGNC:7910]
 88069_s_at	SMARCA4	6597	SWI/SNF related, matrix associated, actin dependent regulator of chromatin, subfamily a, member 4 [Source:HGNC Symbol;Acc:HGNC:11100]
 88070_at	MAML3	55534	mastermind like transcriptional coactivator 3 [Source:HGNC Symbol;Acc:HGNC:16272]
-88071_at	RF00432
+88071_at	RF00432		NA
 88072_at	CARHSP1	23589	calcium regulated heat stable protein 1 [Source:HGNC Symbol;Acc:HGNC:17150]
 88073_i_at	HDDC3	374659	HD domain containing 3 [Source:HGNC Symbol;Acc:HGNC:30522]
 88075_r_at	HDDC3	374659	HD domain containing 3 [Source:HGNC Symbol;Acc:HGNC:30522]
@@ -44715,7 +44715,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 89546_at	ZNF229	7772	zinc finger protein 229 [Source:HGNC Symbol;Acc:HGNC:13022]
 89550_at	SEC22C	9117	SEC22 homolog C, vesicle trafficking protein [Source:HGNC Symbol;Acc:HGNC:16828]
 89552_at	DENR	8562	density regulated re-initiation and release factor [Source:HGNC Symbol;Acc:HGNC:2769]
-89552_at	RF00019
+89552_at	RF00019		NA
 89554_at	NFATC3	4775	nuclear factor of activated T cells 3 [Source:HGNC Symbol;Acc:HGNC:7777]
 89565_at	MFAP3L	9848	microfibril associated protein 3 like [Source:HGNC Symbol;Acc:HGNC:29083]
 89570_f_at	MYL6	4637	myosin light chain 6 [Source:HGNC Symbol;Acc:HGNC:7587]
@@ -44891,7 +44891,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 89826_at	CFAP97D1	284067	CFAP97 domain containing 1 [Source:HGNC Symbol;Acc:HGNC:37241]
 89827_at	ZNF540	163255	zinc finger protein 540 [Source:HGNC Symbol;Acc:HGNC:25331]
 89828_at	APBB2	323	amyloid beta precursor protein binding family B member 2 [Source:HGNC Symbol;Acc:HGNC:582]
-89828_at	RF00019
+89828_at	RF00019		NA
 89829_at	ARHGEF10L	55160	Rho guanine nucleotide exchange factor 10 like [Source:HGNC Symbol;Acc:HGNC:25540]
 89830_at	MAN2A2	4122	mannosidase alpha class 2A member 2 [Source:HGNC Symbol;Acc:HGNC:6825]
 89834_at	ZFAND2A	90637	zinc finger AN1-type containing 2A [Source:HGNC Symbol;Acc:HGNC:28073]
@@ -45138,7 +45138,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 90082_r_at	TCAIM	285343	T cell activation inhibitor, mitochondrial [Source:HGNC Symbol;Acc:HGNC:25241]
 90083_at	SAMD4B	55095	sterile alpha motif domain containing 4B [Source:HGNC Symbol;Acc:HGNC:25492]
 90085_at	HOXB-AS3	404266	HOXB cluster antisense RNA 3 [Source:HGNC Symbol;Acc:HGNC:40283]
-90086_at	RF00407
+90086_at	RF00407		NA
 90086_at	SNHG25	105376843	small nucleolar RNA host gene 25 [Source:HGNC Symbol;Acc:HGNC:51534]
 90086_at	SNORA50C	677842	small nucleolar RNA, H/ACA box 50C [Source:HGNC Symbol;Acc:HGNC:32662]
 90086_at	SNORD104	692227	small nucleolar RNA, C/D box 104 [Source:HGNC Symbol;Acc:HGNC:32768]
@@ -45489,7 +45489,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 90539_at	AC105935.1		novel transcript, antisense to MON1A
 90543_at	MEIOB	254528	meiosis specific with OB-fold [Source:HGNC Symbol;Acc:HGNC:28569]
 90544_at	L1TD1	54596	LINE1 type transposase domain containing 1 [Source:HGNC Symbol;Acc:HGNC:25595]
-90544_at	RF00019
+90544_at	RF00019		NA
 90545_at	METTL14	57721	methyltransferase like 14 [Source:HGNC Symbol;Acc:HGNC:29330]
 90546_at	SPRN	503542	shadow of prion protein [Source:HGNC Symbol;Acc:HGNC:16871]
 90551_s_at	CCDC125	202243	coiled-coil domain containing 125 [Source:HGNC Symbol;Acc:HGNC:28924]
@@ -45826,7 +45826,7 @@ Probe Set ID	Gene Symbol	NCBI Gene ID	Gene Title
 91067_i_at	MRPL42	28977	mitochondrial ribosomal protein L42 [Source:HGNC Symbol;Acc:HGNC:14493]
 91067_i_at	RN7SL737P	106481123	RNA, 7SL, cytoplasmic 737, pseudogene [Source:HGNC Symbol;Acc:HGNC:46753]
 91068_at	MALAT1	378938	metastasis associated lung adenocarcinoma transcript 1 [Source:HGNC Symbol;Acc:HGNC:29665]
-91068_at	RF01684
+91068_at	RF01684		NA
 91069_r_at	MRPL42	28977	mitochondrial ribosomal protein L42 [Source:HGNC Symbol;Acc:HGNC:14493]
 91069_r_at	RN7SL737P	106481123	RNA, 7SL, cytoplasmic 737, pseudogene [Source:HGNC Symbol;Acc:HGNC:46753]
 91070_at	ARL1	400	ADP ribosylation factor like GTPase 1 [Source:HGNC Symbol;Acc:HGNC:692]
@@ -46688,8 +46688,8 @@ AFFX-HUMISGF3A/M97935_3_at	STAT1	6772	signal transducer and activator of transcr
 AFFX-HUMISGF3A/M97935_5_at	STAT1	6772	signal transducer and activator of transcription 1 [Source:HGNC Symbol;Acc:HGNC:11362]
 AFFX-HUMISGF3A/M97935_MA_at	STAT1	6772	signal transducer and activator of transcription 1 [Source:HGNC Symbol;Acc:HGNC:11362]
 AFFX-HUMISGF3A/M97935_MB_at	STAT1	6772	signal transducer and activator of transcription 1 [Source:HGNC Symbol;Acc:HGNC:11362]
-AFFX-HUMRGE/M10098_5_at	CR392039.1	103504728
-AFFX-HUMRGE/M10098_5_at	FP671120.1
+AFFX-HUMRGE/M10098_5_at	CR392039.1	103504728	NA
+AFFX-HUMRGE/M10098_5_at	FP671120.1		NA
 AFFX-HUMTFRR/M11507_3_at	TFRC	7037	transferrin receptor [Source:HGNC Symbol;Acc:HGNC:11763]
 AFFX-HUMTFRR/M11507_5_at	TFRC	7037	transferrin receptor [Source:HGNC Symbol;Acc:HGNC:11763]
 AFFX-HUMTFRR/M11507_M_at	TFRC	7037	transferrin receptor [Source:HGNC Symbol;Acc:HGNC:11763]
