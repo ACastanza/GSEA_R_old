@@ -1,3 +1,4 @@
+library("dplyr")
 # The Broad Institute
 # SOFTWARE COPYRIGHT NOTICE AGREEMENT
 # This software and its documentation are copyright 2003 by the
@@ -21,9 +22,16 @@ probemap <- unique(dataplatform[,c("Probe.Set.ID","Gene.Symbol")])
 mappedgct <- merge(x = probemap, y= gct, by.x=1, by.y=1)
 mappedgct = unique(subset(mappedgct, select = -c(1)))
 
-if(collapse.mode == 1){} #MAX
-if(collapse.mode == 2){} #Median
-if(collapse.mode == 3){} #SUM
+if(collapse.mode == 1){
+mappedexp_sum <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(max) %>% data.frame()
+} #MAX
+if(collapse.mode == 2){
+mappedexp_sum <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(median) %>% data.frame()
+} #Median
+if(collapse.mode == 3){
+mappedexp_sum <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(sum) %>% data.frame()
+} #SUM
+return(mappedexp_sum)
 }
 
 
@@ -679,9 +687,14 @@ use.fast.enrichment.routine = T) {
 
 if (output.directory != "")  {
 
+if (.Platform$OS.type == "unix") {
+output.directory <- paste0(output.directory,.Platform$file.sep)}
+if (.Platform$OS.type == "windows") {
+output.directory <- paste0(output.directory,.Platform$file.sep)}
+
 filename <- paste(output.directory, doc.string, "_params.txt", sep="", collapse="")  
 
-time.string <- as.character(as.POSIXlt(Sys.time(),"GMT"))
+time.string <- as.character(random.seed)
 write(paste("Run of GSEA on ", time.string), file=filename)
 
 if (is.data.frame(input.ds)) {
@@ -759,6 +772,13 @@ if(collapsedataset == FALSE){
   } else {
      dataset <- GSEA.Gct2Frame(filename = input.ds)
   }
+dataset <- dataset[-c(1),]
+dataset <- dataset[-c(1),]
+colnames(dataset) <- dataset[c(1),]
+dataset <- dataset[-c(1),]
+colnames(dataset)[1] <- "ID"
+dataset <- dataset[match(unique(dataset$"ID"), dataset$"ID"),]
+
 } else if(collapsedataset == TRUE){
 chip <- GSEA.ReadCHIPFile(file=inputchip)
   if (is.data.frame(input.ds)) {
@@ -766,11 +786,19 @@ chip <- GSEA.ReadCHIPFile(file=inputchip)
   } else {
      dataset <- GSEA.Gct2Frame(filename = input.ds)
   }
+dataset <- dataset[-1,]
+dataset <- dataset[-1,]
+colnames(dataset) <- dataset[1,]
+dataset <- dataset[-1,]
 collapseddataset <- GSEA.CollapseDataset(chip, dataset)
+rownames(collapseddataset) <- collapseddataset[,1]
+collapseddataset <- collapseddataset[,-1]
+collapseddataset <- collapseddataset[,-1]
+dataset <- collapseddataset
 }
 
   gene.labels <- row.names(dataset)
-  sample.names <- names(dataset)
+  sample.names <- colnames(dataset[2:length(colnames(dataset))])
   A <- data.matrix(dataset)
   dim(A) 
   cols <- length(A[1,])
@@ -1374,7 +1402,7 @@ for (j in 1:nperm) {
        glob.p.vals.sorted <- signif(glob.p.vals.sorted, digits=5)
 
        report <- data.frame(cbind(gs.names, size.G, all.gs.descs, Obs.ES, Obs.ES.norm, p.vals[,1], FDR.mean.sorted, p.vals[,2], tag.frac, gene.frac, signal.strength, FDR.median.sorted, glob.p.vals.sorted))
-       names(report) <- c("GS", "SIZE", "SOURCE", "ES", "NES", "NOM p-val", "FDR q-val", "FWER p-val", "Tag \%", "Gene \%", "Signal", "FDR (median)", "glob.p.val")
+       names(report) <- c("GS", "SIZE", "SOURCE", "ES", "NES", "NOM p-val", "FDR q-val", "FWER p-val", "Tag %", "Gene %", "Signal", "FDR (median)", "glob.p.val")
 #       print(report)
        report2 <- report
        report.index2 <- order(Obs.ES.norm, decreasing=T)
@@ -1444,8 +1472,8 @@ if (output.directory != "")  {
 
      area.bias <- signif(100*(sum(obs.s2n[1:arg.correl]) + sum(obs.s2n[arg.correl:N]))/sum(abs(obs.s2n[1:N])), digits=3)
      area.phen <- ifelse(area.bias >= 0, phen1, phen2)
-     delta.string <- paste("Corr. Area Bias to \"", area.phen, "\" =", abs(area.bias), "\%", sep="", collapse="")
-     zero.crossing.string <- paste("Zero Crossing at location ", arg.correl, " (",  signif(100*arg.correl/N, digits=3), " \%)")
+     delta.string <- paste("Corr. Area Bias to \"", area.phen, "\" =", abs(area.bias), "%", sep="", collapse="")
+     zero.crossing.string <- paste("Zero Crossing at location ", arg.correl, " (",  signif(100*arg.correl/N, digits=3), " %)")
      leg.txt <- c(delta.string, zero.crossing.string)
      legend(x=N/10, y=max.corr, bty="n", bg = "white", legend=leg.txt, cex = 0.9)
 
@@ -1910,13 +1938,19 @@ GSEA.Analyze.Sets <- function(
    width = 17) {
 
    file.list <- list.files(directory)
-   files <- file.list[regexpr(pattern = "\.report\.", file.list) > 1]
+
+		if(.Platform$OS.type == "unix") {
+		directory <- paste0(directory,.Platform$file.sep)}
+		if (.Platform$OS.type == "windows") {
+		directory <- paste0(directory,.Platform$file.sep)}
+
+   files <- file.list[regexpr(pattern = ".report.", file.list) > 1]
    max.sets <- length(files)
 
    set.table <- matrix(nrow = max.sets, ncol = 5)
 
    for (i in 1:max.sets) {
-      temp1 <-  strsplit(files[i], split="\.report\.")
+      temp1 <-  strsplit(files[i], split=".report.")
       temp2 <-  strsplit(temp1[[1]][1], split="\\.")
       s <- length(temp2[[1]])
       prefix.name <- paste(temp2[[1]][1:(s-1)], sep="", collapse="")
@@ -1924,7 +1958,7 @@ GSEA.Analyze.Sets <- function(
       temp3 <-  strsplit(temp1[[1]][2], split="\\.")
       phenotype <- temp3[[1]][1]
       seq.number <- temp3[[1]][2]
-      dataset <- paste(temp2[[1]][1:(s-1)], sep="", collapse="\.")
+      dataset <- paste(temp2[[1]][1:(s-1)], sep="", collapse=".")
 
       set.table[i, 1] <- files[i]
 
@@ -1933,7 +1967,7 @@ GSEA.Analyze.Sets <- function(
       set.table[i, 5] <- dataset
 
 #      set.table[i, 2] <- paste(set.name, dataset, sep ="", collapse="")
-      set.table[i, 2] <- substr(set.name, 1, 20) 
+      set.table[i, 2] <- set.name 
    }
 
    print(c("set name=", prefix.name))

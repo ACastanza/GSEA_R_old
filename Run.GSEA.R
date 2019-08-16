@@ -2,29 +2,34 @@
 #
 # Executable R script to run GSEA Analysis
 library("utils")
-
-GSEA.program.location <- readline(prompt = ("Input path to GSEA.1.0.R Source (or drop file into R window) "))   #  R source program (change pathname to the rigth location in local machine)
+cat("\n")
+GSEA.program.location <- readline(prompt = ("Input path to GSEA.1.0.R Source (or drop file into R window): "))   #  R source program (change pathname to the rigth location in local machine)
 source(GSEA.program.location, verbose=T, max.deparse.length=9999)
-
-collapsedataset <- FALSE
-
+cat("\n")
+cat("\n")
+cat("Starting...\n")
+cat("\n")
 inputds <- readline(prompt = ("Input path to GCT formatted gene expression dataset (or drop file into R window): "))
 inputcls <- readline(prompt = ("Input path to experiment CLS file (or drop file into R window): "))
 gsdb <- readline(prompt = ("Input path to GMT formatted gene set database (or drop file into R window): "))
+collapsedataset <- askYesNo("Collapse data set to Gene Symbols? ")
+if(collapsedataset == TRUE) {
+	inputchip <- readline(prompt = ("Input path to CHIP platform file (or drop file into R window): "))
+collapsemode <- menu(c("Max_probe","Median_of_probes","Sum_of_Probes"), graphics = FALSE, title = "Collapsing mode for probe sets => 1 gene")
+	} else {
+inputchip <- "NOCHIP"
+collapsemode <- 0
+}
+
+reshuffetype <- menu(c("Phenotype","gene_set"), graphics = FALSE, title = "Select GSEA Permutation Type (recommended: Phenotype)")
+cat("\n")
 maxsize <- readline(prompt = ("Max size: exclude larger sets (recommended value: 500): "))
 minsize <- readline(prompt = ("Min size: exclude smaller sets (recommended value: 15): "))
-#collapsedataset <- askYesNo("Collapse data set to Gene Symbols? ")
-#if(collapsedataset == TRUE) {
-#	inputchip <- readline(prompt = ("Input path to CHIP platform file (or drop file into R window) "))
-#collapsemode <- menu(c("Max_probe","Median_of_probes","Sum_of_Probes"), graphics = FALSE, title = "Collapsing mode for probe sets => 1 gene")
-#	} else {
-#inputchip <- "NOCHIP"
-collapsemode <- 0
-#}
+cat("\n")
 outdir <- readline(prompt = ("Drop a directory into R window to use as the output folder or enter directory path: "))
+cat("\n")
 outname <- readline(prompt = ("Enter a prefix to label output files: "))
-reshuffetype <- menu(c("Phenotype","gene_set"), graphics = FALSE, title = "Select GSEA Permutation Type (recommended: Phenotype)")
-
+cat("\n")
 
 if (reshuffetype == 1){
 permutation <- "sample.labels"
@@ -37,7 +42,7 @@ GSEA(
  input.ds = inputds,                    # Input gene expression dataset file in GCT format
  input.cls = inputcls,                  # Input class vector (phenotype) file in CLS format
  gs.db = gsdb,                          # Gene set database in GMT format
-# input.chip = inputchip,               # CHIP File
+ input.chip = inputchip,               # CHIP File
  output.directory      = outdir,        # Directory where to store output and results (default: "")
 #  Program parameters :-------------------------------------------------------------------------------
  doc.string            = outname,         # Documentation string used as a prefix to name result files (default: "GSEA.analysis")
