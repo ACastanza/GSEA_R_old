@@ -13,6 +13,12 @@
 
 # Auxiliary functions and definitions 
 
+GSEA.ReadCHIPFile <- function(file = "NULL") {}
+
+GSEA.CollapseDataset <- function(){}
+
+
+
 GSEA.GeneRanking <- function(A, class.labels, gene.labels, nperm, permutation.type = 0, sigma.correction = "GeneCluster", fraction=1.0, replace=F, reverse.sign= F) { 
 
 # This function ranks the genes according to the signal to noise ratio for the actual phenotype and also random permutations and bootstrap  
@@ -459,34 +465,6 @@ GSEA.HeatMapPlot <- function(V, row.names = F, col.labels, col.classes, col.name
 	return()
 }
 
-GSEA.Res2Frame <- function(filename = "NULL") { 
-#
-# Reads a gene expression dataset in RES format and converts it into an R data frame
-#
-# The Broad Institute
-# SOFTWARE COPYRIGHT NOTICE AGREEMENT
-# This software and its documentation are copyright 2003 by the
-# Broad Institute/Massachusetts Institute of Technology.
-# All rights are reserved.
-#
-# This software is supplied without any warranty or guaranteed support
-# whatsoever. Neither the Broad Institute nor MIT can be responsible for
-# its use, misuse, or functionality.
-
-   header.cont <- readLines(filename, n = 1)
-   temp <- unlist(strsplit(header.cont, "\t"))
-   colst <- length(temp)
-   header.labels <- temp[seq(3, colst, 2)]
-   ds <- read.delim(filename, header=F, row.names = 2, sep="\t", skip=3, blank.lines.skip=T, comment.char="", as.is=T)
-   colst <- length(ds[1,])
-   cols <- (colst - 1)/2
-   rows <- length(ds[,1])
-   A <- matrix(nrow=rows - 1, ncol=cols)
-   A <- ds[1:rows, seq(2, colst, 2)]
-   table1 <- data.frame(A)
-   names(table1) <- header.labels
-   return(table1)
-}
 
 GSEA.Gct2Frame <- function(filename = "NULL") { 
 #
@@ -905,12 +883,8 @@ write(paste("replace =", replace, sep=" "), file=filename, append=T)
   if (is.data.frame(input.ds)) {
      dataset <- input.ds
   } else {
-     if (regexpr(pattern=".gct", input.ds) == -1) {
-         dataset <- GSEA.Res2Frame(filename = input.ds)
-     } else {
 #         dataset <- GSEA.Gct2Frame(filename = input.ds)
-         dataset <- GSEA.Gct2Frame2(filename = input.ds)
-     }
+     dataset <- GSEA.Gct2Frame2(filename = input.ds)
   }
   gene.labels <- row.names(dataset)
   sample.names <- names(dataset)
