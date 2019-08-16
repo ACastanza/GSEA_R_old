@@ -8,11 +8,11 @@ source(GSEA.program.location, verbose=T, max.deparse.length=9999)
 
 collapsedataset <- FALSE
 
-inputds <- readline(prompt = ("Input path to gene expression dataset (or drop file into R window) "))
-inputcls <- readline(prompt = ("Input path to experiment CLS file (or drop file into R window) "))
-gsdb <- readline(prompt = ("Input path to GMT formatted gene set database (or drop file into R window) "))
-maxsize <- readline(prompt = ("Max size: exclude larger sets (recommended value: 500)"))
-minsize <- readline(prompt = ("Min size: exclude smaller sets (recommended value: 15)"))
+inputds <- readline(prompt = ("Input path to GCT formatted gene expression dataset (or drop file into R window): "))
+inputcls <- readline(prompt = ("Input path to experiment CLS file (or drop file into R window): "))
+gsdb <- readline(prompt = ("Input path to GMT formatted gene set database (or drop file into R window): "))
+maxsize <- readline(prompt = ("Max size: exclude larger sets (recommended value: 500): "))
+minsize <- readline(prompt = ("Min size: exclude smaller sets (recommended value: 15): "))
 #collapsedataset <- askYesNo("Collapse data set to Gene Symbols? ")
 #if(collapsedataset == TRUE) {
 #	inputchip <- readline(prompt = ("Input path to CHIP platform file (or drop file into R window) "))
@@ -29,7 +29,7 @@ permutation <- "gene.labels"
 }
 
 GSEA(                                                                    # Input/Output Files :-------------------------------------------
- input.ds =  inputds,           # Input gene expression Affy dataset file in RES or GCT format
+ input.ds =  inputds,           # Input gene expression dataset file in GCT format
  input.cls = inputcls,           # Input class vector (phenotype) file in CLS format
  gs.db =     gsdb,         # Gene set database in GMT format
 # input.chip = inputchip,         # CHIP File
