@@ -858,7 +858,7 @@ dataset <- collapseddataset
       max.Ng <- length(temp)
       temp.size.G <- vector(length = max.Ng, mode = "numeric") 
       for (i in 1:max.Ng) {
-          temp.size.G[i] <- length(unlist(strsplit(temp[[i]], "\t"))) - 2
+          temp.size.G[i] <- length(unlist(strsplit(temp[[i]], "\\t"))) - 2
       }
 
       max.size.G <- max(temp.size.G)      
@@ -867,8 +867,8 @@ dataset <- collapseddataset
       temp.desc <- vector(length = max.Ng, mode = "character")
       gs.count <- 1
       for (i in 1:max.Ng) {
-          gene.set.size <- length(unlist(strsplit(temp[[i]], "\t"))) - 2
-          gs.line <- noquote(unlist(strsplit(temp[[i]], "\t")))
+          gene.set.size <- length(unlist(strsplit(temp[[i]], "\\t"))) - 2
+          gs.line <- noquote(unlist(strsplit(temp[[i]], "\\t")))
           gene.set.name <- gs.line[1] 
           gene.set.desc <- gs.line[2] 
           gene.set.tags <- vector(length = gene.set.size, mode = "character")
