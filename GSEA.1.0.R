@@ -19,7 +19,7 @@ read.table(file, sep = "\t", comment.char = "", quote = "", stringsAsFactors = F
 
 GSEA.CollapseDataset <- function(dataplatform = chip, gct = dataset, collapse.mode = collapsemode){
 probemap <- unique(dataplatform[,c("Probe.Set.ID","Gene.Symbol")])
-mappedgct <- merge(x = probemap, y= gct, by.x=1, by.y=1)
+mappedgct <- merge(x = probemap, y= gct, by.x=1, by.y=1, all=FALSE, no.dups=FALSE)
 mappedgct = unique(subset(mappedgct, select = -c(1)))
 
 if(collapse.mode == 1){
