@@ -861,7 +861,8 @@ dataset <- collapseddataset
           temp.size.G[i] <- length(unlist(strsplit(temp[[i]], "\\t"))) - 2
       }
 
-      max.size.G <- max(temp.size.G)      
+      max.size.G <- max(temp.size.G)
+      min.size.G <- min(temp.size.G)
       gs <- matrix(rep("null", max.Ng*max.size.G), nrow=max.Ng, ncol= max.size.G)
       temp.names <- vector(length = max.Ng, mode = "character")
       temp.desc <- vector(length = max.Ng, mode = "character")
@@ -877,7 +878,7 @@ dataset <- collapseddataset
           } 
           existing.set <- is.element(gene.set.tags, gene.labels)
           set.size <- length(existing.set[existing.set == T])
-          if ((set.size < gs.size.threshold.min) || (set.size > gs.size.threshold.max)) next
+          if (set.size > gs.size.threshold.min & set.size < gs.size.threshold.max) next
           temp.size.G[gs.count] <- set.size
           gs[gs.count,] <- c(gene.set.tags[existing.set], rep("null", max.size.G - temp.size.G[gs.count]))
           temp.names[gs.count] <- gene.set.name
@@ -900,6 +901,7 @@ dataset <- collapseddataset
   print(c("Number of samples:", Ns))
   print(c("Original number of Gene Sets:", max.Ng))
   print(c("Maximum gene set size:", max.size.G))
+  print(c("Minimum gene set size:", min.size.G))
 
 # Read gene and gene set annotations if gene annotation file was provided
 
