@@ -597,6 +597,8 @@ collapse.mode,
 save.intermediate.results = F,
 use.fast.enrichment.routine = T) {
 
+gs.size.threshold.min <- as.integer(gs.size.threshold.min)
+gs.size.threshold.max <- as.integer(gs.size.threshold.max)
 # This is a methodology for the analysis of global molecular profiles called Gene Set Enrichment Analysis (GSEA). It determines 
 # whether an a priori defined set of genes shows statistically significant, concordant differences between two biological 
 # states (e.g. phenotypes). GSEA operates on all genes from an experiment, rank ordered by the signal to noise ratio and 
@@ -878,7 +880,7 @@ dataset <- collapseddataset
           } 
           existing.set <- is.element(gene.set.tags, gene.labels)
           set.size <- length(existing.set[existing.set == T])
-          if (set.size > gs.size.threshold.min & set.size < gs.size.threshold.max) next
+          if ((set.size < gs.size.threshold.min) || (set.size > gs.size.threshold.max)) next
           temp.size.G[gs.count] <- set.size
           gs[gs.count,] <- c(gene.set.tags[existing.set], rep("null", max.size.G - temp.size.G[gs.count]))
           temp.names[gs.count] <- gene.set.name
