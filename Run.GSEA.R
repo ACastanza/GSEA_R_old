@@ -1,4 +1,4 @@
-# GSEA 1.0.1 -- Gene Set Enrichment Analysis / Broad Institute 
+# GSEA 1.0.1 -- Gene Set Enrichment Analysis / Broad Institute
 #
 # Executable R script to run GSEA Analysis
 library("utils")
@@ -47,7 +47,7 @@ GSEA(
 #  Program parameters :-------------------------------------------------------------------------------
  doc.string            = outname,         # Documentation string used as a prefix to name result files (default: "GSEA.analysis")
  non.interactive.run   = F,               # Run in interactive (i.e. R GUI) or batch (R command line) mode (default: F)
- reshuffling.type      = permutation,     # Type of permutation reshuffling: "sample.labels" or "gene.labels" (default: "sample.labels" 
+ reshuffling.type      = permutation,     # Type of permutation reshuffling: "sample.labels" or "gene.labels" (default: "sample.labels"
  nperm                 = 1000,            # Number of random permutations (default: 1000)
  weighted.score.type   =  1,              # Enrichment correlation-based weighting: 0=no weight (KS), 1= weigthed, 2 = over-weigthed (default: 1)
  nom.p.val.threshold   = -1,              # Significance threshold for nominal p-vals for gene sets (default: -1, no thres)
@@ -59,7 +59,7 @@ GSEA(
  gs.size.threshold.max = maxsize,         # Maximum size (in genes) for database gene sets to be considered (default: 500)
  reverse.sign          = F,               # Reverse direction of gene list (pos. enrichment becomes negative, etc.) (default: F)
  preproc.type          = 0,               # Preproc.normalization: 0=none, 1=col(z-score)., 2=col(rank) and row(z-score)., 3=col(rank). (def: 0)
- random.seed           = as.numeric(as.POSIXct(Sys.time())),            # Random number generator seed. (default: 123456)
+ random.seed           = as.integer(as.POSIXct(Sys.time())),            # Random number generator seed. (default: 123456)
  perm.type             = 0,               # For experts only. Permutation type: 0 = unbalanced, 1 = balanced (default: 0)
  fraction              = 1.0,             # For experts only. Subsampling fraction. Set to 1.0 (no resampling) (default: 1.0)
  replace               = F,               # For experts only, Resampling mode (replacement or not replacement) (default: F)
