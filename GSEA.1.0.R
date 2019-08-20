@@ -782,6 +782,7 @@ colnames(dataset)[1] <- "NAME"
 dataset <- dataset[match(unique(dataset$"NAME"), dataset$"NAME"),]
 rownames(dataset) <- dataset[,1]
 dataset <- dataset[,-1]
+dataset <- dataset[,-1]
 
 } else if(collapsedataset == TRUE){
 chip <- GSEA.ReadCHIPFile(file=inputchip)
