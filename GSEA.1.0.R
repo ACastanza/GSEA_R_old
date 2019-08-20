@@ -1400,7 +1400,7 @@ for (j in 1:nperm) {
 
        Obs.ES <- signif(Obs.ES, digits=5)
        Obs.ES.norm <- signif(Obs.ES.norm, digits=5)
-       p.vals <- signif(p.vals, digits=4)
+       p.vals <- signif(p.vals, digits=nchar(nperm))
        signal.strength <- signif(signal.strength, digits=3)
        tag.frac <- signif(tag.frac, digits=3)
        gene.frac <- signif(gene.frac, digits=3)
