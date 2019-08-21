@@ -753,12 +753,6 @@ write(paste("replace =", replace, sep=" "), file=filename, append=T)
 
 # Start of GSEA methodology 
 
-  if (.Platform$OS.type == "windows") {
-      memory.limit(6000000000)
-      memory.limit()
-#      print(c("Start memory size=",  memory.size()))
-  }
-
   # Read input data matrix
 
   set.seed(seed=random.seed, kind = NULL)
