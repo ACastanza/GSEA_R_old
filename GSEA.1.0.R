@@ -777,7 +777,7 @@ dataset <- dataset[-c(1),]
 colnames(dataset)[1] <- "NAME"
 dataset <- dataset[match(unique(dataset$"NAME"), dataset$"NAME"),]
 rownames(dataset) <- dataset[,1]
-gene.map<- dataset[,c(1,2)]
+gene.map <- dataset[,c(1,2)]
 dataset <- dataset[,-1]
 dataset <- dataset[,-1]
 
