@@ -1696,7 +1696,7 @@ if (output.directory != "")  {
             }
 
        gene.report <- data.frame(cbind(gene.number, gene.names, gene.symbols, gene.descs, gene.list.loc, gene.s2n, gene.RES, core.enrichment))
-       names(gene.report) <- c("#", "GENE", "SYMBOL", "DESC", "LIST LOC", "S2N", "RES", "CORE_ENRICHMENT")
+       names(gene.report) <- c("#", "GENE SYMBOL", "DESC", "LIST LOC", "S2N", "RES", "CORE_ENRICHMENT")
 
 #       print(gene.report)
 
