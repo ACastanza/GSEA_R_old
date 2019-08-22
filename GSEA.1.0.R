@@ -18,20 +18,22 @@ GSEA.ReadCHIPFile <- function(file = "NULL") {
 read.table(file, sep = "\t", comment.char = "", quote = "", stringsAsFactors = FALSE, fill = TRUE, header = T)}
 
 GSEA.CollapseDataset <- function(dataplatform = chip, gct = dataset, collapse.mode = collapsemode){
-probemap <- unique(dataplatform[,c("Probe.Set.ID","Gene.Symbol")])
+probemap <- unique(dataplatform[,c("Probe.Set.ID","Gene.Symbol","Gene.Title")])
 mappedgct <- merge(x = probemap, y= gct, by.x=1, by.y=1, all=FALSE, no.dups=FALSE)
 mappedgct = unique(subset(mappedgct, select = -c(1)))
+mappedgct <- mappedgct[,-c(3)]
+colnames(mappedgct)[2] <- "Description"
 
 if(collapse.mode == 1){
-mappedexp_sum <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(max) %>% data.frame()
+mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(max) %>% data.frame()
 } #MAX
 if(collapse.mode == 2){
-mappedexp_sum <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(median) %>% data.frame()
+mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(median) %>% data.frame()
 } #Median
 if(collapse.mode == 3){
-mappedexp_sum <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(sum) %>% data.frame()
+mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(sum) %>% data.frame()
 } #SUM
-return(mappedexp_sum)
+return(mappedexp)
 }
 
 
@@ -775,6 +777,7 @@ dataset <- dataset[-c(1),]
 colnames(dataset)[1] <- "NAME"
 dataset <- dataset[match(unique(dataset$"NAME"), dataset$"NAME"),]
 rownames(dataset) <- dataset[,1]
+gene.map<- dataset[,c(1,2)]
 dataset <- dataset[,-1]
 dataset <- dataset[,-1]
 
@@ -791,6 +794,7 @@ colnames(dataset) <- dataset[1,]
 dataset <- dataset[-1,]
 collapseddataset <- GSEA.CollapseDataset(chip, dataset)
 rownames(collapseddataset) <- collapseddataset[,1]
+gene.map<- collapseddataset[,c(1,2)]
 collapseddataset <- collapseddataset[,-1]
 collapseddataset <- collapseddataset[,-1]
 dataset <- collapseddataset
@@ -922,7 +926,7 @@ if(exists("chip") == TRUE)
      rm(temp)
   } else  if (gene.ann == "") {
      for (i in 1:N) {
-        all.gene.descs[i] <- gene.labels[i]
+        all.gene.descs[i] <- gene.map[2,i]
         all.gene.symbols[i] <- gene.labels[i]
      }
   }
@@ -1676,9 +1680,9 @@ if (output.directory != "")  {
             for (k in set.k) {
                if (Obs.indicator[i, k] == 1) {
                   gene.number[kk] <- kk
-                  gene.names[kk] <- obs.gene.labels[k]
-                  gene.symbols[kk] <- substr(obs.gene.symbols[k], 1, 15)
-                  gene.descs[kk] <- substr(obs.gene.descs[k], 1, 40)
+#                  gene.names[kk] <- obs.gene.labels[k]
+                  gene.symbols[kk] <- obs.gene.symbols[k]
+                  gene.descs[kk] <- obs.gene.descs[k]
                   gene.list.loc[kk] <- k
                   gene.s2n[kk] <- signif(obs.s2n[k], digits=3)
                   gene.RES[kk] <- signif(Obs.RES[i, k], digits = 3)
