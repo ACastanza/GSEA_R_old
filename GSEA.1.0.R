@@ -1703,7 +1703,7 @@ if (output.directory != "")  {
 if (output.directory != "")  {
 
        filename <- paste(output.directory, doc.string, ".", gs.names[i], ".report.", phen.tag, ".", loc, ".txt", sep="", collapse="")
-       write.table(gene.report, file = filename, quote=F, row.names=F, sep = "\t")
+       write.table(gene.report, file = filename, quote=F, row.names=F, sep = "\t", na="NA")
 
        if (non.interactive.run == F) {
            if (.Platform$OS.type == "windows") {
@@ -1855,7 +1855,7 @@ GSEA.write.gct <- function (gct, filename)
         m[, index] <- gct[, i]
         index <- index + 1
     }
-    write.table(m, file = f, append = TRUE, quote = FALSE, sep = "\t", eol = "\n", col.names = FALSE, row.names = FALSE)
+    write.table(m, file = f, append = TRUE, quote = FALSE, sep = "\t", eol = "\n", col.names = FALSE, row.names = FALSE, na="NA")
     close(f)
     options(warn = 0)
     return(gct)
