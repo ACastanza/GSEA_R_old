@@ -1918,7 +1918,7 @@ GSEA.HeatMapPlot2 <- function(V, row.names = "NA", col.names = "NA", main = " ",
 
         if (length(row.names) > 1) {
             size.row.char <- ifelse(n.rows < 15, 1, sqrt(15/n.rows))
-            size.col.char <- ifelse(n.cols < 15, 1, sqrt(10/n.cols))
+            size.col.char <- ifelse(n.cols < 15, 1, sqrt(25/n.cols))
 #            size.col.char <- ifelse(n.cols < 2.5, 1, sqrt(2.5/n.cols))
             for (i in 1:n.rows) {
                row.names[i] <- substr(row.names[i], 1, 40)
@@ -2290,7 +2290,7 @@ GSEA.Analyze.Sets <- function(
    cmap <-  c("#AAAAFF", "#111166")
 #   GSEA.HeatMapPlot2(V = A, row.names = A.row.names, col.names = A.names, main = "Leading Subsets Assignment (clustered)", sub = paste(doc.string, " - ", phen1, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
 
-   GSEA.HeatMapPlot2(V = t(A), row.names = A.names, col.names = A.row.names, main = "Leading Subsets Assignment (clustered)", sub = paste(doc.string, " - ", phen1, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
+   GSEA.HeatMapPlot2(V = A, row.names = A.row.names, col.names = A.names, main = "Leading Subsets Assignment (clustered)", sub = paste(doc.string, " - ", phen1, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
 
     text.filename <- paste(directory, doc.string, ".leading.assignment.clustered.", phen1, ".txt", sep="", collapse="")
     line.list <- c("Gene", A.row.names)
@@ -2372,7 +2372,7 @@ GSEA.Analyze.Sets <- function(
    cmap <-  c("#AAAAFF", "#111166")
 
 #   GSEA.HeatMapPlot2(V = A, row.names = A.row.names, col.names = A.names, main = "Leading Subsets Assignment (clustered)", sub = paste(doc.string, " - ", phen2, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
-   GSEA.HeatMapPlot2(V = t(A), row.names =A.names , col.names = A.row.names, main = "Leading Subsets Assignment (clustered)", sub = paste(doc.string, " - ", phen2, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
+   GSEA.HeatMapPlot2(V = A, row.names =A.row.names , col.names = A.names, main = "Leading Subsets Assignment (clustered)", sub = paste(doc.string, " - ", phen2, sep=""), xlab=" ", ylab=" ", color.map = cmap) 
 
     text.filename <- paste(directory, doc.string, ".leading.assignment.clustered.", phen2, ".txt", sep="", collapse="")
     line.list <- c("Gene", A.row.names)
