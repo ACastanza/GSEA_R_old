@@ -685,7 +685,7 @@ gs.size.threshold.max <- as.integer(gs.size.threshold.max)
 # result2:  Global putput report for second phenotype
 #
 
-  print(" *** Running GSEA Analysis...")
+  print(" *** Running Gene Set Enrichment Analysis...")
 
 # Copy input parameters to log file
 
@@ -1695,7 +1695,7 @@ if (output.directory != "")  {
                }
             }
 
-       gene.report <- data.frame(cbind(gene.number, gene.names, gene.symbols, gene.descs, gene.list.loc, gene.s2n, gene.RES, core.enrichment))
+       gene.report <- data.frame(cbind(gene.number, gene.symbols, gene.descs, gene.list.loc, gene.s2n, gene.RES, core.enrichment))
        names(gene.report) <- c("#", "GENE SYMBOL", "DESC", "LIST LOC", "S2N", "RES", "CORE_ENRICHMENT")
 
 #       print(gene.report)
@@ -1703,7 +1703,7 @@ if (output.directory != "")  {
 if (output.directory != "")  {
 
        filename <- paste(output.directory, doc.string, ".", gs.names[i], ".report.", phen.tag, ".", loc, ".txt", sep="", collapse="")
-       write.table(gene.report, file = filename, quote=F, row.names=F, sep = "\t", na="")
+       write.table(gene.report, file = filename, quote = FALSE, row.names = FALSE, sep = "\t", na="")
 
        if (non.interactive.run == F) {
            if (.Platform$OS.type == "windows") {
@@ -1836,14 +1836,14 @@ if (output.directory != "")  {
 GSEA.write.gct <- function (gct, filename) 
 {
     f <- file(filename, "w")
-    cat("#1.2", "\n", file = f, append = TRUE, sep = "")
-    cat(dim(gct)[1], "\t", dim(gct)[2], "\n", file = f, append = TRUE, sep = "")
-    cat("Name", "\t", file = f, append = TRUE, sep = "")
-    cat("Description", file = f, append = TRUE, sep = "")
+    cat("#1.2", "\n", file = f, append = TRUE, sep = "\t")
+    cat(dim(gct)[1], "\t", dim(gct)[2], "\n", file = f, append = TRUE, sep = "\t")
+    cat("Name", "\t", file = f, append = TRUE, sep = "\t")
+    cat("Description", file = f, append = TRUE, sep = "\t")
     names <- names(gct)
-    cat("\t", names[1], file = f, append = TRUE, sep = "")
+    cat("\t", names[1], file = f, append = TRUE, sep = "\t")
     for (j in 2:length(names)) {
-        cat("\t", names[j], file = f, append = TRUE, sep = "")
+        cat("\t", names[j], file = f, append = TRUE, sep = "\t")
     }
     cat("\n", file = f, append = TRUE, sep = "\t")
     oldWarn <- options(warn = -1)
@@ -2007,8 +2007,8 @@ GSEA.Analyze.Sets <- function(
    leading.lists <- NULL
    for (i in 1:max.sets.phen1) {
       inputfile <- paste(directory, set.table.phen1[i, 1], sep="", collapse="")
-      gene.set <- read.table(file=inputfile, sep="\t", header=T, comment.char="", as.is=T)
-      leading.set <- as.vector(gene.set[gene.set[,"CORE_ENRICHMENT"] == "YES", "SYMBOL"])
+      gene.set <- read.table(file=inputfile, sep="\t", header=T, comment.char="", as.is=T, quote="", fill=TRUE)
+      leading.set <- as.vector(gene.set[gene.set[,"CORE_ENRICHMENT"] == "YES", "GENE.SYMBOL"])
       leading.lists <- c(leading.lists, list(leading.set))
       if (i == 1) {
          all.leading.genes <- leading.set 
@@ -2121,8 +2121,8 @@ GSEA.Analyze.Sets <- function(
    leading.lists <- NULL
    for (i in 1:max.sets.phen2) {
       inputfile <- paste(directory, set.table.phen2[i, 1], sep="", collapse="")
-      gene.set <- read.table(file=inputfile, sep="\t", header=T, comment.char="", as.is=T)
-      leading.set <- as.vector(gene.set[gene.set[,"CORE_ENRICHMENT"] == "YES", "SYMBOL"])
+      gene.set <- read.table(file=inputfile, sep="\t", header=T, comment.char="", as.is=T, quote="", fill=TRUE)
+      leading.set <- as.vector(gene.set[gene.set[,"CORE_ENRICHMENT"] == "YES", "GENE.SYMBOL"])
       leading.lists <- c(leading.lists, list(leading.set))
       if (i == 1) {
          all.leading.genes <- leading.set 
