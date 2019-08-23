@@ -426,7 +426,7 @@ GSEA.HeatMapPlot <- function(V, row.names = F, col.labels, col.classes, col.name
 
         if (length(row.names) > 1) {
             numC <- nchar(row.names)
-            size.row.char <- 35/(n.rows + 5)
+            size.row.char <- 25/(n.rows + 5)
             size.col.char <- 25/(n.cols + 5)
             maxl <- floor(n.rows/1.6)
             for (i in 1:n.rows) {
@@ -1907,7 +1907,7 @@ GSEA.HeatMapPlot2 <- function(V, row.names = "NA", col.names = "NA", main = " ",
        n.cols <- length(V[1,])
 
        if (color.map == "default") {
-         color.map <- rev(rainbow(100, s = 1.0, v = 0.75, start = 0.0, end = 0.75, gamma = 1.5))
+         color.map <- rev(rainbow(100, s = 1.0, v = 0.75, start = 0.0, end = 0.75))
        }
 
         heatm <- matrix(0, nrow = n.rows, ncol = n.cols)
