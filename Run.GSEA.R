@@ -4,10 +4,10 @@
 library("utils")
 cat("\n")
 gseasource <- list.files(getwd(),pattern="GSEA.1.0.R", full.names=T, recursive=FALSE)[1]
-if((gseasource != "NA") == "TRUE"){
-GSEA.program.location <- gseasource
-	} else {
-		GSEA.program.location <- readline(prompt = ("Input path to GSEA.1.0.R Source (or drop file into R window): "))   #  R source program (change pathname to the rigth location in local machine)
+if (!is.na(gseasource)) {
+	GSEA.program.location <- gseasource
+} else {
+	GSEA.program.location <- readline(prompt = ("Input path to GSEA.1.0.R Source (or drop file into R window): "))   #  R source program (change pathname to the rigth location in local machine)
 }
 source(GSEA.program.location, verbose=T, max.deparse.length=9999)
 cat("\n")
