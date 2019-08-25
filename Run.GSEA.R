@@ -3,13 +3,13 @@
 # Executable R script to run GSEA Analysis
 library("utils")
 cat("\n")
-gseasource <- list.files(getwd(),pattern="GSEA.1.0.R", full.names=T, recursive=FALSE)[1]
+gseasource <- list.files(getwd(), pattern = "GSEA.1.0.R", full.names = T, recursive = FALSE)[1]
 if (!is.na(gseasource)) {
-	GSEA.program.location <- gseasource
+  GSEA.program.location <- gseasource
 } else {
-	GSEA.program.location <- readline(prompt = ("Input path to GSEA.1.0.R Source (or drop file into R window): "))   #  R source program (change pathname to the rigth location in local machine)
+  GSEA.program.location <- readline(prompt = ("Input path to GSEA.1.0.R Source (or drop file into R window): "))  #  R source program (change pathname to the rigth location in local machine)
 }
-source(GSEA.program.location, verbose=T, max.deparse.length=9999)
+source(GSEA.program.location, verbose = T, max.deparse.length = 9999)
 cat("\n")
 cat("\n")
 cat("Starting...\n")
@@ -18,29 +18,54 @@ inputds <- readline(prompt = ("Input path to GCT formatted gene expression datas
 inputcls <- readline(prompt = ("Input path to experiment CLS file (or drop file into R window): "))
 gsdb <- readline(prompt = ("Input path to GMT formatted gene set database (or drop file into R window): "))
 collapsedataset <- askYesNo("Collapse data set to Gene Symbols? ")
-if(collapsedataset == TRUE) {
-	inputchip <- readline(prompt = ("Input path to CHIP platform file (or drop file into R window): "))
-collapsemode <- menu(c("Max_probe","Median_of_probes","Sum_of_Probes"), graphics = FALSE, title = "Collapsing mode for probe sets => 1 gene")
-	} else {
-inputchip <- "NOCHIP"
-collapsemode <- 0
+if (collapsedataset == TRUE) {
+  inputchip <- readline(prompt = ("Input path to CHIP platform file (or drop file into R window): "))
+  collapsemode <- menu(c("Max_probe", "Median_of_probes", "Sum_of_Probes"), graphics = FALSE,
+    title = "Collapsing mode for probe sets => 1 gene")
+} else {
+  inputchip <- "NOCHIP"
+  collapsemode <- 0
 }
 
 reshuffetype <- menu(c("Phenotype","gene_set"), graphics = FALSE, title = "Select GSEA Permutation Type (recommended: Phenotype)")
 cat("\n")
-maxsize <- readline(prompt = ("Max size: exclude larger sets (recommended value: 500): "))
-minsize <- readline(prompt = ("Min size: exclude smaller sets (recommended value: 15): "))
+
+npermsoverride <- askYesNo("Override default number of permutations for significance testing? (default: 1000) ")
+if (npermsoverride == TRUE) {
+  nperms <- readline(prompt = ("Number of permutations: "))
+} else {
+  nperms <- 1000
+}
 cat("\n")
+
+maxoverride <- askYesNo("Override maximum gene set size filter? (default: 500 genes) ")
+if (maxoverride == TRUE) {
+  maxsize <- readline(prompt = ("Max size: "))
+} else {
+  maxsize <- 500
+}
+cat("\n")
+
+minoverride <- askYesNo("Override minimum gene set size filter? (default: 15 genes) ")
+if (minoverride == TRUE) {
+  minsize <- readline(prompt = ("Min size: "))
+} else {
+  minsize <- 15
+}
+cat("\n")
+
 outdir <- readline(prompt = ("Drop a directory into R window to use as the output folder or enter directory path: "))
 cat("\n")
 outname <- readline(prompt = ("Enter a prefix to label output files: "))
 cat("\n")
 
-if (reshuffetype == 1){
-permutation <- "sample.labels"
-} else if (reshuffetype == 2){
-permutation <- "gene.labels"
+if (reshuffetype == 1) {
+  permutation <- "sample.labels"
+} else if (reshuffetype == 2) {
+  permutation <- "gene.labels"
 }
+
+
 
 GSEA(
 # Input/Output Files :-------------------------------------------------------------------------------
@@ -53,15 +78,15 @@ GSEA(
  doc.string            = outname,         # Documentation string used as a prefix to name result files (default: "GSEA.analysis")
  non.interactive.run   = F,               # Run in interactive (i.e. R GUI) or batch (R command line) mode (default: F)
  reshuffling.type      = permutation,     # Type of permutation reshuffling: "sample.labels" or "gene.labels" (default: "sample.labels"
- nperm                 = 1000,            # Number of random permutations (default: 1000)
+ nperm                 = as.integer(nperms),            # Number of random permutations (default: 1000)
  weighted.score.type   =  1,              # Enrichment correlation-based weighting: 0=no weight (KS), 1= weigthed, 2 = over-weigthed (default: 1)
  nom.p.val.threshold   = -1,              # Significance threshold for nominal p-vals for gene sets (default: -1, no thres)
  fwer.p.val.threshold  = -1,              # Significance threshold for FWER p-vals for gene sets (default: -1, no thres)
  fdr.q.val.threshold   = 0.25,            # Significance threshold for FDR q-vals for gene sets (default: 0.25)
  topgs                 = 20,              # Besides those passing test, number of top scoring gene sets used for detailed reports (default: 10)
  adjust.FDR.q.val      = F,               # Adjust the FDR q-vals (default: F)
- gs.size.threshold.min = minsize,         # Minimum size (in genes) for database gene sets to be considered (default: 25)
- gs.size.threshold.max = maxsize,         # Maximum size (in genes) for database gene sets to be considered (default: 500)
+ gs.size.threshold.min = as.integer(minsize),         # Minimum size (in genes) for database gene sets to be considered (default: 25)
+ gs.size.threshold.max = as.integer(maxsize),         # Maximum size (in genes) for database gene sets to be considered (default: 500)
  reverse.sign          = F,               # Reverse direction of gene list (pos. enrichment becomes negative, etc.) (default: F)
  preproc.type          = 0,               # Preproc.normalization: 0=none, 1=col(z-score)., 2=col(rank) and row(z-score)., 3=col(rank). (def: 0)
  random.seed           = as.integer(as.POSIXct(Sys.time())),            # Random number generator seed. (default: 123456)
