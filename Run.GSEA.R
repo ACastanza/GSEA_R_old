@@ -18,7 +18,7 @@ inputds <- readline(prompt = ("Input path to GCT formatted gene expression datas
 inputcls <- readline(prompt = ("Input path to experiment CLS file (or drop file into R window): "))
 gsdb <- readline(prompt = ("Input path to GMT formatted gene set database (or drop file into R window): "))
 collapsedataset <- askYesNo("Collapse data set to Gene Symbols? ")
-if (collapsedataset == TRUE) {
+if (collapsedataset == TRUE & !is.na(collapsedataset)) {
   inputchip <- readline(prompt = ("Input path to CHIP platform file (or drop file into R window): "))
   collapsemode <- menu(c("Max_probe", "Median_of_probes", "Sum_of_Probes"), graphics = FALSE,
     title = "Collapsing mode for probe sets => 1 gene")
@@ -31,7 +31,7 @@ reshuffetype <- menu(c("Phenotype","gene_set"), graphics = FALSE, title = "Selec
 cat("\n")
 
 npermsoverride <- askYesNo("Override default number of permutations for significance testing? (default: 1000) ")
-if (npermsoverride == TRUE) {
+if (npermsoverride == TRUE & !is.na(npermsoverride)) {
   nperms <- readline(prompt = ("Number of permutations: "))
 } else {
   nperms <- 1000
@@ -39,7 +39,7 @@ if (npermsoverride == TRUE) {
 cat("\n")
 
 maxoverride <- askYesNo("Override maximum gene set size filter? (default: 500 genes) ")
-if (maxoverride == TRUE) {
+if (maxoverride == TRUE & !is.na(maxoverride)) {
   maxsize <- readline(prompt = ("Max size: "))
 } else {
   maxsize <- 500
@@ -47,7 +47,7 @@ if (maxoverride == TRUE) {
 cat("\n")
 
 minoverride <- askYesNo("Override minimum gene set size filter? (default: 15 genes) ")
-if (minoverride == TRUE) {
+if (minoverride == TRUE & !is.na(minoverride) {
   minsize <- readline(prompt = ("Min size: "))
 } else {
   minsize <- 15
