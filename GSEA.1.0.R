@@ -585,8 +585,6 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   fraction = 1, replace = F, collapse.dataset, collapse.mode, save.intermediate.results = F,
   use.fast.enrichment.routine = T) {
 
-  gs.size.threshold.min <- as.integer(gs.size.threshold.min)
-  gs.size.threshold.max <- as.integer(gs.size.threshold.max)
   # This is a methodology for the analysis of global molecular profiles called Gene
   # Set Enrichment Analysis (GSEA). It determines whether an a priori defined set
   # of genes shows statistically significant, concordant differences between two
@@ -1963,7 +1961,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
         } else {
           dev.off()
         }
-        
+
       }  # if p.vals thres
 
   }  # loop over gene sets
