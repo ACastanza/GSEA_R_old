@@ -930,7 +930,7 @@ GSEA <- function(
     rm(temp)
   } else  if (gene.ann == "") {
     for (i in 1:N) {
-      all.gene.descs[i] <- gene.map[2,i]
+      all.gene.descs[i] <- gene.map[i,2]
       all.gene.symbols[i] <- gene.labels[i]
     }
   }
