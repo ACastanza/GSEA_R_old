@@ -1600,7 +1600,7 @@ GSEA <- function(
 
     for (i in 1:Ng) {
       col <- ifelse(Obs.ES.norm[i] > 0, 2, 3)
-       ines(c(Obs.ES.norm[i], Obs.ES.norm[i]), c(-0.2*max(c(y1, y2)), 0), lwd = 1, lty = 1, col = 1)
+      lines(c(Obs.ES.norm[i], Obs.ES.norm[i]), c(-0.2*max(c(y1, y2)), 0), lwd = 1, lty = 1, col = 1)
     }
     leg.txt <- paste("Neg. ES: \"", phen2, " \" ", sep="", collapse="")
     text(x=x.plot.range[1], y=-0.25*max(c(y1, y2)), adj = c(0, 1), labels=leg.txt, cex = 0.9)
