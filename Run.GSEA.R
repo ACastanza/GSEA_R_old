@@ -4,7 +4,6 @@
 library("utils")
 cat("\n")
 gseasource <- list.files(getwd(),pattern="GSEA.1.0.R", full.names=T, recursive=FALSE)[1]
-cat(gseasource)
 if (!is.na(gseasource)) {
 	GSEA.program.location <- gseasource
 } else {
