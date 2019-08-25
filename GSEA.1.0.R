@@ -929,10 +929,12 @@ GSEA <- function(
     all.gene.symbols <- as.character(temp[locs, "Gene.Symbol"])
     rm(temp)
   } else  if (gene.ann == "") {
-    for (i in 1:N) {
-      all.gene.descs[i] <- gene.map[i,2]
-      all.gene.symbols[i] <- gene.labels[i]
-    }
+
+     for (i in 1:N) {
+        all.gene.descs[i] <- gene.map[i,2]
+        all.gene.symbols[i] <- gene.labels[i]
+     }
+
   }
 
   if (is.data.frame(gs.ann)) {
