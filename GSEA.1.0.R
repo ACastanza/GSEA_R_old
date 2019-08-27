@@ -564,7 +564,7 @@ GSEA.NormalizeCols <- function(V) {
   col.n <- length(V[1, ])
   for (i in 1:col.n) {
     if (col.sd[i] == 0) {
-      V[i, ] <- 0
+      V[ ,i] <- 0
     } else {
       V[, i] <- (V[, i] - col.mean[i])/col.sd[i]
     }
