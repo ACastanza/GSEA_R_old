@@ -47,7 +47,7 @@ if (maxoverride == TRUE & !is.na(maxoverride)) {
 cat("\n")
 
 minoverride <- askYesNo("Override minimum gene set size filter? (default: 15 genes) ")
-if (minoverride == TRUE & !is.na(minoverride) {
+if (minoverride == TRUE & !is.na(minoverride)) {
   minsize <- readline(prompt = ("Min size: "))
 } else {
   minsize <- 15
