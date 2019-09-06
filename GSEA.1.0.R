@@ -777,7 +777,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     dataset <- dataset[-c(1), ]
     colnames(dataset)[1] <- "NAME"
     dataset <- dataset[match(unique(dataset$NAME), dataset$NAME), ]
-    dataset.ann <- dataset[,c("NAME","DESCRIPTION")]
+    dataset.ann <- dataset[,c("NAME","Description")]
     colnames(dataset.ann)[1] <- "Gene.Title"
     colnames(dataset.ann)[2] <- "Gene.Symbol"
     rownames(dataset) <- dataset[, 1]
