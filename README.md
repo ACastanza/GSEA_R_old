@@ -2,6 +2,7 @@
 ## Revisions to the GSEA-P R Application (Subramanian and Tamayo et al 2005)
 
 Preliminary revisions to the original GSEA implementation in R to enable it to run on modern R distributions.
+Recommended R minimum version: 3.6
 
 Additionally, a rudimentary Collapse dataset function has been backported from the Java GSEA application, however differences in the implementation result in inconsistencies with the desktop collapse function.
 
