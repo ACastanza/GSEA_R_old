@@ -16,11 +16,12 @@ GSEA.ReadCHIPFile <- function(file = "NULL") {
 }
 
 GSEA.CollapseDataset <- function(dataplatform = chip, gct = dataset, collapse.mode = collapsemode) {
-  probemap <- unique(dataplatform[, c("Probe.Set.ID", "Gene.Symbol", "Gene.Title")])
+  probemap <- unique(dataplatform[, c("Probe.Set.ID", "Gene.Symbol")])
+  annotate <- unique(dataplatform[, c("Gene.Symbol", "Gene.Title")])
   mappedgct <- merge(x = probemap, y = gct, by.x = 1, by.y = 1, all = FALSE, no.dups = FALSE)
   mappedgct = unique(subset(mappedgct, select = -c(1)))
-  mappedgct <- mappedgct[, -c(3)]
-  colnames(mappedgct)[2] <- "Description"
+  mappedgct <- unique(mappedgct[, -c(2)])
+  mappedgct[, c(2:ncol(mappedgct))] <- sapply(mappedgct[, c(2:ncol(mappedgct))], as.numeric)
 
   if (collapse.mode == 1)
     {
@@ -37,7 +38,9 @@ GSEA.CollapseDataset <- function(dataplatform = chip, gct = dataset, collapse.mo
       mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(sum) %>%
         data.frame()
     }  #SUM
-  return(mappedexp)
+  mappedexp_2 <- unique(merge(x=annotate, y=mappedexp, by.x="Gene.Symbol", by.y="Gene.Symbol"))
+  colnames(mappedexp_2)[2] <- "Description"
+  return(mappedexp_2)
 }
 
 
@@ -774,6 +777,9 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     dataset <- dataset[-c(1), ]
     colnames(dataset)[1] <- "NAME"
     dataset <- dataset[match(unique(dataset$NAME), dataset$NAME), ]
+    dataset.ann <- dataset[,c("NAME","DESCRIPTION")]
+    colnames(dataset.ann)[1] <- "Gene.Title"
+    colnames(dataset.ann)[2] <- "Gene.Symbol"
     rownames(dataset) <- dataset[, 1]
     gene.map <- dataset[, c(1, 2)]
     dataset <- dataset[, -1]
@@ -918,6 +924,9 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
 
   if (exists("chip") == TRUE) {
     gene.ann <- unique(chip[, c("Gene.Symbol", "Gene.Title")])
+  }
+  if (exists("chip") == FALSE) {
+    gene.ann <- dataset.ann
   }
 
   if (is.data.frame(gene.ann)) {
