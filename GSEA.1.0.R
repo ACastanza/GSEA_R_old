@@ -481,7 +481,8 @@ GSEA.ReadClsFile <- function(file = "NULL") {
 
   cls.cont <- readLines(file)
   num.lines <- length(cls.cont)
-  class.list <- unlist(strsplit(cls.cont[[3]], " "))
+  cls.cont[[3]] <- gsub("\\t", " ", cls.cont[[3]]) #Converts any tabs to spaces
+  class.list <- unlist(strsplit(cls.cont[[3]], " ")) #Splits CLS on spaces
   s <- length(class.list)
   t <- table(class.list)
   l <- length(t)
