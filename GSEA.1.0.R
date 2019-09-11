@@ -717,13 +717,14 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     } else {
       write(paste("gs.ann =", gs.ann, sep = " "), file = filename, append = T)
     }
-    if (is.data.frame(input.chip)) {
-      # write(paste('input.chip=', quote(input.chip), sep=' '), file=filename,
-      # append=T)
-    } else {
-      write(paste("input.chip=", input.chip, sep = " "), file = filename, append = T)
+    if(runtype == "GSEA") {
+        if (is.data.frame(input.chip)) {
+          # write(paste('input.chip=', quote(input.chip), sep=' '), file=filename,
+          # append=T)
+        } else {
+          write(paste("input.chip=", input.chip, sep = " "), file = filename, append = T)
+        }
     }
-
     write(paste("output.directory =", output.directory, sep = " "), file = filename,
       append = T)
     write(paste("doc.string = ", doc.string, sep = " "), file = filename, append = T)
@@ -767,7 +768,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   gc()
 
   time1 <- proc.time()
-
+  if(runtype=="GSEA") {
   if (collapsedataset == FALSE) {
     if (is.data.frame(input.ds)) {
       dataset <- input.ds
@@ -860,6 +861,24 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     A[j, ] <- A[j, col.index]
   }
   names(A) <- sample.names
+  }
+
+  if (runtype == "preranked") {
+  dataset <- read.table(input.ds, sep = "\t", header = FALSE, quote = "", stringsAsFactors = FALSE, 
+  fill = TRUE)
+  colnames(dataset)[1] <- "NAME"
+  dataset <- dataset[match(unique(dataset$NAME), dataset$NAME), ]
+  dataset.ann <- as.data.frame(dataset[,1], stringsAsFactors = FALSE, header = FALSE)
+  rownames(dataset) <- dataset[, 1]
+  dataset = subset(dataset, select = -c(NAME) )
+  gene.labels <- row.names(dataset)
+  dataset.ann <- cbind(dataset.ann, "NA", stringsAsFactors = FALSE)
+  colnames(dataset.ann)[1] <- "Gene.Symbol"
+  colnames(dataset.ann)[2] <- "Gene.Title"
+  A <- data.matrix(dataset)
+  cols <- length(A[1, ])
+  rows <- length(A[, 1])
+  }
 
   # Read input gene set database
 
@@ -1009,69 +1028,80 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   } else {
     n.tot <- n.groups + 1
   }
-
-  for (nk in 1:n.tot) {
-    call.nperm <- n.perms[nk]
-
-    print(paste("Computing ranked list for actual and permuted phenotypes.......permutations: ",
-      n.starts[nk], "--", n.ends[nk], sep = " "))
-
-    O <- GSEA.GeneRanking(A, class.labels, gene.labels, call.nperm, permutation.type = perm.type,
-      sigma.correction = "GeneCluster", fraction = fraction, replace = replace,
-      reverse.sign = reverse.sign)
-    gc()
-
-    order.matrix[, n.starts[nk]:n.ends[nk]] <- O$order.matrix
-    obs.order.matrix[, n.starts[nk]:n.ends[nk]] <- O$obs.order.matrix
-    correl.matrix[, n.starts[nk]:n.ends[nk]] <- O$s2n.matrix
-    obs.correl.matrix[, n.starts[nk]:n.ends[nk]] <- O$obs.s2n.matrix
-    rm(O)
-  }
-
-  obs.s2n <- apply(obs.correl.matrix, 1, median)  # using median to assign enrichment scores
-  obs.index <- order(obs.s2n, decreasing = T)
-  obs.s2n <- sort(obs.s2n, decreasing = T)
-
-  obs.gene.labels <- gene.labels[obs.index]
-  obs.gene.descs <- all.gene.descs[obs.index]
-  obs.gene.symbols <- all.gene.symbols[obs.index]
-
-  for (r in 1:nperm) {
-    correl.matrix[, r] <- correl.matrix[order.matrix[, r], r]
-  }
-  for (r in 1:nperm) {
-    obs.correl.matrix[, r] <- obs.correl.matrix[obs.order.matrix[, r], r]
-  }
-
-  gene.list2 <- obs.index
-  for (i in 1:Ng) {
-    print(paste("Computing observed enrichment for gene set:", i, gs.names[i],
-      sep = " "))
-    gene.set <- gs[i, gs[i, ] != "null"]
-    gene.set2 <- vector(length = length(gene.set), mode = "numeric")
-    gene.set2 <- match(gene.set, gene.labels)
-    GSEA.results <- GSEA.EnrichmentScore(gene.list = gene.list2, gene.set = gene.set2,
-      weighted.score.type = weighted.score.type, correl.vector = obs.s2n)
-    Obs.ES[i] <- GSEA.results$ES
-    Obs.arg.ES[i] <- GSEA.results$arg.ES
-    Obs.RES[i, ] <- GSEA.results$RES
-    Obs.indicator[i, ] <- GSEA.results$indicator
-    if (Obs.ES[i] >= 0) {
-      # compute signal strength
-      tag.frac[i] <- sum(Obs.indicator[i, 1:Obs.arg.ES[i]])/size.G[i]
-      gene.frac[i] <- Obs.arg.ES[i]/N
-    } else {
-      tag.frac[i] <- sum(Obs.indicator[i, Obs.arg.ES[i]:N])/size.G[i]
-      gene.frac[i] <- (N - Obs.arg.ES[i] + 1)/N
+    if (runtype == "GSEA"){
+    for (nk in 1:n.tot) {
+      call.nperm <- n.perms[nk]
+  
+      print(paste("Computing ranked list for actual and permuted phenotypes.......permutations: ",
+        n.starts[nk], "--", n.ends[nk], sep = " "))
+  
+      O <- GSEA.GeneRanking(A, class.labels, gene.labels, call.nperm, permutation.type = perm.type,
+        sigma.correction = "GeneCluster", fraction = fraction, replace = replace,
+        reverse.sign = reverse.sign)
+      gc()
+  
+      order.matrix[, n.starts[nk]:n.ends[nk]] <- O$order.matrix
+      obs.order.matrix[, n.starts[nk]:n.ends[nk]] <- O$obs.order.matrix
+      correl.matrix[, n.starts[nk]:n.ends[nk]] <- O$s2n.matrix
+      obs.correl.matrix[, n.starts[nk]:n.ends[nk]] <- O$obs.s2n.matrix
+      rm(O)
     }
-    signal.strength[i] <- tag.frac[i] * (1 - gene.frac[i]) * (N/(N - size.G[i]))
+  
+    obs.s2n <- apply(obs.correl.matrix, 1, median)  # using median to assign enrichment scores
+    obs.index <- order(obs.s2n, decreasing = T)
+    obs.s2n <- sort(obs.s2n, decreasing = T)
+  
+    obs.gene.labels <- gene.labels[obs.index]
+    obs.gene.descs <- all.gene.descs[obs.index]
+    obs.gene.symbols <- all.gene.symbols[obs.index]
+  
+    for (r in 1:nperm) {
+      correl.matrix[, r] <- correl.matrix[order.matrix[, r], r]
+    }
+    for (r in 1:nperm) {
+      obs.correl.matrix[, r] <- obs.correl.matrix[obs.order.matrix[, r], r]
+    }
+  
+    gene.list2 <- obs.index
+    for (i in 1:Ng) {
+      print(paste("Computing observed enrichment for gene set:", i, gs.names[i],
+        sep = " "))
+      gene.set <- gs[i, gs[i, ] != "null"]
+      gene.set2 <- vector(length = length(gene.set), mode = "numeric")
+      gene.set2 <- match(gene.set, gene.labels)
+      GSEA.results <- GSEA.EnrichmentScore(gene.list = gene.list2, gene.set = gene.set2,
+        weighted.score.type = weighted.score.type, correl.vector = obs.s2n)
+      Obs.ES[i] <- GSEA.results$ES
+      Obs.arg.ES[i] <- GSEA.results$arg.ES
+      Obs.RES[i, ] <- GSEA.results$RES
+      Obs.indicator[i, ] <- GSEA.results$indicator
+      if (Obs.ES[i] >= 0) {
+        # compute signal strength
+        tag.frac[i] <- sum(Obs.indicator[i, 1:Obs.arg.ES[i]])/size.G[i]
+        gene.frac[i] <- Obs.arg.ES[i]/N
+      } else {
+        tag.frac[i] <- sum(Obs.indicator[i, Obs.arg.ES[i]:N])/size.G[i]
+        gene.frac[i] <- (N - Obs.arg.ES[i] + 1)/N
+      }
+      signal.strength[i] <- tag.frac[i] * (1 - gene.frac[i]) * (N/(N - size.G[i]))
+    }
   }
-
-  # Compute enrichment for random permutations
-
-  phi <- matrix(nrow = Ng, ncol = nperm)
-  phi.norm <- matrix(nrow = Ng, ncol = nperm)
-  obs.phi <- matrix(nrow = Ng, ncol = nperm)
+    # Compute enrichment for random permutations
+  
+    phi <- matrix(nrow = Ng, ncol = nperm)
+    phi.norm <- matrix(nrow = Ng, ncol = nperm)
+    obs.phi <- matrix(nrow = Ng, ncol = nperm)
+   if(runtype == "preranked")
+    {
+      print(paste("Skipping calculating gene rankings... using pre-ranked list."))
+    obs.s2n <- A[,1]
+    obs.index <- order(obs.s2n, decreasing = T)
+    obs.s2n <- sort(obs.s2n, decreasing = T)
+    obs.gene.labels <- gene.labels[obs.index]
+    obs.gene.descs <- obs.gene.labels
+    obs.gene.symbols <- obs.gene.labels
+    gene.list2 <- obs.index
+    }
 
   if (reshuffling.type == "sample.labels") {
     # reshuffling phenotype labels
