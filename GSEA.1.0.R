@@ -587,7 +587,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   fdr.q.val.threshold = 0.25, topgs = 20, adjust.FDR.q.val = F, gs.size.threshold.min,
   gs.size.threshold.max, reverse.sign = F, preproc.type = 0, random.seed, perm.type = 0,
   fraction = 1, replace = F, collapse.dataset, collapse.mode, save.intermediate.results = F,
-  use.fast.enrichment.routine = T) {
+  use.fast.enrichment.routine = T, runtype) {
 
   # This is a methodology for the analysis of global molecular profiles called Gene
   # Set Enrichment Analysis (GSEA). It determines whether an a priori defined set
@@ -695,10 +695,12 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     } else {
       write(paste("input.ds=", input.ds, sep = " "), file = filename, append = T)
     }
-    if (is.list(input.cls)) {
-      # write(paste('input.cls=', input.cls, sep=' '), file=filename, append=T)
-    } else {
-      write(paste("input.cls=", input.cls, sep = " "), file = filename, append = T)
+    if(runtype == "GSEA") {
+        if (is.list(input.cls)) {
+          # write(paste('input.cls=', input.cls, sep=' '), file=filename, append=T)
+        } else {
+          write(paste("input.cls=", input.cls, sep = " "), file = filename, append = T)
+        }
     }
     if (is.data.frame(gene.ann)) {
       # write(paste('gene.ann =', gene.ann, sep=' '), file=filename, append=T)
