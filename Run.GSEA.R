@@ -1,57 +1,70 @@
-# GSEA 1.0.1 -- Gene Set Enrichment Analysis / Broad Institute
-#
-# Executable R script to run GSEA Analysis
+# GSEA 1.1 -- Gene Set Enrichment Analysis / Broad Institute Executable R
+# script to run GSEA Analysis
 library("utils")
+library("tools")
 cat("\n")
 gseasource <- list.files(getwd(), pattern = "GSEA.1.0.R", full.names = T, recursive = FALSE)[1]
 if (!is.na(gseasource)) {
-  GSEA.program.location <- gseasource
+ GSEA.program.location <- gseasource
 } else {
-  GSEA.program.location <- readline(prompt = ("Input path to GSEA.1.0.R Source (or drop file into R window): "))  #  R source program (change pathname to the rigth location in local machine)
+ GSEA.program.location <- readline(prompt = ("Input path to GSEA.1.0.R Source (or drop file into R window): "))  #  R source program (change pathname to the rigth location in local machine)
 }
 source(GSEA.program.location, verbose = T, max.deparse.length = 9999)
 cat("\n")
 cat("\n")
 cat("Starting...\n")
 cat("\n")
-inputds <- readline(prompt = ("Input path to GCT formatted gene expression dataset (or drop file into R window): "))
-inputcls <- readline(prompt = ("Input path to experiment CLS file (or drop file into R window): "))
+inputds <- readline(prompt = ("Input path to GCT or RNK formatted gene expression dataset (or drop file into R window): "))
+if (file_ext(inputds) != "rnk") {
+ inputcls <- readline(prompt = ("Input path to experiment CLS file (or drop file into R window): "))
+}
 gsdb <- readline(prompt = ("Input path to GMT formatted gene set database (or drop file into R window): "))
-collapsedataset <- askYesNo("Collapse data set to Gene Symbols? ")
-if (collapsedataset == TRUE & !is.na(collapsedataset)) {
-  inputchip <- readline(prompt = ("Input path to CHIP platform file (or drop file into R window): "))
-  collapsemode <- menu(c("Max_probe", "Median_of_probes", "Sum_of_Probes"), graphics = FALSE,
-    title = "Collapsing mode for probe sets => 1 gene")
+
+if (file_ext(inputds) != "rnk") {
+ collapsedataset <- askYesNo("Collapse data set to Gene Symbols? ")
 } else {
-  inputchip <- "NOCHIP"
-  collapsemode <- 0
+ collapsedataset <- FALSE
 }
 
-reshuffetype <- menu(c("Phenotype","gene_set"), graphics = FALSE, title = "Select GSEA Permutation Type (recommended: Phenotype)")
-cat("\n")
+if (collapsedataset == TRUE & !is.na(collapsedataset)) {
+ inputchip <- readline(prompt = ("Input path to CHIP platform file (or drop file into R window): "))
+ collapsemode <- menu(c("Max_probe", "Median_of_probes", "Sum_of_Probes"), graphics = FALSE, 
+  title = "Collapsing mode for probe sets => 1 gene")
+} else {
+ inputchip <- "NOCHIP"
+ collapsemode <- 0
+}
+
+if (file_ext(inputds) != "rnk") {
+ reshuffetype <- menu(c("Phenotype", "gene_set"), graphics = FALSE, title = "Select GSEA Permutation Type (recommended: Phenotype)")
+ cat("\n")
+} else {
+ reshuffetype <- 2
+}
 
 npermsoverride <- askYesNo("Override default number of permutations for significance testing? (default: 1000) ")
 if (npermsoverride == TRUE & !is.na(npermsoverride)) {
-  nperms <- readline(prompt = ("Number of permutations: "))
+ nperms <- readline(prompt = ("Number of permutations: "))
 } else {
-  nperms <- 1000
+ nperms <- 1000
 }
 cat("\n")
 
 maxoverride <- askYesNo("Override maximum gene set size filter? (default: 500 genes) ")
 if (maxoverride == TRUE & !is.na(maxoverride)) {
-  maxsize <- readline(prompt = ("Max size: "))
+ maxsize <- readline(prompt = ("Max size: "))
 } else {
-  maxsize <- 500
+ maxsize <- 500
 }
 cat("\n")
 
 minoverride <- askYesNo("Override minimum gene set size filter? (default: 15 genes) ")
 if (minoverride == TRUE & !is.na(minoverride)) {
-  minsize <- readline(prompt = ("Min size: "))
+ minsize <- readline(prompt = ("Min size: "))
 } else {
-  minsize <- 15
+ minsize <- 15
 }
+
 cat("\n")
 
 outdir <- readline(prompt = ("Drop a directory into R window to use as the output folder or enter directory path: "))
@@ -60,12 +73,16 @@ outname <- readline(prompt = ("Enter a prefix to label output files: "))
 cat("\n")
 
 if (reshuffetype == 1) {
-  permutation <- "sample.labels"
+ permutation <- "sample.labels"
 } else if (reshuffetype == 2) {
-  permutation <- "gene.labels"
+ permutation <- "gene.labels"
 }
 
-
+if (file_ext(inputds) != "rnk") {
+ runtype <- GSEA
+} else {
+ runtype <- preranked
+}
 
 GSEA(
 # Input/Output Files :-------------------------------------------------------------------------------
@@ -96,7 +113,8 @@ GSEA(
  collapse.dataset      = collapsedataset, # Collapse dataset to gene symbols using a user provided chip file (default: F)
  collapse.mode         = collapsemode,
  save.intermediate.results = F,           # For experts only, save intermediate results (e.g. matrix of random perm. scores) (default: F)
- use.fast.enrichment.routine = T          # Use faster routine to compute enrichment for random permutations (default: T)
+ use.fast.enrichment.routine = T,          # Use faster routine to compute enrichment for random permutations (default: T)
+usepreranked = runtype
 )
 #----------------------------------------------------------------------------------------------------------
 
