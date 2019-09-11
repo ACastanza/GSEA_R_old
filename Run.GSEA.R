@@ -79,9 +79,9 @@ if (reshuffetype == 1) {
 }
 
 if (file_ext(inputds) != "rnk") {
- runtype <- GSEA
+ runtype <- "GSEA"
 } else {
- runtype <- preranked
+ runtype <- "preranked"
 }
 
 GSEA(
