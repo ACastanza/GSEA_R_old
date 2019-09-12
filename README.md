@@ -17,5 +17,3 @@ The original R-GSEA documentation indicates that it supports "phenotype permutat
 R-GSEA remains unsupported by the GSEA-MSigDB Team.
 
 See the original R-GSEA readme here: https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/R-GSEA_Readme
-
-<b>Known Issues:</b> FDR q-value reporting is broken in GSEA-preranked in this build. Code currently reports "1" for all results.
