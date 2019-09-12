@@ -3,11 +3,11 @@
 library("utils")
 library("tools")
 cat("\n")
-gseasource <- list.files(getwd(), pattern = "GSEA.1.0.R", full.names = T, recursive = FALSE)[1]
+gseasource <- list.files(getwd(), pattern = "GSEA.1.1.R", full.names = T, recursive = FALSE)[1]
 if (!is.na(gseasource)) {
  GSEA.program.location <- gseasource
 } else {
- GSEA.program.location <- readline(prompt = ("Input path to GSEA.1.0.R Source (or drop file into R window): "))  #  R source program (change pathname to the rigth location in local machine)
+ GSEA.program.location <- readline(prompt = ("Input path to GSEA.1.1.R Source (or drop file into R window): "))  #  R source program (change pathname to the rigth location in local machine)
 }
 source(GSEA.program.location, verbose = T, max.deparse.length = 9999)
 cat("\n")
@@ -20,8 +20,10 @@ if (file_ext(inputds) != "rnk") {
 }
 gsdb <- readline(prompt = ("Input path to GMT formatted gene set database (or drop file into R window): "))
 
+cat("\n")
 if (file_ext(inputds) != "rnk") {
  collapsedataset <- askYesNo("Collapse data set to Gene Symbols? ")
+ cat("\n")
 } else {
  collapsedataset <- FALSE
 }
@@ -42,24 +44,24 @@ if (file_ext(inputds) != "rnk") {
  reshuffetype <- 2
 }
 
-npermsoverride <- askYesNo("Override default number of permutations for significance testing? (default: 1000) ")
-if (npermsoverride == TRUE & !is.na(npermsoverride)) {
+npermsdefault <- askYesNo("Use default number of permutations for significance testing? (default: 1000) ")
+if (npermsdefault == FALSE & !is.na(npermsdefault)) {
  nperms <- readline(prompt = ("Number of permutations: "))
 } else {
  nperms <- 1000
 }
 cat("\n")
 
-maxoverride <- askYesNo("Override maximum gene set size filter? (default: 500 genes) ")
-if (maxoverride == TRUE & !is.na(maxoverride)) {
+maxdefault <- askYesNo("Use default maximum gene set size filter? (default: 500 genes) ")
+if (maxdefault == FALSE & !is.na(maxdefault)) {
  maxsize <- readline(prompt = ("Max size: "))
 } else {
  maxsize <- 500
 }
 cat("\n")
 
-minoverride <- askYesNo("Override minimum gene set size filter? (default: 15 genes) ")
-if (minoverride == TRUE & !is.na(minoverride)) {
+mindefault <- askYesNo("Use default minimum gene set size filter? (default: 15 genes) ")
+if (mindefault == FALSE & !is.na(mindefault)) {
  minsize <- readline(prompt = ("Min size: "))
 } else {
  minsize <- 15
@@ -124,5 +126,6 @@ GSEA.Analyze.Sets(
    directory           = outdir,        # Directory where to store output and results (default: "")
    topgs = 20,                                                           # number of top scoring gene sets used for analysis
    height = 16,
-   width = 16
+   width = 16,
+   runtype = rankmethod
 )

@@ -40,5 +40,6 @@ GSEA.Analyze.Sets(
    directory           = outdir,        # Directory where to store output and results (default: "")
    topgs = 20,                                                           # number of top scoring gene sets used for analysis
    height = 16,
-   width = 16
+   width = 16, 
+   runtype = rankmethod
 )
