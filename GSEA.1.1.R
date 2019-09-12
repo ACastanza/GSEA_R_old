@@ -1058,7 +1058,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   obs.gene.symbols <- all.gene.symbols[obs.index]
  } else if (runtype == "preranked") {
   print(paste("Skipping calculating gene rankings... using pre-ranked list."))
-  obs.s2n <- A[, 1]
+  obs.s2n <- unname(A[, 1])
   obs.index <- order(obs.s2n, decreasing = T)
   obs.s2n <- sort(obs.s2n, decreasing = T)
   gene.list2 <- obs.index
@@ -1075,7 +1075,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   obs.gene.descs <- obs.gene.labels
   obs.gene.symbols <- obs.gene.labels
   obs.order.matrix[, 1:1000] <- gene.list2
-  obs.correl.matrix <- obs.order.matrix
+  obs.correl.matrix[, 1:1000] <- obs.s2n
  }
  
  gene.list2 <- obs.index
