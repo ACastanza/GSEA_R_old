@@ -1062,6 +1062,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     obs.s2n <- A[,1]
     obs.index <- order(obs.s2n, decreasing = T)
     obs.s2n <- sort(obs.s2n, decreasing = T)
+    gene.list2 <- obs.index
     }
   
     for (r in 1:nperm) {
