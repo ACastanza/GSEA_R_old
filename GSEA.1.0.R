@@ -1560,8 +1560,8 @@ if(runtype == "GSEA"){
       write.table(report2, file = filename, quote = F, row.names = F,
         sep = "\t")
     }
-phen1 <- "NA"
-phen2 <- "NA" 
+phen1 <- "NA.pos"
+phen2 <- "NA.neg" 
 }
   # Global plots
 
@@ -1760,7 +1760,7 @@ if(runtype == "GSEA") {
       lwd.vec <- c(2, 2, 2)
       legend(x = 0, y = 1.5 * y.plot.range[2], bty = "n", bg = "white", legend = leg.txt,
         lty = lty.vec, lwd = lwd.vec, col = c.vec, cex = 0.9)
-
+  if (runtype == "GSEA") {
       B <- A[obs.index, ]
       if (N > 300) {
         C <- rbind(B[1:100, ], rep(0, Ns), rep(0, Ns), B[(floor(N/2) - 50 +
@@ -1770,7 +1770,7 @@ if(runtype == "GSEA") {
       rm(B)
       GSEA.HeatMapPlot(V = C, col.labels = class.labels, col.classes = class.phen,
         main = "Heat Map for Genes in Dataset")
-
+  }
       # p-vals plot
       nom.p.vals <- p.vals[Obs.ES.index, 1]
       FWER.p.vals <- p.vals[Obs.ES.index, 2]
@@ -2001,7 +2001,7 @@ if(runtype == "GSEA") {
         # create pinkogram for each gene set
 
         kk <- 1
-
+  if(runtype == "GSEA"){
         pinko <- matrix(0, nrow = size.G[i], ncol = cols)
         pinko.gene.names <- vector(length = size.G[i], mode = "character")
         for (k in 1:rows) {
@@ -2024,7 +2024,7 @@ if(runtype == "GSEA") {
         } else {
           dev.off()
         }
-
+  }
       }  # if p.vals thres
 
   }  # loop over gene sets
@@ -2320,6 +2320,8 @@ GSEA.Analyze.Sets <- function(directory, topgs = "", non.interactive.run = F, he
   }
 
   cmap <- c("#AAAAFF", "#111166")
+
+  if(runtype == "GSEA") {
   GSEA.HeatMapPlot2(V = data.matrix(D.phen1), row.names = row.names(D.phen1), col.names = names(D.phen1),
     main = "Leading Subsets Assignment", sub = paste(doc.string, " - ", phen1,
       sep = ""), xlab = " ", ylab = " ", color.map = cmap)
@@ -2333,7 +2335,7 @@ GSEA.Analyze.Sets <- function(directory, topgs = "", non.interactive.run = F, he
   } else {
     dev.off()
   }
-
+  }
   DT1.phen1 <- data.matrix(t(D.phen1))
   DT2.phen1 <- data.frame(DT1.phen1)
   names(DT2.phen1) <- set.table.phen1[1:max.sets.phen1, 2]
@@ -2450,6 +2452,7 @@ GSEA.Analyze.Sets <- function(directory, topgs = "", non.interactive.run = F, he
   }
 
   cmap <- c("#AAAAFF", "#111166")
+  if(runtype == "GSEA") {
   GSEA.HeatMapPlot2(V = data.matrix(D.phen2), row.names = row.names(D.phen2), col.names = names(D.phen2),
     main = "Leading Subsets Assignment", sub = paste(doc.string, " - ", phen2,
       sep = ""), xlab = " ", ylab = " ", color.map = cmap)
@@ -2463,7 +2466,7 @@ GSEA.Analyze.Sets <- function(directory, topgs = "", non.interactive.run = F, he
   } else {
     dev.off()
   }
-
+  }
   DT1.phen2 <- data.matrix(t(D.phen2))
   DT2.phen2 <- data.frame(DT1.phen2)
   names(DT2.phen2) <- set.table.phen2[1:max.sets.phen2, 2]
@@ -2523,6 +2526,7 @@ GSEA.Analyze.Sets <- function(directory, topgs = "", non.interactive.run = F, he
 
 
   cmap <- c("#AAAAFF", "#111166")
+  if(runtype == "GSEA") {
   # GSEA.HeatMapPlot2(V = A, row.names = A.row.names, col.names = A.names, main =
   # 'Leading Subsets Assignment (clustered)', sub = paste(doc.string, ' - ', phen1,
   # sep=''), xlab=' ', ylab=' ', color.map = cmap)
@@ -2549,7 +2553,7 @@ GSEA.Analyze.Sets <- function(directory, topgs = "", non.interactive.run = F, he
   } else {
     dev.off()
   }
-
+  }
 
   # resort columns and rows for phen2
 
@@ -2602,7 +2606,7 @@ GSEA.Analyze.Sets <- function(directory, topgs = "", non.interactive.run = F, he
   }
 
   cmap <- c("#AAAAFF", "#111166")
-
+  if(runtype == "GSEA") {
   # GSEA.HeatMapPlot2(V = A, row.names = A.row.names, col.names = A.names, main =
   # 'Leading Subsets Assignment (clustered)', sub = paste(doc.string, ' - ', phen2,
   # sep=''), xlab=' ', ylab=' ', color.map = cmap)
@@ -2628,5 +2632,5 @@ GSEA.Analyze.Sets <- function(directory, topgs = "", non.interactive.run = F, he
   } else {
     dev.off()
   }
-
+  }
 }
