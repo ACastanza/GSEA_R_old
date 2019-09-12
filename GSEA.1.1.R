@@ -860,25 +860,23 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     A[j, ] <- A[j, col.index]
   }
   names(A) <- sample.names
-  }
-
-  if (runtype == "preranked") {
-  dataset <- read.table(input.ds, sep = "\t", header = FALSE, quote = "", stringsAsFactors = FALSE, 
-  fill = TRUE)
-  colnames(dataset)[1] <- "NAME"
-  dataset <- dataset[match(unique(dataset$NAME), dataset$NAME), ]
-  dataset.ann <- as.data.frame(dataset[,1], stringsAsFactors = FALSE, header = FALSE)
-  rownames(dataset) <- dataset[, 1]
-  dataset = subset(dataset, select = -c(NAME) )
-  gene.labels <- row.names(dataset)
-  dataset.ann <- cbind(dataset.ann, "NA", stringsAsFactors = FALSE)
-  colnames(dataset.ann)[1] <- "Gene.Symbol"
-  colnames(dataset.ann)[2] <- "Gene.Title"
-  A <- data.matrix(dataset)
-  cols <- length(A[1, ])
-  rows <- length(A[, 1])
-  phen1 <- "NA_pos"
-  phen2 <- "NA_neg" 
+  } else if (runtype == "preranked") {
+    dataset <- read.table(input.ds, sep = "\t", header = FALSE, quote = "", stringsAsFactors = FALSE, 
+    fill = TRUE)
+    colnames(dataset)[1] <- "NAME"
+    dataset <- dataset[match(unique(dataset$NAME), dataset$NAME), ]
+    dataset.ann <- as.data.frame(dataset[,1], stringsAsFactors = FALSE, header = FALSE)
+    rownames(dataset) <- dataset[, 1]
+    dataset = subset(dataset, select = -c(NAME) )
+    gene.labels <- row.names(dataset)
+    dataset.ann <- cbind(dataset.ann, "NA", stringsAsFactors = FALSE)
+    colnames(dataset.ann)[1] <- "Gene.Symbol"
+    colnames(dataset.ann)[2] <- "Gene.Title"
+    A <- data.matrix(dataset)
+    cols <- length(A[1, ])
+    rows <- length(A[, 1])
+    phen1 <- "NA_pos"
+    phen2 <- "NA_neg" 
   }
 
   # Read input gene set database
@@ -955,7 +953,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   if (is.data.frame(gene.ann)) {
     temp <- gene.ann
     a.size <- length(temp[, 1])
-    print(c("Number of gene annotation file entries:", a.size))
+    print(paste("Number of gene annotation file entries:", a.size))
     accs <- as.character(temp[, 1])
     locs <- match(gene.labels, accs)
     all.gene.descs <- as.character(temp[locs, "Gene.Title"])
@@ -973,7 +971,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   if (is.data.frame(gs.ann)) {
     temp <- gs.ann
     a.size <- length(temp[, 1])
-    print(c("Number of gene set annotation file entries:", a.size))
+    print(paste("Number of gene set annotation file entries:", a.size))
     accs <- as.character(temp[, 1])
     locs <- match(gs.names, accs)
     all.gs.descs <- as.character(temp[locs, "SOURCE"])
@@ -985,7 +983,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   } else {
     temp <- read.delim(gs.ann, header = T, sep = "\t", comment.char = "", as.is = T)
     a.size <- length(temp[, 1])
-    print(c("Number of gene set annotation file entries:", a.size))
+    print(paste("Number of gene set annotation file entries:", a.size))
     accs <- as.character(temp[, 1])
     locs <- match(gs.names, accs)
     all.gs.descs <- as.character(temp[locs, "SOURCE"])
