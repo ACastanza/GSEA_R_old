@@ -835,22 +835,26 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   }
 
   # Read input class vector
-
-  if (is.list(input.cls)) {
-    CLS <- input.cls
-  } else {
-    CLS <- GSEA.ReadClsFile(file = input.cls)
-  }
-  class.labels <- CLS$class.v
-  class.phen <- CLS$phen
-
-  if (reverse.sign == T) {
-    phen1 <- class.phen[2]
-    phen2 <- class.phen[1]
-  } else {
-    phen1 <- class.phen[1]
-    phen2 <- class.phen[2]
-  }
+  if (runtype == "GSEA") {
+    if (is.list(input.cls)) {
+      CLS <- input.cls
+    } else {
+      CLS <- GSEA.ReadClsFile(file = input.cls)
+    }
+    class.labels <- CLS$class.v
+    class.phen <- CLS$phen
+  
+    if (reverse.sign == T) {
+      phen1 <- class.phen[2]
+      phen2 <- class.phen[1]
+    } else {
+      phen1 <- class.phen[1]
+      phen2 <- class.phen[2]
+    }
+  } else if (runtype == "preranked") {
+    phen1 <- "NA.pos"
+    phen2 <- "NA.neg" 
+    }
 
   # sort samples according to phenotype
 
@@ -1538,7 +1542,6 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   report.phen1 <- report2[1:phen1.rows, ]
   report.phen2 <- report3[1:phen2.rows, ]
 
-if(runtype == "GSEA"){
   if (output.directory != "") {
     if (phen1.rows > 0) {
       filename <- paste(output.directory, doc.string, ".SUMMARY.RESULTS.REPORT.",
@@ -1553,16 +1556,7 @@ if(runtype == "GSEA"){
         sep = "\t")
     }
   }
-} else if (runtype == "preranked") {
-  if (output.directory != "") {
-      filename <- paste(output.directory, doc.string, ".SUMMARY.RESULTS.REPORT",
-      ".txt", sep = "", collapse = "")
-      write.table(report2, file = filename, quote = F, row.names = F,
-        sep = "\t")
-    }
-phen1 <- "NA.pos"
-phen2 <- "NA.neg" 
-}
+
   # Global plots
 
   if (output.directory != "") {
