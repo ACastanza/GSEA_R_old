@@ -1101,6 +1101,9 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     obs.gene.descs <- obs.gene.labels
     obs.gene.symbols <- obs.gene.labels
     gene.list2 <- obs.index
+    obs.order.matrix[, 1:1000] <- gene.list2
+    obs.correl.matrix <- obs.order.matrix
+
     }
 
   if (reshuffling.type == "sample.labels") {
@@ -1163,6 +1166,8 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   } else if (reshuffling.type == "gene.labels") {
     # reshuffling gene labels
     for (i in 1:Ng) {
+      print(paste("Computing random permutations' enrichment for gene set:",
+        i, gs.names[i], sep = " "))
       gene.set <- gs[i, gs[i, ] != "null"]
       gene.set2 <- vector(length = length(gene.set), mode = "numeric")
       gene.set2 <- match(gene.set, gene.labels)
@@ -1535,6 +1540,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   report.phen1 <- report2[1:phen1.rows, ]
   report.phen2 <- report3[1:phen2.rows, ]
 
+if(runtype == "GSEA"){
   if (output.directory != "") {
     if (phen1.rows > 0) {
       filename <- paste(output.directory, doc.string, ".SUMMARY.RESULTS.REPORT.",
@@ -1549,7 +1555,16 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
         sep = "\t")
     }
   }
-
+} else if (runtype == "preranked") {
+  if (output.directory != "") {
+      filename <- paste(output.directory, doc.string, ".SUMMARY.RESULTS.REPORT",
+      ".txt", sep = "", collapse = "")
+      write.table(report2, file = filename, quote = F, row.names = F,
+        sep = "\t")
+    }
+phen1 <- "NA"
+phen2 <- "NA" 
+}
   # Global plots
 
   if (output.directory != "") {
@@ -1584,9 +1599,17 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   max.corr <- max(obs.s2n)
   min.corr <- min(obs.s2n)
 
+if(runtype == "GSEA") {
   x <- plot(location, obs.s2n, ylab = "Signal to Noise Ratio (S2N)", xlab = "Gene List Location",
     main = "Gene List Correlation (S2N) Profile", type = "l", lwd = 2, cex = 0.9,
     col = 1)
+} else if (runtype == "preranked") {
+  x <- plot(location, obs.s2n, ylab = "User Rank Metric", xlab = "Gene List Location",
+    main = "Gene List Correlation Profile", type = "l", lwd = 2, cex = 0.9,
+    col = 1)
+}
+
+
   for (i in seq(1, N, 20)) {
     lines(c(i, i), c(0, obs.s2n[i]), lwd = 3, cex = 0.9, col = colors()[12])  # shading of correlation plot
   }
@@ -1599,7 +1622,11 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
 
   area.bias <- signif(100 * (sum(obs.s2n[1:arg.correl]) + sum(obs.s2n[arg.correl:N]))/sum(abs(obs.s2n[1:N])),
     digits = 3)
+if(runtype == "GSEA") {
   area.phen <- ifelse(area.bias >= 0, phen1, phen2)
+} else if (runtype == "preranked") {
+area.phen <- ifelse(area.bias >= 0)
+}
   delta.string <- paste("Corr. Area Bias to \"", area.phen, "\" =", abs(area.bias),
     "%", sep = "", collapse = "")
   zero.crossing.string <- paste("Zero Crossing at location ", arg.correl, " (",
@@ -2528,10 +2555,6 @@ GSEA.Analyze.Sets <- function(directory, topgs = "", non.interactive.run = F, he
   } else {
     dev.off()
   }
-
-
-
-
 
 
   # resort columns and rows for phen2
