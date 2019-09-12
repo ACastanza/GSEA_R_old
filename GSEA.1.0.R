@@ -1046,7 +1046,6 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
       obs.correl.matrix[, n.starts[nk]:n.ends[nk]] <- O$obs.s2n.matrix
       rm(O)
     }
-  
     obs.s2n <- apply(obs.correl.matrix, 1, median)  # using median to assign enrichment scores
     obs.index <- order(obs.s2n, decreasing = T)
     obs.s2n <- sort(obs.s2n, decreasing = T)
@@ -1054,12 +1053,25 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     obs.gene.labels <- gene.labels[obs.index]
     obs.gene.descs <- all.gene.descs[obs.index]
     obs.gene.symbols <- all.gene.symbols[obs.index]
+  }   else if(runtype == "preranked") {
+      print(paste("Skipping calculating gene rankings... using pre-ranked list."))
+    obs.s2n <- A[,1]
+    obs.index <- order(obs.s2n, decreasing = T)
+    obs.s2n <- sort(obs.s2n, decreasing = T)
+    }
   
     for (r in 1:nperm) {
       correl.matrix[, r] <- correl.matrix[order.matrix[, r], r]
     }
     for (r in 1:nperm) {
       obs.correl.matrix[, r] <- obs.correl.matrix[obs.order.matrix[, r], r]
+    }
+    if(runtype == "preranked") {
+    obs.gene.labels <- gene.labels[obs.index]
+    obs.gene.descs <- obs.gene.labels
+    obs.gene.symbols <- obs.gene.labels
+    obs.order.matrix[, 1:1000] <- gene.list2
+    obs.correl.matrix <- obs.order.matrix
     }
   
     gene.list2 <- obs.index
@@ -1085,26 +1097,12 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
       }
       signal.strength[i] <- tag.frac[i] * (1 - gene.frac[i]) * (N/(N - size.G[i]))
     }
-  }
+
     # Compute enrichment for random permutations
   
     phi <- matrix(nrow = Ng, ncol = nperm)
     phi.norm <- matrix(nrow = Ng, ncol = nperm)
     obs.phi <- matrix(nrow = Ng, ncol = nperm)
-   if(runtype == "preranked")
-    {
-      print(paste("Skipping calculating gene rankings... using pre-ranked list."))
-    obs.s2n <- A[,1]
-    obs.index <- order(obs.s2n, decreasing = T)
-    obs.s2n <- sort(obs.s2n, decreasing = T)
-    obs.gene.labels <- gene.labels[obs.index]
-    obs.gene.descs <- obs.gene.labels
-    obs.gene.symbols <- obs.gene.labels
-    gene.list2 <- obs.index
-    obs.order.matrix[, 1:1000] <- gene.list2
-    obs.correl.matrix <- obs.order.matrix
-
-    }
 
   if (reshuffling.type == "sample.labels") {
     # reshuffling phenotype labels
