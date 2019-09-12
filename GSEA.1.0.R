@@ -1622,11 +1622,7 @@ if(runtype == "GSEA") {
 
   area.bias <- signif(100 * (sum(obs.s2n[1:arg.correl]) + sum(obs.s2n[arg.correl:N]))/sum(abs(obs.s2n[1:N])),
     digits = 3)
-if(runtype == "GSEA") {
   area.phen <- ifelse(area.bias >= 0, phen1, phen2)
-} else if (runtype == "preranked") {
-area.phen <- ifelse(area.bias >= 0)
-}
   delta.string <- paste("Corr. Area Bias to \"", area.phen, "\" =", abs(area.bias),
     "%", sep = "", collapse = "")
   zero.crossing.string <- paste("Zero Crossing at location ", arg.correl, " (",
