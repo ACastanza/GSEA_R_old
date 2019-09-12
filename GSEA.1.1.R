@@ -835,7 +835,6 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   }
 
   # Read input class vector
-  if (runtype == "GSEA") {
     if (is.list(input.cls)) {
       CLS <- input.cls
     } else {
@@ -850,10 +849,6 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     } else {
       phen1 <- class.phen[1]
       phen2 <- class.phen[2]
-    }
-  } else if (runtype == "preranked") {
-    phen1 <- "NA_pos"
-    phen2 <- "NA_neg" 
     }
 
   # sort samples according to phenotype
@@ -882,6 +877,8 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   A <- data.matrix(dataset)
   cols <- length(A[1, ])
   rows <- length(A[, 1])
+  phen1 <- "NA_pos"
+  phen2 <- "NA_neg" 
   }
 
   # Read input gene set database
@@ -1542,11 +1539,6 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   phen2.rows <- length(Obs.ES.norm[Obs.ES.norm < 0])
   report.phen1 <- report2[1:phen1.rows, ]
   report.phen2 <- report3[1:phen2.rows, ]
-
-  if (runtype == "preranked") {
-  phen1 <- "NA_pos"
-  phen2 <- "NA_neg"
-  }
 
   if (output.directory != "") {
     if (phen1.rows > 0) {
