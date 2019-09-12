@@ -6,7 +6,7 @@ Recommended R minimum version: 3.6
 
 Additionally, a rudimentary Collapse dataset function has been backported from the Java GSEA application, however differences in the implementation result in inconsistencies with the desktop collapse function.
 
-This GSEA-R v1.1 contains a preliminary implementation of GSEA-preranked. This implementation has not been thoroughly tested and is reliant on undocumented gene set permutation code.
+GSEA-R v1.1 contains a preliminary implementation of GSEA-preranked. This implementation has not been thoroughly tested and is reliant on undocumented gene set permutation code.
 
 The collapse dataset feature requires the <tt>dplyr</tt> package from <tt>tidyverse</tt>
 
