@@ -30,27 +30,27 @@ if (collapsedataset == TRUE & !is.na(collapsedataset)) {
 reshuffetype <- menu(c("Phenotype","gene_set"), graphics = FALSE, title = "Select GSEA Permutation Type (recommended: Phenotype)")
 cat("\n")
 
-npermsoverride <- askYesNo("Override default number of permutations for significance testing? (default: 1000) ")
-if (npermsoverride == TRUE & !is.na(npermsoverride)) {
-  nperms <- readline(prompt = ("Number of permutations: "))
+npermsdefault <- askYesNo("Use default number of permutations for significance testing? (default: 1000) ")
+if (npermsdefault == FALSE & !is.na(npermsdefault)) {
+ nperms <- readline(prompt = ("Number of permutations: "))
 } else {
-  nperms <- 1000
+ nperms <- 1000
 }
 cat("\n")
 
-maxoverride <- askYesNo("Override maximum gene set size filter? (default: 500 genes) ")
-if (maxoverride == TRUE & !is.na(maxoverride)) {
-  maxsize <- readline(prompt = ("Max size: "))
+maxdefault <- askYesNo("Use default maximum gene set size filter? (default: 500 genes) ")
+if (maxdefault == FALSE & !is.na(maxdefault)) {
+ maxsize <- readline(prompt = ("Max size: "))
 } else {
-  maxsize <- 500
+ maxsize <- 500
 }
 cat("\n")
 
-minoverride <- askYesNo("Override minimum gene set size filter? (default: 15 genes) ")
-if (minoverride == TRUE & !is.na(minoverride)) {
-  minsize <- readline(prompt = ("Min size: "))
+mindefault <- askYesNo("Use default minimum gene set size filter? (default: 15 genes) ")
+if (mindefault == FALSE & !is.na(mindefault)) {
+ minsize <- readline(prompt = ("Min size: "))
 } else {
-  minsize <- 15
+ minsize <- 15
 }
 cat("\n")
 
