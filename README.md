@@ -17,3 +17,10 @@ The original R-GSEA documentation indicates that it supports "phenotype permutat
 R-GSEA remains unsupported by the GSEA-MSigDB Team.
 
 See the original R-GSEA readme here: https://software.broadinstitute.org/cancer/software/gsea/wiki/index.php/R-GSEA_Readme
+
+### Running this application
+To run this application, in an R session, set the working directory to the diectory which contains the <tt>.R</tt> files with the <tt>setwd()</tt> command.
+
+Initialize the helper script with the <tt>source()</tt> command by calling <tt>source("Run.GSEA.R")</tt>
+
+The helper script will import the GSEA functions from the <tt>GSEA.1.1.R</tt> source file, and begin a series of prompts for loading files required for GSEA and setting experiment parameters.
