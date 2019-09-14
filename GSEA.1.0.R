@@ -715,13 +715,15 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     } else {
       write(paste("gs.ann =", gs.ann, sep = " "), file = filename, append = T)
     }
-    if (is.data.frame(input.chip)) {
+    if (collapse.dataset == TRUE) {
+     if (is.data.frame(input.chip)) {
       # write(paste('input.chip=', quote(input.chip), sep=' '), file=filename,
       # append=T)
-    } else {
-      write(paste("input.chip=", input.chip, sep = " "), file = filename, append = T)
+     } else {
+      write(paste("input.chip=", input.chip, sep = " "), file = filename,
+        append = T)
+     }
     }
-
     write(paste("output.directory =", output.directory, sep = " "), file = filename,
       append = T)
     write(paste("doc.string = ", doc.string, sep = " "), file = filename, append = T)
@@ -766,7 +768,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
 
   time1 <- proc.time()
 
-  if (collapsedataset == FALSE) {
+  if (collapse.dataset == FALSE) {
     if (is.data.frame(input.ds)) {
       dataset <- input.ds
     } else {
@@ -786,7 +788,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     dataset <- dataset[, -1]
     dataset <- dataset[, -1]
 
-  } else if (collapsedataset == TRUE) {
+  } else if (collapse.dataset == TRUE) {
     chip <- GSEA.ReadCHIPFile(file = input.chip)
     if (is.data.frame(input.ds)) {
       dataset <- input.ds
