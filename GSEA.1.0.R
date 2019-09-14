@@ -787,7 +787,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     dataset <- dataset[, -1]
 
   } else if (collapsedataset == TRUE) {
-    chip <- GSEA.ReadCHIPFile(file = input.chip)
+    chip <- GSEA.ReadCHIPFile(file = inputchip)
     if (is.data.frame(input.ds)) {
       dataset <- input.ds
     } else {
