@@ -47,9 +47,10 @@ GSEA.CollapseDataset <- function(dataplatform = chip, gct = dataset, collapse.mo
 
 
 
-GSEA.GeneRanking <- function(A, class.labels, gene.labels, nperm, permutation.type = 0,
- sigma.correction = "GeneCluster", fraction = 1, replace = F, reverse.sign = F) {
-
+GSEA.GeneRanking <- function(A, class.labels, gene.labels, nperm, permutation.type = 0, 
+ sigma.correction = "GeneCluster", fraction = 1, replace = F, reverse.sign = F, 
+ rank.metric) {
+ 
  # This function ranks the genes according to the signal to noise ratio for the
  # actual phenotype and also random permutations and bootstrap subsamples of both
  # the observed and random phenotypes. It uses matrix operations to implement the
@@ -77,52 +78,52 @@ GSEA.GeneRanking <- function(A, class.labels, gene.labels, nperm, permutation.ty
  # fraction: Subsampling fraction. Set to 1.0 (no resampling). For experts only
  # (default: 1.0) replace: Resampling mode (replacement or not replacement). For
  # experts only (default: F) reverse.sign: Reverse direction of gene list (default
- # = F) Outputs: s2n.matrix: Matrix with random permuted or bootstraps signal to
- # noise ratios (rows are genes, columns are permutations or bootstrap
- # subsamplings obs.s2n.matrix: Matrix with observed signal to noise ratios (rows
- # are genes, columns are boostraps subsamplings. If fraction is set to 1.0 then
- # all the columns have the same values order.matrix: Matrix with the orderings
- # that will sort the columns of the obs.s2n.matrix in decreasing s2n order
- # obs.order.matrix: Matrix with the orderings that will sort the columns of the
- # s2n.matrix in decreasing s2n order
-
+ # = F) Outputs: rnk.matrix: Matrix with random permuted or bootstraps rank
+ # metrics signal to noise ratios by default (rows are genes, columns are
+ # permutations or bootstrap subsamplings obs.rnk.matrix: Matrix with observed
+ # signal to noise ratios (rows are genes, columns are boostraps subsamplings. If
+ # fraction is set to 1.0 then all the columns have the same values order.matrix:
+ # Matrix with the orderings that will sort the columns of the obs.rnk.matrix in
+ # decreasing rnk order obs.order.matrix: Matrix with the orderings that will sort
+ # the columns of the rnk.matrix in decreasing rnk order
+ 
  A <- A + 1e-08
-
+ 
  N <- length(A[, 1])
  Ns <- length(A[1, ])
-
+ 
  subset.mask <- matrix(0, nrow = Ns, ncol = nperm)
  reshuffled.class.labels1 <- matrix(0, nrow = Ns, ncol = nperm)
  reshuffled.class.labels2 <- matrix(0, nrow = Ns, ncol = nperm)
  class.labels1 <- matrix(0, nrow = Ns, ncol = nperm)
  class.labels2 <- matrix(0, nrow = Ns, ncol = nperm)
-
+ 
  order.matrix <- matrix(0, nrow = N, ncol = nperm)
  obs.order.matrix <- matrix(0, nrow = N, ncol = nperm)
- s2n.matrix <- matrix(0, nrow = N, ncol = nperm)
- obs.s2n.matrix <- matrix(0, nrow = N, ncol = nperm)
-
+ rnk.matrix <- matrix(0, nrow = N, ncol = nperm)
+ obs.rnk.matrix <- matrix(0, nrow = N, ncol = nperm)
+ 
  obs.gene.labels <- vector(length = N, mode = "character")
  obs.gene.descs <- vector(length = N, mode = "character")
  obs.gene.symbols <- vector(length = N, mode = "character")
-
+ 
  M1 <- matrix(0, nrow = N, ncol = nperm)
  M2 <- matrix(0, nrow = N, ncol = nperm)
  S1 <- matrix(0, nrow = N, ncol = nperm)
  S2 <- matrix(0, nrow = N, ncol = nperm)
-
+ 
  gc()
-
+ 
  C <- split(class.labels, class.labels)
  class1.size <- length(C[[1]])
  class2.size <- length(C[[2]])
  class1.index <- seq(1, class1.size, 1)
  class2.index <- seq(class1.size + 1, class1.size + class2.size, 1)
-
+ 
  for (r in 1:nperm) {
-  class1.subset <- sample(class1.index, size = ceiling(class1.size * fraction),
+  class1.subset <- sample(class1.index, size = ceiling(class1.size * fraction), 
    replace = replace)
-  class2.subset <- sample(class2.index, size = ceiling(class2.size * fraction),
+  class2.subset <- sample(class2.index, size = ceiling(class2.size * fraction), 
    replace = replace)
   class1.subset.size <- length(class1.subset)
   class2.subset.size <- length(class2.subset)
@@ -141,7 +142,7 @@ GSEA.GeneRanking <- function(A, class.labels, gene.labels, nperm, permutation.ty
   subset.mask[, r] <- as.numeric(c(subset.class1, subset.class2))
   fraction.class1 <- class1.size/Ns
   fraction.class2 <- class2.size/Ns
-
+  
   if (permutation.type == 0) {
    # random (unbalanced) permutation
    full.subset <- c(class1.subset, class2.subset)
@@ -165,10 +166,10 @@ GSEA.GeneRanking <- function(A, class.labels, gene.labels, nperm, permutation.ty
    }
   } else if (permutation.type == 1) {
    # proportional (balanced) permutation
-
-   class1.label1.subset <- sample(class1.subset, size = ceiling(class1.subset.size *
+   
+   class1.label1.subset <- sample(class1.subset, size = ceiling(class1.subset.size * 
     fraction.class1))
-   class2.label1.subset <- sample(class2.subset, size = floor(class2.subset.size *
+   class2.label1.subset <- sample(class2.subset, size = floor(class2.subset.size * 
     fraction.class1))
    reshuffled.class.labels1[, r] <- rep(0, Ns)
    reshuffled.class.labels2[, r] <- rep(0, Ns)
@@ -193,112 +194,214 @@ GSEA.GeneRanking <- function(A, class.labels, gene.labels, nperm, permutation.ty
    }
   }
  }
-
+ 
  # compute S2N for the random permutation matrix
-
- P <- reshuffled.class.labels1 * subset.mask
- n1 <- sum(P[, 1])
- M1 <- A %*% P
- M1 <- M1/n1
- gc()
- A2 <- A * A
- S1 <- A2 %*% P
- S1 <- S1/n1 - M1 * M1
- S1 <- sqrt(abs((n1/(n1 - 1)) * S1))
- gc()
- P <- reshuffled.class.labels2 * subset.mask
- n2 <- sum(P[, 1])
- M2 <- A %*% P
- M2 <- M2/n2
- gc()
- A2 <- A * A
- S2 <- A2 %*% P
- S2 <- S2/n2 - M2 * M2
- S2 <- sqrt(abs((n2/(n2 - 1)) * S2))
- rm(P)
- rm(A2)
- gc()
-
- if (sigma.correction == "GeneCluster") {
-  # small sigma 'fix' as used in GeneCluster
-  S2 <- ifelse(0.2 * abs(M2) < S2, S2, 0.2 * abs(M2))
-  S2 <- ifelse(S2 == 0, 0.2, S2)
-  S1 <- ifelse(0.2 * abs(M1) < S1, S1, 0.2 * abs(M1))
-  S1 <- ifelse(S1 == 0, 0.2, S1)
+ if (rank.metric == "S2N") {
+  P <- reshuffled.class.labels1 * subset.mask
+  n1 <- sum(P[, 1])
+  M1 <- A %*% P
+  M1 <- M1/n1
+  gc()
+  A2 <- A * A
+  S1 <- A2 %*% P
+  S1 <- S1/n1 - M1 * M1
+  S1 <- sqrt(abs((n1/(n1 - 1)) * S1))
+  gc()
+  P <- reshuffled.class.labels2 * subset.mask
+  n2 <- sum(P[, 1])
+  M2 <- A %*% P
+  M2 <- M2/n2
+  gc()
+  A2 <- A * A
+  S2 <- A2 %*% P
+  S2 <- S2/n2 - M2 * M2
+  S2 <- sqrt(abs((n2/(n2 - 1)) * S2))
+  rm(P)
+  rm(A2)
+  gc()
+  
+  if (sigma.correction == "GeneCluster") {
+   # small sigma 'fix' as used in GeneCluster
+   S2 <- ifelse(0.2 * abs(M2) < S2, S2, 0.2 * abs(M2))
+   S2 <- ifelse(S2 == 0, 0.2, S2)
+   S1 <- ifelse(0.2 * abs(M1) < S1, S1, 0.2 * abs(M1))
+   S1 <- ifelse(S1 == 0, 0.2, S1)
+   gc()
+  }
+  
+  M1 <- M1 - M2
+  rm(M2)
+  gc()
+  S1 <- S1 + S2
+  rm(S2)
+  gc()
+  
+  rnk.matrix <- M1/S1
+  
+  if (reverse.sign == T) {
+   rnk.matrix <- -rnk.matrix
+  }
+  gc()
+  
+  for (r in 1:nperm) {
+   order.matrix[, r] <- order(rnk.matrix[, r], decreasing = T)
+  }
+  
+  # compute S2N for the 'observed' permutation matrix
+  
+  P <- class.labels1 * subset.mask
+  n1 <- sum(P[, 1])
+  M1 <- A %*% P
+  M1 <- M1/n1
+  gc()
+  A2 <- A * A
+  S1 <- A2 %*% P
+  S1 <- S1/n1 - M1 * M1
+  S1 <- sqrt(abs((n1/(n1 - 1)) * S1))
+  gc()
+  P <- class.labels2 * subset.mask
+  n2 <- sum(P[, 1])
+  M2 <- A %*% P
+  M2 <- M2/n2
+  gc()
+  A2 <- A * A
+  S2 <- A2 %*% P
+  S2 <- S2/n2 - M2 * M2
+  S2 <- sqrt(abs((n2/(n2 - 1)) * S2))
+  rm(P)
+  rm(A2)
+  gc()
+  
+  if (sigma.correction == "GeneCluster") {
+   # small sigma 'fix' as used in GeneCluster
+   S2 <- ifelse(0.2 * abs(M2) < S2, S2, 0.2 * abs(M2))
+   S2 <- ifelse(S2 == 0, 0.2, S2)
+   S1 <- ifelse(0.2 * abs(M1) < S1, S1, 0.2 * abs(M1))
+   S1 <- ifelse(S1 == 0, 0.2, S1)
+   gc()
+  }
+  
+  M1 <- M1 - M2
+  rm(M2)
+  gc()
+  S1 <- S1 + S2
+  rm(S2)
+  gc()
+  
+  obs.rnk.matrix <- M1/S1
+  gc()
+ } else if (rank.metric == "ttest") {
+ # compute TTest for the random permutation matrix
+  P <- reshuffled.class.labels1 * subset.mask
+  n1 <- sum(P[, 1])
+  M1 <- A %*% P
+  M1 <- M1/n1
+  gc()
+  A2 <- A * A
+  S1 <- A2 %*% P
+  S1 <- S1/n1 - M1 * M1
+  S1 <- sqrt(abs((n1/(n1 - 1)) * S1))
+  gc()
+  P <- reshuffled.class.labels2 * subset.mask
+  n2 <- sum(P[, 1])
+  M2 <- A %*% P
+  M2 <- M2/n2
+  gc()
+  A2 <- A * A
+  S2 <- A2 %*% P
+  S2 <- S2/n2 - M2 * M2
+  S2 <- sqrt(abs((n2/(n2 - 1)) * S2))
+  rm(P)
+  rm(A2)
+  gc()
+  
+  if (sigma.correction == "GeneCluster") {
+   # small sigma 'fix' as used in GeneCluster
+   S2 <- ifelse(0.2 * abs(M2) < S2, S2, 0.2 * abs(M2))
+   S2 <- ifelse(S2 == 0, 0.2, S2)
+   S1 <- ifelse(0.2 * abs(M1) < S1, S1, 0.2 * abs(M1))
+   S1 <- ifelse(S1 == 0, 0.2, S1)
+   gc()
+  }
+  
+  M1 <- M1 - M2
+  rm(M2)
+  gc()
+  S1 <- (S1^2)/class1.size
+  S2 <- (S2^2)/class2.size
+  S1 <- S1 + S2
+  S1 <- sqrt(S1)
+  rm(S2)
+  gc()
+  
+  rnk.matrix <- M1/S1
+  
+  if (reverse.sign == T) {
+   rnk.matrix <- -rnk.matrix
+  }
+  gc()
+  
+  for (r in 1:nperm) {
+   order.matrix[, r] <- order(rnk.matrix[, r], decreasing = T)
+  }
+  
+  # compute TTest for the 'observed' permutation matrix
+  
+  P <- class.labels1 * subset.mask
+  n1 <- sum(P[, 1])
+  M1 <- A %*% P
+  M1 <- M1/n1
+  gc()
+  A2 <- A * A
+  S1 <- A2 %*% P
+  S1 <- S1/n1 - M1 * M1
+  S1 <- sqrt(abs((n1/(n1 - 1)) * S1))
+  gc()
+  P <- class.labels2 * subset.mask
+  n2 <- sum(P[, 1])
+  M2 <- A %*% P
+  M2 <- M2/n2
+  gc()
+  A2 <- A * A
+  S2 <- A2 %*% P
+  S2 <- S2/n2 - M2 * M2
+  S2 <- sqrt(abs((n2/(n2 - 1)) * S2))
+  rm(P)
+  rm(A2)
+  gc()
+  
+  if (sigma.correction == "GeneCluster") {
+   # small sigma 'fix' as used in GeneCluster
+   S2 <- ifelse(0.2 * abs(M2) < S2, S2, 0.2 * abs(M2))
+   S2 <- ifelse(S2 == 0, 0.2, S2)
+   S1 <- ifelse(0.2 * abs(M1) < S1, S1, 0.2 * abs(M1))
+   S1 <- ifelse(S1 == 0, 0.2, S1)
+   gc()
+  }
+  
+  M1 <- M1 - M2
+  rm(M2)
+  gc()
+  S1 <- (S1^2)/class1.size
+  S2 <- (S2^2)/class2.size
+  S1 <- S1 + S2
+  S1 <- sqrt(S1)
+  rm(S2)
+  gc()
+  
+  obs.rnk.matrix <- M1/S1
   gc()
  }
-
- M1 <- M1 - M2
- rm(M2)
- gc()
- S1 <- S1 + S2
- rm(S2)
- gc()
-
- s2n.matrix <- M1/S1
-
+ 
  if (reverse.sign == T) {
-  s2n.matrix <- -s2n.matrix
+  obs.rnk.matrix <- -obs.rnk.matrix
  }
- gc()
-
+ 
  for (r in 1:nperm) {
-  order.matrix[, r] <- order(s2n.matrix[, r], decreasing = T)
+  obs.order.matrix[, r] <- order(obs.rnk.matrix[, r], decreasing = T)
  }
-
- # compute S2N for the 'observed' permutation matrix
-
- P <- class.labels1 * subset.mask
- n1 <- sum(P[, 1])
- M1 <- A %*% P
- M1 <- M1/n1
- gc()
- A2 <- A * A
- S1 <- A2 %*% P
- S1 <- S1/n1 - M1 * M1
- S1 <- sqrt(abs((n1/(n1 - 1)) * S1))
- gc()
- P <- class.labels2 * subset.mask
- n2 <- sum(P[, 1])
- M2 <- A %*% P
- M2 <- M2/n2
- gc()
- A2 <- A * A
- S2 <- A2 %*% P
- S2 <- S2/n2 - M2 * M2
- S2 <- sqrt(abs((n2/(n2 - 1)) * S2))
- rm(P)
- rm(A2)
- gc()
-
- if (sigma.correction == "GeneCluster") {
-  # small sigma 'fix' as used in GeneCluster
-  S2 <- ifelse(0.2 * abs(M2) < S2, S2, 0.2 * abs(M2))
-  S2 <- ifelse(S2 == 0, 0.2, S2)
-  S1 <- ifelse(0.2 * abs(M1) < S1, S1, 0.2 * abs(M1))
-  S1 <- ifelse(S1 == 0, 0.2, S1)
-  gc()
- }
-
- M1 <- M1 - M2
- rm(M2)
- gc()
- S1 <- S1 + S2
- rm(S2)
- gc()
-
- obs.s2n.matrix <- M1/S1
- gc()
-
- if (reverse.sign == T) {
-  obs.s2n.matrix <- -obs.s2n.matrix
- }
-
- for (r in 1:nperm) {
-  obs.order.matrix[, r] <- order(obs.s2n.matrix[, r], decreasing = T)
- }
-
- return(list(s2n.matrix = s2n.matrix, obs.s2n.matrix = obs.s2n.matrix, order.matrix = order.matrix,
+ 
+ return(list(rnk.matrix = rnk.matrix, obs.rnk.matrix = obs.rnk.matrix, order.matrix = order.matrix, 
   obs.order.matrix = obs.order.matrix))
 }
 
@@ -589,7 +692,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
  fdr.q.val.threshold = 0.25, topgs = 20, adjust.FDR.q.val = F, gs.size.threshold.min,
  gs.size.threshold.max, reverse.sign = F, preproc.type = 0, random.seed, perm.type = 0,
  fraction = 1, replace = F, collapse.dataset, collapse.mode, save.intermediate.results = F,
- use.fast.enrichment.routine = T, runtype) {
+ use.fast.enrichment.routine = T, runtype, rank.metric) {
 
  # This is a methodology for the analysis of global molecular profiles called Gene
  # Set Enrichment Analysis (GSEA). It determines whether an a priori defined set
@@ -1008,7 +1111,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
 
  # Compute observed and random permutation gene rankings
 
- obs.s2n <- vector(length = N, mode = "numeric")
+ obs.rnk <- vector(length = N, mode = "numeric")
  signal.strength <- vector(length = Ng, mode = "numeric")
  tag.frac <- vector(length = Ng, mode = "numeric")
  gene.frac <- vector(length = Ng, mode = "numeric")
@@ -1040,27 +1143,27 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
 
    O <- GSEA.GeneRanking(A, class.labels, gene.labels, call.nperm, permutation.type = perm.type,
     sigma.correction = "GeneCluster", fraction = fraction, replace = replace,
-    reverse.sign = reverse.sign)
+    reverse.sign = reverse.sign, rank.metric)
    gc()
 
    order.matrix[, n.starts[nk]:n.ends[nk]] <- O$order.matrix
    obs.order.matrix[, n.starts[nk]:n.ends[nk]] <- O$obs.order.matrix
-   correl.matrix[, n.starts[nk]:n.ends[nk]] <- O$s2n.matrix
-   obs.correl.matrix[, n.starts[nk]:n.ends[nk]] <- O$obs.s2n.matrix
+   correl.matrix[, n.starts[nk]:n.ends[nk]] <- O$rnk.matrix
+   obs.correl.matrix[, n.starts[nk]:n.ends[nk]] <- O$obs.rnk.matrix
    rm(O)
   }
-  obs.s2n <- apply(obs.correl.matrix, 1, median)  # using median to assign enrichment scores
-  obs.index <- order(obs.s2n, decreasing = T)
-  obs.s2n <- sort(obs.s2n, decreasing = T)
+  obs.rnk <- apply(obs.correl.matrix, 1, median)  # using median to assign enrichment scores
+  obs.index <- order(obs.rnk, decreasing = T)
+  obs.rnk <- sort(obs.rnk, decreasing = T)
 
   obs.gene.labels <- gene.labels[obs.index]
   obs.gene.descs <- all.gene.descs[obs.index]
   obs.gene.symbols <- all.gene.symbols[obs.index]
  } else if (runtype == "preranked") {
   print(paste("Skipping calculating gene rankings... using pre-ranked list."))
-  obs.s2n <- unname(A[, 1])
-  obs.index <- order(obs.s2n, decreasing = T)
-  obs.s2n <- sort(obs.s2n, decreasing = T)
+  obs.rnk <- unname(A[, 1])
+  obs.index <- order(obs.rnk, decreasing = T)
+  obs.rnk <- sort(obs.rnk, decreasing = T)
   gene.list2 <- obs.index
  }
 
@@ -1075,7 +1178,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   obs.gene.descs <- obs.gene.labels
   obs.gene.symbols <- obs.gene.labels
   obs.order.matrix[, 1:1000] <- gene.list2
-  obs.correl.matrix[, 1:1000] <- obs.s2n
+  obs.correl.matrix[, 1:1000] <- obs.rnk
  }
 
  gene.list2 <- obs.index
@@ -1086,7 +1189,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
   gene.set2 <- vector(length = length(gene.set), mode = "numeric")
   gene.set2 <- match(gene.set, gene.labels)
   GSEA.results <- GSEA.EnrichmentScore(gene.list = gene.list2, gene.set = gene.set2,
-   weighted.score.type = weighted.score.type, correl.vector = obs.s2n)
+   weighted.score.type = weighted.score.type, correl.vector = obs.rnk)
   Obs.ES[i] <- GSEA.results$ES
   Obs.arg.ES[i] <- GSEA.results$arg.ES
   Obs.RES[i, ] <- GSEA.results$RES
@@ -1178,11 +1281,11 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     if (use.fast.enrichment.routine == F) {
       GSEA.results <- GSEA.EnrichmentScore(gene.list = reshuffled.gene.labels,
      gene.set = gene.set2, weighted.score.type = weighted.score.type,
-     correl.vector = obs.s2n)
+     correl.vector = obs.rnk)
     } else {
       GSEA.results <- GSEA.EnrichmentScore2(gene.list = reshuffled.gene.labels,
      gene.set = gene.set2, weighted.score.type = weighted.score.type,
-     correl.vector = obs.s2n)
+     correl.vector = obs.rnk)
     }
     phi[i, r] <- GSEA.results$ES
    }
@@ -1588,31 +1691,36 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
  # plot S2N correlation profile
 
  location <- 1:N
- max.corr <- max(obs.s2n)
- min.corr <- min(obs.s2n)
+ max.corr <- max(obs.rnk)
+ min.corr <- min(obs.rnk)
 
- if (runtype == "GSEA") {
-  x <- plot(location, obs.s2n, ylab = "Signal to Noise Ratio (S2N)", xlab = "Gene List Location",
-   main = "Gene List Correlation (S2N) Profile", type = "l", lwd = 2, cex = 0.9,
-   col = 1)
- } else if (runtype == "preranked") {
-  x <- plot(location, obs.s2n, ylab = "User Rank Metric", xlab = "Gene List Location",
-   main = "Gene List Correlation Profile", type = "l", lwd = 2, cex = 0.9,
+if (runtype == "GSEA") {
+ if (rank.metric == "S2N") {
+  x <- plot(location, obs.rnk, ylab = "Signal to Noise Ratio (S2N)", xlab = "Gene List Location", 
+   main = "Gene List Correlation (S2N) Profile", type = "l", lwd = 2, cex = 0.9, 
    col = 1)
  }
-
+ if (rank.metric == "ttest") {
+  x <- plot(location, obs.rnk, ylab = "T-Test", xlab = "Gene List Location", 
+   main = "Gene List Correlation (T-Test) Profile", type = "l", lwd = 2, 
+   cex = 0.9, col = 1)
+ }
+} else if (runtype == "preranked") {
+ x <- plot(location, obs.rnk, ylab = "User Rank Metric", xlab = "Gene List Location", 
+  main = "Gene List Correlation Profile", type = "l", lwd = 2, cex = 0.9, col = 1)
+}
 
  for (i in seq(1, N, 20)) {
-  lines(c(i, i), c(0, obs.s2n[i]), lwd = 3, cex = 0.9, col = colors()[12])  # shading of correlation plot
+  lines(c(i, i), c(0, obs.rnk[i]), lwd = 3, cex = 0.9, col = colors()[12])  # shading of correlation plot
  }
- x <- points(location, obs.s2n, type = "l", lwd = 2, cex = 0.9, col = 1)
+ x <- points(location, obs.rnk, type = "l", lwd = 2, cex = 0.9, col = 1)
  lines(c(1, N), c(0, 0), lwd = 2, lty = 1, cex = 0.9, col = 1)  # zero correlation horizontal line
- temp <- order(abs(obs.s2n), decreasing = T)
+ temp <- order(abs(obs.rnk), decreasing = T)
  arg.correl <- temp[N]
  lines(c(arg.correl, arg.correl), c(min.corr, 0.7 * max.corr), lwd = 2, lty = 3,
   cex = 0.9, col = 1)  # zero correlation vertical line
 
- area.bias <- signif(100 * (sum(obs.s2n[1:arg.correl]) + sum(obs.s2n[arg.correl:N]))/sum(abs(obs.s2n[1:N])),
+ area.bias <- signif(100 * (sum(obs.rnk[1:arg.correl]) + sum(obs.rnk[arg.correl:N]))/sum(abs(obs.rnk[1:N])),
   digits = 3)
  area.phen <- ifelse(area.bias >= 0, phen1, phen2)
  delta.string <- paste("Corr. Area Bias to \"", area.phen, "\" =", abs(area.bias),
@@ -1822,7 +1930,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     gene.descs <- vector(length = size.G[i], mode = "character")
     gene.list.loc <- vector(length = size.G[i], mode = "numeric")
     core.enrichment <- vector(length = size.G[i], mode = "character")
-    gene.s2n <- vector(length = size.G[i], mode = "numeric")
+    gene.rnk <- vector(length = size.G[i], mode = "numeric")
     gene.RES <- vector(length = size.G[i], mode = "numeric")
     rank.list <- seq(1, N)
 
@@ -1843,7 +1951,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
      gene.symbols[kk] <- obs.gene.symbols[k]
      gene.descs[kk] <- obs.gene.descs[k]
      gene.list.loc[kk] <- k
-     gene.s2n[kk] <- signif(obs.s2n[k], digits = 3)
+     gene.rnk[kk] <- signif(obs.rnk[k], digits = 3)
      gene.RES[kk] <- signif(Obs.RES[i, k], digits = 3)
      if (Obs.ES[i] >= 0) {
        core.enrichment[kk] <- ifelse(gene.list.loc[kk] <= Obs.arg.ES[i],
@@ -1856,15 +1964,21 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
       }
     }
 
-    gene.report <- data.frame(cbind(gene.number, gene.symbols, gene.descs,
-      gene.list.loc, gene.s2n, gene.RES, core.enrichment))
-    if (runtype == "GSEA") {
-      names(gene.report) <- c("#", "GENE SYMBOL", "DESC", "LIST LOC",
-     "S2N", "RES", "CORE_ENRICHMENT")
-    } else if (runtype == "preranked") {
-      names(gene.report) <- c("#", "GENE SYMBOL", "DESC", "LIST LOC",
-     "RNK", "RES", "CORE_ENRICHMENT")
-    }
+ gene.report <- data.frame(cbind(gene.number, gene.symbols, gene.descs, gene.list.loc, 
+  gene.rnk, gene.RES, core.enrichment))
+ if (runtype == "GSEA") {
+  if (rank.metric == "S2N") {
+   names(gene.report) <- c("#", "GENE SYMBOL", "DESC", "LIST LOC", "S2N", "RES", 
+    "CORE_ENRICHMENT")
+  }
+  if (rank.metric == "ttest") {
+   names(gene.report) <- c("#", "GENE SYMBOL", "DESC", "LIST LOC", "TTest", 
+    "RES", "CORE_ENRICHMENT")
+  }
+ } else if (runtype == "preranked") {
+  names(gene.report) <- c("#", "GENE SYMBOL", "DESC", "LIST LOC", "RNK", "RES", 
+   "CORE_ENRICHMENT")
+ }
 
     # print(gene.report)
 
@@ -1911,9 +2025,9 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
     delta <- (max.RES - min.RES) * 0.5
     min.plot <- min.RES - 2 * delta
     max.plot <- max.RES
-    max.corr <- max(obs.s2n)
-    min.corr <- min(obs.s2n)
-    Obs.correl.vector.norm <- (obs.s2n - min.corr)/(max.corr - min.corr) *
+    max.corr <- max(obs.rnk)
+    min.corr <- min(obs.rnk)
+    Obs.correl.vector.norm <- (obs.rnk - min.corr)/(max.corr - min.corr) *
       1.25 * delta + min.plot
     zero.corr.line <- (-min.corr/(max.corr - min.corr)) * 1.25 * delta +
       min.plot
@@ -1945,7 +2059,7 @@ GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann =
       col = 1)
     lines(c(1, N), c(zero.corr.line, zero.corr.line), lwd = 1, lty = 1,
       cex = 1, col = 1)  # zero correlation horizontal line
-    temp <- order(abs(obs.s2n), decreasing = T)
+    temp <- order(abs(obs.rnk), decreasing = T)
     arg.correl <- temp[N]
     lines(c(arg.correl, arg.correl), c(min.plot, max.plot), lwd = 1,
       lty = 3, cex = 1, col = 3)  # zero crossing correlation vertical line

@@ -67,6 +67,15 @@ if (mindefault == FALSE & !is.na(mindefault)) {
  minsize <- 15
 }
 
+if (file_ext(inputds) != "rnk") {
+use.s2n <- askYesNo("Use default metric for ranking genes? (default: Signal2Noise) ")
+if (use.s2n == TRUE & !is.na(use.s2n)) {
+rankmetric <- "S2N"
+} else {
+cat("Using T-Test as ranking metric\n")
+rankmetric <- "ttest"}
+}
+
 cat("\n")
 
 outdir <- readline(prompt = ("Drop a directory into R window to use as the output folder or enter directory path: "))
@@ -115,8 +124,9 @@ GSEA(
  collapse.dataset      = collapsedataset, # Collapse dataset to gene symbols using a user provided chip file (default: F)
  collapse.mode         = collapsemode,
  save.intermediate.results = F,           # For experts only, save intermediate results (e.g. matrix of random perm. scores) (default: F)
- use.fast.enrichment.routine = T,          # Use faster routine to compute enrichment for random permutations (default: T)
-runtype = rankmethod
+ use.fast.enrichment.routine = T,         # Use faster routine to compute enrichment for random permutations (default: T)
+runtype = rankmethod,                     # Select Standard GSEA (default) or GSEA-preranked
+rank.metric = rankmetric
 )
 #----------------------------------------------------------------------------------------------------------
 

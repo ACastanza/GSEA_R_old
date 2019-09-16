@@ -30,7 +30,8 @@ GSEA(
  collapse.mode         = collapsemode,
  save.intermediate.results = F,           # For experts only, save intermediate results (e.g. matrix of random perm. scores) (default: F)
  use.fast.enrichment.routine = T,          # Use faster routine to compute enrichment for random permutations (default: T)
-runtype = rankmethod
+runtype = rankmethod,
+rank.metric = rankmetric
 )
 #----------------------------------------------------------------------------------------------------------
 
