@@ -68,12 +68,19 @@ if (mindefault == FALSE & !is.na(mindefault)) {
 }
 
 if (file_ext(inputds) != "rnk") {
-use.s2n <- askYesNo("Use default metric for ranking genes? (default: Signal2Noise) ")
-if (use.s2n == TRUE & !is.na(use.s2n)) {
-rankmetric <- "S2N"
-} else {
-cat("Using T-Test as ranking metric\n")
-rankmetric <- "ttest"}
+ cat("\n")
+ use.s2n <- askYesNo("Use default Signal2Noise metric for ranking genes? ")
+ if (use.s2n == TRUE & !is.na(use.s2n)) {
+  rankmetric <- "S2N"
+ } else if (use.s2n == FALSE) {
+  use.ttest <- askYesNo("Use T-Test to rank genes? ")
+  if (use.ttest == TRUE & !is.na(use.ttest)) {
+   rankmetric <- "ttest"
+  } else {
+   cat("No other ranking metrics implemented. Defaulting to S2N.\n")
+   rankmetric <- "S2N"
+  }
+ }
 }
 
 cat("\n")
