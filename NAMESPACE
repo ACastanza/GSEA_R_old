@@ -6,3 +6,4 @@ importFrom("graphics", "axis", "image", "layout", "legend", "lines",
 importFrom("stats", "density", "dist", "hclust", "median", "pnorm",
              "sd")
 importFrom("utils", "read.delim", "read.table", "write.table")
+export("GSEA","GSEA.Analyze.Sets")
