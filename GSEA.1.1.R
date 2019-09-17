@@ -650,7 +650,7 @@ GSEA.VarFilter <- function(V, fold, delta, gene.names = "NULL") {
 }
 
 GSEA.NormalizeRows <- function(V) {
- # Stardardize rows of a gene expression matrix
+ # Standardize rows of a gene expression matrix
 
  row.mean <- apply(V, MARGIN = 1, FUN = mean)
  row.sd <- apply(V, MARGIN = 1, FUN = sd)
@@ -666,7 +666,7 @@ GSEA.NormalizeRows <- function(V) {
 }
 
 GSEA.NormalizeCols <- function(V) {
- # Stardardize columns of a gene expression matrix
+ # Standardize columns of a gene expression matrix
 
  col.mean <- apply(V, MARGIN = 2, FUN = mean)
  col.sd <- apply(V, MARGIN = 2, FUN = sd)
