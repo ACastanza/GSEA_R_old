@@ -2,15 +2,8 @@
 # script to run GSEA Analysis
 library("utils")
 library("tools")
-cat("\n")
-gseasource <- list.files(getwd(), pattern = "GSEA.1.1.R", full.names = T, recursive = FALSE)[1]
-if (!is.na(gseasource)) {
- GSEA.program.location <- gseasource
-} else {
- GSEA.program.location <- readline(prompt = ("Input path to GSEA.1.1.R Source (or drop file into R window): "))  #  R source program (change pathname to the rigth location in local machine)
-}
-source(GSEA.program.location, verbose = T, max.deparse.length = 9999)
-cat("\n")
+library("dplyr")
+library("GSEA")
 cat("\n")
 cat("Starting...\n")
 cat("\n")

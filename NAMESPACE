@@ -1,0 +1,8 @@
+importFrom("dplyr")
+importFrom("grDevices", "colors", "dev.cur", "dev.off", "pdf",
+             "rainbow", "savePlot")
+importFrom("graphics", "axis", "image", "layout", "legend", "lines",
+             "par", "plot", "points", "text")
+importFrom("stats", "density", "dist", "hclust", "median", "pnorm",
+             "sd")
+importFrom("utils", "read.delim", "read.table", "write.table")

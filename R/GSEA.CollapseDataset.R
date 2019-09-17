@@ -1,0 +1,30 @@
+GSEA.CollapseDataset <-
+function(dataplatform = chip, gct = dataset, collapse.mode = collapsemode) {
+ probemap <- unique(dataplatform[, c("Probe.Set.ID", "Gene.Symbol")])
+ annotate <- unique(dataplatform[, c("Gene.Symbol", "Gene.Title")])
+ mappedgct <- merge(x = probemap, y = gct, by.x = 1, by.y = 1, all = FALSE, no.dups = FALSE)
+ mappedgct = unique(subset(mappedgct, select = -c(1)))
+ mappedgct <- unique(mappedgct[, -c(2)])
+ mappedgct[, c(2:ncol(mappedgct))] <- sapply(mappedgct[, c(2:ncol(mappedgct))],
+  as.numeric)
+
+ if (collapse.mode == 1)
+  {
+   mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(max) %>%
+    data.frame()
+  }  #MAX
+ if (collapse.mode == 2)
+  {
+   mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(median) %>%
+    data.frame()
+  }  #Median
+ if (collapse.mode == 3)
+  {
+   mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(sum) %>%
+    data.frame()
+  }  #SUM
+ mappedexp_2 <- unique(merge(x = annotate, y = mappedexp, by.x = "Gene.Symbol",
+  by.y = "Gene.Symbol"))
+ colnames(mappedexp_2)[2] <- "Description"
+ return(mappedexp_2)
+}
