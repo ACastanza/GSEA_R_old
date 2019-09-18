@@ -1,6 +1,6 @@
 GSEA.Analyze.Sets <-
 function(directory, topgs = "", non.interactive.run = F, height = 12,
- width = 17, runtype) {
+ width = 17, runtype, doc.string) {
 
  file.list <- list.files(directory)
 
@@ -11,7 +11,9 @@ function(directory, topgs = "", non.interactive.run = F, height = 12,
   directory <- paste0(directory, .Platform$file.sep)
  }
 
- files <- file.list[regexpr(pattern = ".report.", file.list) > 1]
+ files0 <- file.list[regexpr(pattern = ".report.", file.list)]
+ files <- files0[grep(doc.string, files0)]
+
  max.sets <- length(files)
 
  set.table <- matrix(nrow = max.sets, ncol = 5)

@@ -125,8 +125,8 @@ GSEA(
  collapse.mode         = collapsemode,
  save.intermediate.results = F,           # For experts only, save intermediate results (e.g. matrix of random perm. scores) (default: F)
  use.fast.enrichment.routine = T,         # Use faster routine to compute enrichment for random permutations (default: T)
-runtype = rankmethod,                     # Select Standard GSEA (default) or GSEA-preranked
-rank.metric = rankmetric
+ runtype = rankmethod,                     # Select Standard GSEA (default) or GSEA-preranked
+ rank.metric = rankmetric
 )
 #----------------------------------------------------------------------------------------------------------
 
@@ -137,5 +137,6 @@ GSEA.Analyze.Sets(
    topgs = 20,                                                           # number of top scoring gene sets used for analysis
    height = 16,
    width = 16,
-   runtype = rankmethod
+   runtype = rankmethod,
+   doc.string = outname
 )
