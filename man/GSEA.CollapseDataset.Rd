@@ -4,8 +4,7 @@
 \alias{GSEA.CollapseDataset}
 \title{Maps user supplied identifiers to Gene Symbols}
 \usage{
-GSEA.CollapseDataset(dataplatform = chip, gct = dataset,
-  collapse.mode = collapsemode)
+GSEA.CollapseDataset(dataplatform, gct, collapse.mode)
 }
 \description{
 `GSEA.CollapseDataset` applies a .CHIP file to the dataset to gene symbols using a specified collapse function
