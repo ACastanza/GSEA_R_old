@@ -1,6 +1,12 @@
+#' Variation filter pre-processing for gene expression matrix
+#'
+#' `GSEA.VarFilter` apply a variation filter to expression matrix
+#'
+#' Unused function.
+#'
+#' @export
 GSEA.VarFilter <-
 function(V, fold, delta, gene.names = "NULL") {
- # Variation filter pre-processing for gene expression matrix
 
  cols <- length(V[1, ])
  rows <- length(V[, 1])

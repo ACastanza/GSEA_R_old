@@ -1,8 +1,13 @@
+#' Produce Heat Map for Genes in Dataset
+#'
+#' `GSEA.HeatMapPlot` plots a heatmap 'pinkogram' of a gene expression matrix including phenotype vector and gene, sample and phenotype labels
+#'
+#' Internal `GSEA` function invoked if gsea.type="GSEA"
+#'
+#' @export
 GSEA.HeatMapPlot <-
 function(V, row.names = F, col.labels, col.classes, col.names = F,
  main = " ", xlab = " ", ylab = " ") {
- # Plots a heatmap 'pinkogram' of a gene expression matrix including phenotype
- # vector and gene, sample and phenotype labels
 
  n.rows <- length(V[, 1])
  n.cols <- length(V[1, ])

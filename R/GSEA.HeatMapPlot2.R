@@ -1,7 +1,13 @@
+#' Produces overlap heatmap for leading edge analysis
+#'
+#' `GSEA.HeatMapPlot2` plots a heatmap of a gene set leading edge overlap matrix
+#'
+#' Internal function invoked by `GSEA.Analyze.Sets` to plot heatmaps of leading edge overlaps.
+#'
+#' @export
 GSEA.HeatMapPlot2 <-
 function(V, row.names = "NA", col.names = "NA", main = " ",
  sub = " ", xlab = " ", ylab = " ", color.map = "default") {
- # Plots a heatmap of a matrix
 
  n.rows <- length(V[, 1])
  n.cols <- length(V[1, ])

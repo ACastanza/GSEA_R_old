@@ -1,7 +1,13 @@
+#' Read phenotype assignments from .CLS file
+#'
+#' `GSEA.ReadClsFile` reads a class vector CLS file to define dataset relationships 
+#'
+#' Read in a class vector CLS file to defines phenotype and class label
+#' vectors for the samples in a gene expression file (GCT format).
+#'
+#' @export
 GSEA.ReadClsFile <-
 function(file = "NULL") {
- # Reads a class vector CLS file and defines phenotype and class labels vectors
- # for the samples in a gene expression file (RES or GCT format)
 
  cls.cont <- readLines(file)
  num.lines <- length(cls.cont)

@@ -1,6 +1,12 @@
+#' Standardize columns of a gene expression matrix
+#'
+#' `GSEA.NormalizeCols` performs column-wise normalization of a gene expression matrix using the col.mean and standard deviation
+#'
+#' Internal `GSEA` function.
+#'
+#' @export
 GSEA.NormalizeCols <-
 function(V) {
- # Standardize columns of a gene expression matrix
 
  col.mean <- apply(V, MARGIN = 2, FUN = mean)
  col.sd <- apply(V, MARGIN = 2, FUN = sd)

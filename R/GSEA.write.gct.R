@@ -1,3 +1,10 @@
+#' Write output .GCT files
+#'
+#' `GSEA.write.gct` produces properly formatted .GCT files of leading edge subsets
+#'
+#' Internal `GSEA.Analyze.Sets` function.
+#'
+#' @export
 GSEA.write.gct <-
 function(gct, filename) {
  f <- file(filename, "w")

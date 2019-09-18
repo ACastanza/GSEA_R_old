@@ -1,3 +1,14 @@
+#' Performs leading edge analysis of a GSEA result
+#'
+#' `GSEA.Analyze.Sets` returns leading edge plots and gcts extracted from a GSEA result folder
+#'
+#' This function is designed to be invoked immediately after `GSEA` to run leading edge analysis. 
+
+#' @param directory the directory containing GSEA result files 
+#' @param  gsea.type the gsea run type (either "GSEA" or "preranked")
+#' @param  doc.string the file prefixed in the original analysis
+#'
+#' @export
 GSEA.Analyze.Sets <-
 function(directory = getwd(), topgs = 20, non.interactive.run = F, height = 16,
  width = 16, gsea.type = "GSEA", doc.string = "gsea_result") {

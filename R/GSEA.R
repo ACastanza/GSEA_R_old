@@ -1,3 +1,98 @@
+#' Run Gene Set enrichment Analysis
+#'
+#' `GSEA` is the main function to perform gene set enrichment analysis of a dataset
+#'
+#' This is a methodology for the analysis of global molecular profiles called Gene
+#' Set Enrichment Analysis (GSEA). It determines whether an a priori defined set
+#' of genes shows statistically significant, concordant differences between two
+#' biological states (e.g. phenotypes). GSEA operates on all genes from an
+#' experiment, rank ordered by the signal to noise ratio and determines whether
+#' members of an a priori defined gene set are nonrandomly distributed towards the
+#' top or bottom of the list and thus may correspond to an important biological
+#' process. To assess significance the program uses an empirical permutation
+#' procedure to test deviation from random that preserves correlations between
+#' genes.  For details see Subramanian et al 2005.
+#' 
+#' @param input.ds Input gene expression dataset file in GCT format or RNK format if preranked is specified to gsea.type
+#' @param input.cls Input class vector (phenotype) file in CLS format
+#' @param input.chip If collapse.dataset = TRUE, read in a CHIP formatted gene mapping file to convert dataset to gene symbols
+#' @param gene.ann Gene microarray annotation file (Affymetrix Netaffyx *.csv format) (default: none)
+#' @param gs.file Gene set database in GMT format
+#' @param output.directory: Directory where to store output and results (default: .)
+#' @param doc.string Documentation string used as a prefix to name result files (default: 'gsea_result')
+#' @param non.interactive.run Run in interactive (i.e. R GUI) or batch (R command line) mode (default: F)
+#' @param reshuffling.type Type of permutation reshuffling: 'sample.labels' or 'gene.labels' (default: 'sample.labels')
+#' @param nperm Number of random permutations (default: 1000)
+#' @param weighted.score.type Enrichment correlation-based weighting: 0=no weight (KS), 1=standard weigth, 2 = over-weigth (default: 1) 
+#' @param nom.p.val.threshold Significance threshold for nominal p-vals for gene sets (default: -1, no thres)
+#' @param fwer.p.val.threshold Significance threshold for FWER p-vals for gene sets (default: -1, no thres)
+#' @param fdr.q.val.threshold Significance threshold for FDR q-vals for gene sets (default: 0.25) 
+#' @param topgs Besides those passing test, number of top scoring gene sets used for detailed reports (default: 20)
+#' @param adjust.FDR.q.val Adjust the FDR q-vals (default: F) 
+#' @param gs.size.threshold.min Minimum size (in genes) for database gene sets to be considered (default: 15)
+#' @param gs.size.threshold.max Maximum size (in genes) for database gene sets to be considered (default: 500)
+#' @param reverse.sign Reverse direction of gene list (pos. enrichment becomes negative, etc.) (default: F)
+#' @param preproc.type Preprocessing normalization: 0=none, 1=col(z-score)., 2=col(rank) and row(z-score).,
+#' 3=col(rank). (default: 0) 
+#' @param random.seed Random number generator seed. (default: use system time)
+#' @param perm.type Permutation type: 0 = unbalanced, 1 = balanced. For experts only (default: 0)
+#' @param fraction Subsampling fraction. Set to 1.0 (no resampling). For experts only (default: 1.0)
+#' @param replace Resampling mode (replacement or not replacement). For experts only (default: F)
+#' @param collapse.dataset collapse dataset from user specified identifiers to Gene Symbols (default: FALSE)
+#' @param collapse.mode Method for collapsing the dataset, accepts "max", "median", "mean", "sum", (default: NOCOLLAPSE)
+#' @param use.fast.enrichment.routine if true it uses a faster GSEA.EnrichmentScore2 to compute random perm. enrichment
+#' @param gsea.type mode to run GSEA. Specify either "GSEA" for standard mode, or "preranked" to allow parsing of .RNK file
+#' @param rank.metric method for ranking genes. Accepts either signal-to-noise ratio "S2N" (default) or "ttest" (default: S2N)
+#' @return The results of the method are stored in the
+#' 'output.directory' specified by the user as part of the input parameters.  The
+#' results files are: - Two tab-separated global result text files (one for each
+#' phenotype). These files are labeled according to the doc string prefix and the
+#' phenotype name from the CLS file:
+#' <doc.string>.SUMMARY.RESULTS.REPORT.<phenotype>.txt - One set of global plots.
+#' They include a.- gene list correlation profile, b.- global observed and null
+#' densities, c.- heat map for the entire sorted dataset, and d.- p-values vs. NES
+#' plot. These plots are in a single JPEG file named
+#' <doc.string>.global.plots.<phenotype>.jpg. When the program is run
+#' interactively these plots appear on a window in the R GUI.  - A variable number
+#' of tab-separated gene result text files according to how many sets pass any of
+#' the significance thresholds ('nom.p.val.threshold,' 'fwer.p.val.threshold,' and
+#' 'fdr.q.val.threshold') and how many are specified in the 'topgs' parameter.
+#' These files are named: <doc.string>.<gene set name>.report.txt.  - A variable
+#' number of gene set plots (one for each gene set report file). These plots
+#' include a.- Gene set running enrichment 'mountain' plot, b.- gene set null
+#' distribution and c.- heat map for genes in the gene set. These plots are stored
+#' in a single JPEG file named <doc.string>.<gene set name>.jpg.  The format
+#' (columns) for the global result files is as follows.  GS : Gene set name.  SIZE
+#' : Size of the set in genes.  SOURCE : Set definition or source.  ES :
+#' Enrichment score.  NES : Normalized (multiplicative rescaling) normalized
+#' enrichment score.  NOM p-val : Nominal p-value (from the null distribution of
+#' the gene set).  FDR q-val: False discovery rate q-values FWER p-val: Family
+#' wise error rate p-values.  Tag %: Percent of gene set before running enrichment
+#' peak.  Gene %: Percent of gene list before running enrichment peak.  Signal :
+#' enrichment signal strength.  FDR (median): FDR q-values from the median of the
+#' null distributions.  glob.p.val: P-value using a global statistic (number of
+#' sets above the set's NES).  The rows are sorted by the NES values (from maximum
+#' positive or negative NES to minimum) The format (columns) for the gene set
+#' result files is as follows.  #: Gene number in the (sorted) gene set GENE :
+#' gene name. For example the probe accession number, gene symbol or the gene
+#' identifier gin the dataset.  SYMBOL : gene symbol from the gene annotation
+#' file.  DESC : gene description (title) from the gene annotation file.  LIST LOC
+#' : location of the gene in the sorted gene list.  S2N : signal to noise ratio
+#' (correlation) of the gene in the gene list.  RES : value of the running
+#' enrichment score at the gene location.  CORE_ENRICHMENT: is this gene is the
+#' 'core enrichment' section of the list? Yes or No variable specifying in the
+#' gene location is before (positive ES) or after (negative ES) the running
+#' enrichment peak.  The rows are sorted by the gene location in the gene list.
+#' The function call to GSEA returns a two element list containing the two global
+#' result reports as data frames ($report1, $report2).  results1: Global output
+#' report for first phenotype result2: Global putput report for second phenotype
+#'
+#' @importFrom grDevices colors dev.cur dev.off pdf rainbow savePlot
+#' @importFrom graphics axis image layout legend lines par plot points text
+#' @importFrom stats density dist hclust median pnorm sd
+#' @importFrom utils read.delim read.table write.table
+#'
+#' @export
 GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.db, gs.ann = "", 
  output.directory = getwd(), doc.string = "gsea_result", non.interactive.run = F, reshuffling.type = "sample.labels", nperm = 1000, 
  weighted.score.type = 1, nom.p.val.threshold = -1, fwer.p.val.threshold = -1, 
@@ -5,88 +100,6 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
  gs.size.threshold.max = 500, reverse.sign = F, preproc.type = 0, random.seed = as.integer(as.POSIXct(Sys.time())), perm.type = 0, 
  fraction = 1, replace = F, collapse.dataset = FALSE, collapse.mode = "NOCOLLAPSE", save.intermediate.results = F, 
  use.fast.enrichment.routine = T, gsea.type = "GSEA", rank.metric = "S2N") {
- 
- # This is a methodology for the analysis of global molecular profiles called Gene
- # Set Enrichment Analysis (GSEA). It determines whether an a priori defined set
- # of genes shows statistically significant, concordant differences between two
- # biological states (e.g. phenotypes). GSEA operates on all genes from an
- # experiment, rank ordered by the signal to noise ratio and determines whether
- # members of an a priori defined gene set are nonrandomly distributed towards the
- # top or bottom of the list and thus may correspond to an important biological
- # process. To assess significance the program uses an empirical permutation
- # procedure to test deviation from random that preserves correlations between
- # genes.  For details see Subramanian et al 2005 Inputs: input.ds: Input gene
- # expression dataset file in GCT format input.cls: Input class vector (phenotype)
- # file in CLS format gene.ann.file: Gene microarray annotation file (Affymetrix
- # Netaffyx *.csv format) (default: none) gs.file: Gene set database in GMT format
- # output.directory: Directory where to store output and results (default: .)
- # doc.string: Documentation string used as a prefix to name result files
- # (default: 'GSEA.analysis') non.interactive.run: Run in interactive (i.e. R GUI)
- # or batch (R command line) mode (default: F) reshuffling.type: Type of
- # permutation reshuffling: 'sample.labels' or 'gene.labels' (default:
- # 'sample.labels') nperm: Number of random permutations (default: 1000)
- # weighted.score.type: Enrichment correlation-based weighting: 0=no weight (KS),
- # 1=standard weigth, 2 = over-weigth (default: 1) nom.p.val.threshold:
- # Significance threshold for nominal p-vals for gene sets (default: -1, no thres)
- # fwer.p.val.threshold: Significance threshold for FWER p-vals for gene sets
- # (default: -1, no thres) fdr.q.val.threshold: Significance threshold for FDR
- # q-vals for gene sets (default: 0.25) topgs: Besides those passing test, number
- # of top scoring gene sets used for detailed reports (default: 10)
- # adjust.FDR.q.val: Adjust the FDR q-vals (default: F) gs.size.threshold.min:
- # Minimum size (in genes) for database gene sets to be considered (default: 25)
- # gs.size.threshold.max: Maximum size (in genes) for database gene sets to be
- # considered (default: 500) reverse.sign: Reverse direction of gene list (pos.
- # enrichment becomes negative, etc.) (default: F) preproc.type: Preprocessing
- # normalization: 0=none, 1=col(z-score)., 2=col(rank) and row(z-score).,
- # 3=col(rank). (default: 0) random.seed: Random number generator seed. (default:
- # 123456) perm.type: Permutation type: 0 = unbalanced, 1 = balanced. For experts
- # only (default: 0) fraction: Subsampling fraction. Set to 1.0 (no resampling).
- # For experts only (default: 1.0) replace: Resampling mode (replacement or not
- # replacement). For experts only (default: F) use.fast.enrichment.routine: if
- # true it uses a faster version to compute random perm. enrichment
- # 'GSEA.EnrichmentScore2' Output: The results of the method are stored in the
- # 'output.directory' specified by the user as part of the input parameters.  The
- # results files are: - Two tab-separated global result text files (one for each
- # phenotype). These files are labeled according to the doc string prefix and the
- # phenotype name from the CLS file:
- # <doc.string>.SUMMARY.RESULTS.REPORT.<phenotype>.txt - One set of global plots.
- # They include a.- gene list correlation profile, b.- global observed and null
- # densities, c.- heat map for the entire sorted dataset, and d.- p-values vs. NES
- # plot. These plots are in a single JPEG file named
- # <doc.string>.global.plots.<phenotype>.jpg. When the program is run
- # interactively these plots appear on a window in the R GUI.  - A variable number
- # of tab-separated gene result text files according to how many sets pass any of
- # the significance thresholds ('nom.p.val.threshold,' 'fwer.p.val.threshold,' and
- # 'fdr.q.val.threshold') and how many are specified in the 'topgs' parameter.
- # These files are named: <doc.string>.<gene set name>.report.txt.  - A variable
- # number of gene set plots (one for each gene set report file). These plots
- # include a.- Gene set running enrichment 'mountain' plot, b.- gene set null
- # distribution and c.- heat map for genes in the gene set. These plots are stored
- # in a single JPEG file named <doc.string>.<gene set name>.jpg.  The format
- # (columns) for the global result files is as follows.  GS : Gene set name.  SIZE
- # : Size of the set in genes.  SOURCE : Set definition or source.  ES :
- # Enrichment score.  NES : Normalized (multiplicative rescaling) normalized
- # enrichment score.  NOM p-val : Nominal p-value (from the null distribution of
- # the gene set).  FDR q-val: False discovery rate q-values FWER p-val: Family
- # wise error rate p-values.  Tag %: Percent of gene set before running enrichment
- # peak.  Gene %: Percent of gene list before running enrichment peak.  Signal :
- # enrichment signal strength.  FDR (median): FDR q-values from the median of the
- # null distributions.  glob.p.val: P-value using a global statistic (number of
- # sets above the set's NES).  The rows are sorted by the NES values (from maximum
- # positive or negative NES to minimum) The format (columns) for the gene set
- # result files is as follows.  #: Gene number in the (sorted) gene set GENE :
- # gene name. For example the probe accession number, gene symbol or the gene
- # identifier gin the dataset.  SYMBOL : gene symbol from the gene annotation
- # file.  DESC : gene description (title) from the gene annotation file.  LIST LOC
- # : location of the gene in the sorted gene list.  S2N : signal to noise ratio
- # (correlation) of the gene in the gene list.  RES : value of the running
- # enrichment score at the gene location.  CORE_ENRICHMENT: is this gene is the
- # 'core enrichment' section of the list? Yes or No variable specifying in the
- # gene location is before (positive ES) or after (negative ES) the running
- # enrichment peak.  The rows are sorted by the gene location in the gene list.
- # The function call to GSEA returns a two element list containing the two global
- # result reports as data frames ($report1, $report2).  results1: Global output
- # report for first phenotype result2: Global putput report for second phenotype
  
  print(" *** Running Gene Set Enrichment Analysis...")
  

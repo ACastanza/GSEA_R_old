@@ -1,20 +1,27 @@
+#' Computes random permutation enrichment scores
+#'
+#' `GSEA.EnrichmentScore2` computes the weighted GSEA score of random permutations of a gene.set in gene.list
+#'
+#' Internal `GSEA` function.
+#' Computes the weighted GSEA score of gene.set in gene.list. It is the same
+#' calculation as in GSEA.EnrichmentScore but faster (x8) without producing the
+#' RES, arg.RES and tag.indicator outputs.  This call is intended to be used to
+#' asses the enrichment of random permutations rather than the observed one.  The
+#' weighted score type is the exponent of the correlation weight: 0 (unweighted =
+#' Kolmogorov-Smirnov), 1 (weighted), and 2 (over-weighted). When the score type
+#' is 1 or 2 it is necessary to input the correlation vector with the values in
+#' the same order as in the gene list.  Inputs: gene.list: The ordered gene list
+#' (e.g. integers indicating the original position in the input dataset) gene.set:
+#' A gene set (e.g. integers indicating the location of those genes in the input
+#' dataset) weighted.score.type: Type of score: weight: 0 (unweighted =
+#' Kolmogorov-Smirnov), 1 (weighted), and 2 (over-weighted) correl.vector: A
+#' vector with the coorelations (e.g. signal to noise scores) corresponding to the
+#' genes in the gene list Outputs: ES: Enrichment score (real number between -1
+#' and +1)
+#'
+#' @export
 GSEA.EnrichmentScore2 <-
 function(gene.list, gene.set, weighted.score.type = 1, correl.vector = NULL) {
- # Computes the weighted GSEA score of gene.set in gene.list. It is the same
- # calculation as in GSEA.EnrichmentScore but faster (x8) without producing the
- # RES, arg.RES and tag.indicator outputs.  This call is intended to be used to
- # asses the enrichment of random permutations rather than the observed one.  The
- # weighted score type is the exponent of the correlation weight: 0 (unweighted =
- # Kolmogorov-Smirnov), 1 (weighted), and 2 (over-weighted). When the score type
- # is 1 or 2 it is necessary to input the correlation vector with the values in
- # the same order as in the gene list.  Inputs: gene.list: The ordered gene list
- # (e.g. integers indicating the original position in the input dataset) gene.set:
- # A gene set (e.g. integers indicating the location of those genes in the input
- # dataset) weighted.score.type: Type of score: weight: 0 (unweighted =
- # Kolmogorov-Smirnov), 1 (weighted), and 2 (over-weighted) correl.vector: A
- # vector with the coorelations (e.g. signal to noise scores) corresponding to the
- # genes in the gene list Outputs: ES: Enrichment score (real number between -1
- # and +1)
 
  N <- length(gene.list)
  Nh <- length(gene.set)

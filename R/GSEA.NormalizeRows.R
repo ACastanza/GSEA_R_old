@@ -1,6 +1,12 @@
+#' Standardize rows of a gene expression matrix
+#'
+#' `GSEA.NormalizeRows` performs row-wise adjustment of a gene expression matrix using the col.mean and standard deviation
+#'
+#' Internal `GSEA` function.
+#'
+#' @export
 GSEA.NormalizeRows <-
 function(V) {
- # Standardize rows of a gene expression matrix
 
  row.mean <- apply(V, MARGIN = 1, FUN = mean)
  row.sd <- apply(V, MARGIN = 1, FUN = sd)

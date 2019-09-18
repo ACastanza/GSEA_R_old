@@ -1,3 +1,10 @@
+#' Maps user supplied identifiers to Gene Symbols
+#'
+#' `GSEA.CollapseDataset` applies a .CHIP file to the dataset to gene symbols using a specified collapse function
+#'
+#' Internal `GSEA` function invoked if collapse.dataset == TRUE.
+#'
+#' @export
 GSEA.CollapseDataset <-
 function(dataplatform = chip, gct = dataset, collapse.mode = collapsemode) {
  probemap <- unique(dataplatform[, c("Probe.Set.ID", "Gene.Symbol")])
