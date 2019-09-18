@@ -1,6 +1,6 @@
 GSEA.Analyze.Sets <-
 function(directory = getwd(), topgs = 20, non.interactive.run = F, height = 16,
- width = 16, runtype = "GSEA", doc.string = "gsea_result") {
+ width = 16, gsea.type = "GSEA", doc.string = "gsea_result") {
 
  file.list <- list.files(directory)
 
@@ -45,10 +45,10 @@ function(directory = getwd(), topgs = 20, non.interactive.run = F, height = 16,
  set.table <- noquote(set.table)
  phen.order <- order(set.table[, 3], decreasing = T)
  set.table <- set.table[phen.order, ]
- if (runtype == "GSEA") {
+ if (gsea.type == "GSEA") {
   phen1 <- names(table(set.table[, 3]))[1]
   phen2 <- names(table(set.table[, 3]))[2]
- } else if (runtype == "preranked") {
+ } else if (gsea.type == "preranked") {
   phen1 <- "NA_pos"
   phen2 <- "NA_neg"
  }

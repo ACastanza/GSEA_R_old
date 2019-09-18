@@ -4,7 +4,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
  fdr.q.val.threshold = 0.25, topgs = 20, adjust.FDR.q.val = F, gs.size.threshold.min = 15, 
  gs.size.threshold.max = 500, reverse.sign = F, preproc.type = 0, random.seed = as.integer(as.POSIXct(Sys.time())), perm.type = 0, 
  fraction = 1, replace = F, collapse.dataset = FALSE, collapse.mode = "NOCOLLAPSE", save.intermediate.results = F, 
- use.fast.enrichment.routine = T, runtype = "GSEA", rank.metric = "S2N") {
+ use.fast.enrichment.routine = T, gsea.type = "GSEA", rank.metric = "S2N") {
  
  # This is a methodology for the analysis of global molecular profiles called Gene
  # Set Enrichment Analysis (GSEA). It determines whether an a priori defined set
@@ -112,7 +112,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
   } else {
    write(paste("input.ds=", input.ds, sep = " "), file = filename, append = T)
   }
-  if (runtype == "GSEA") {
+  if (gsea.type == "GSEA") {
    if (is.list(input.cls)) {
     # write(paste('input.cls=', input.cls, sep=' '), file=filename, append=T)
    } else {
@@ -135,7 +135,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
   } else {
    write(paste("gs.ann =", gs.ann, sep = " "), file = filename, append = T)
   }
-  if (runtype == "GSEA" & collapse.dataset == TRUE) {
+  if (gsea.type == "GSEA" & collapse.dataset == TRUE) {
    if (is.data.frame(input.chip)) {
     # write(paste('input.chip=', quote(input.chip), sep=' '), file=filename,
     # append=T)
@@ -187,7 +187,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
  gc()
  
  time1 <- proc.time()
- if (runtype == "GSEA") {
+ if (gsea.type == "GSEA") {
   if (collapse.dataset == FALSE) {
    if (is.data.frame(input.ds)) {
     dataset <- input.ds
@@ -279,7 +279,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
    A[j, ] <- A[j, col.index]
   }
   names(A) <- sample.names
- } else if (runtype == "preranked") {
+ } else if (gsea.type == "preranked") {
   dataset <- read.table(input.ds, sep = "\t", header = FALSE, quote = "", stringsAsFactors = FALSE, 
    fill = TRUE)
   colnames(dataset)[1] <- "NAME"
@@ -446,7 +446,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
  } else {
   n.tot <- n.groups + 1
  }
- if (runtype == "GSEA") {
+ if (gsea.type == "GSEA") {
   for (nk in 1:n.tot) {
    call.nperm <- n.perms[nk]
    
@@ -471,7 +471,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
   obs.gene.labels <- gene.labels[obs.index]
   obs.gene.descs <- all.gene.descs[obs.index]
   obs.gene.symbols <- all.gene.symbols[obs.index]
- } else if (runtype == "preranked") {
+ } else if (gsea.type == "preranked") {
   print(paste("Skipping calculating gene rankings... using pre-ranked list."))
   obs.rnk <- unname(A[, 1])
   obs.index <- order(obs.rnk, decreasing = T)
@@ -485,7 +485,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
  for (r in 1:nperm) {
   obs.correl.matrix[, r] <- obs.correl.matrix[obs.order.matrix[, r], r]
  }
- if (runtype == "preranked") {
+ if (gsea.type == "preranked") {
   obs.gene.labels <- gene.labels[obs.index]
   obs.gene.descs <- obs.gene.labels
   obs.gene.symbols <- obs.gene.labels
@@ -1006,7 +1006,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
  max.corr <- max(obs.rnk)
  min.corr <- min(obs.rnk)
  
- if (runtype == "GSEA") {
+ if (gsea.type == "GSEA") {
   if (rank.metric == "S2N") {
    x <- plot(location, obs.rnk, ylab = "Signal to Noise Ratio (S2N)", xlab = "Gene List Location", 
     main = "Gene List Correlation (S2N) Profile", type = "l", lwd = 2, 
@@ -1017,7 +1017,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
     main = "Gene List Correlation (T-Test) Profile", type = "l", lwd = 2, 
     cex = 0.9, col = 1)
   }
- } else if (runtype == "preranked") {
+ } else if (gsea.type == "preranked") {
   x <- plot(location, obs.rnk, ylab = "User Rank Metric", xlab = "Gene List Location", 
    main = "Gene List Correlation Profile", type = "l", lwd = 2, cex = 0.9, 
    col = 1)
@@ -1175,7 +1175,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
    lwd.vec <- c(2, 2, 2)
    legend(x = 0, y = 1.5 * y.plot.range[2], bty = "n", bg = "white", legend = leg.txt, 
     lty = lty.vec, lwd = lwd.vec, col = c.vec, cex = 0.9)
-   if (runtype == "GSEA") {
+   if (gsea.type == "GSEA") {
     B <- A[obs.index, ]
     if (N > 300) {
       C <- rbind(B[1:100, ], rep(0, Ns), rep(0, Ns), B[(floor(N/2) - 
@@ -1279,7 +1279,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
     
     gene.report <- data.frame(cbind(gene.number, gene.symbols, gene.descs, 
       gene.list.loc, gene.rnk, gene.RES, core.enrichment))
-    if (runtype == "GSEA") {
+    if (gsea.type == "GSEA") {
       if (rank.metric == "S2N") {
      names(gene.report) <- c("#", "GENE SYMBOL", "DESC", "LIST LOC", 
        "S2N", "RES", "CORE_ENRICHMENT")
@@ -1288,7 +1288,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
      names(gene.report) <- c("#", "GENE SYMBOL", "DESC", "LIST LOC", 
        "TTest", "RES", "CORE_ENRICHMENT")
       }
-    } else if (runtype == "preranked") {
+    } else if (gsea.type == "preranked") {
       names(gene.report) <- c("#", "GENE SYMBOL", "DESC", "LIST LOC", 
      "RNK", "RES", "CORE_ENRICHMENT")
     }
@@ -1427,7 +1427,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
     # create pinkogram for each gene set
     
     kk <- 1
-    if (runtype == "GSEA") {
+    if (gsea.type == "GSEA") {
       pinko <- matrix(0, nrow = size.G[i], ncol = cols)
       pinko.gene.names <- vector(length = size.G[i], mode = "character")
       for (k in 1:rows) {
