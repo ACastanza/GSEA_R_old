@@ -232,7 +232,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
    dataset <- dataset[-1, ]
    colnames(dataset) <- dataset[1, ]
    dataset <- dataset[-1, ]
-   collapseddataset <- GSEA.CollapseDataset(chip, dataset)
+   collapseddataset <- GSEA.CollapseDataset(dataplatform = chip, gct = dataset, collapse.mode = collapse.mode)
    rownames(collapseddataset) <- collapseddataset[, 1]
    gene.map <- collapseddataset[, c(1, 2)]
    collapseddataset <- collapseddataset[, -1]

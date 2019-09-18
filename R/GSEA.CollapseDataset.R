@@ -6,7 +6,7 @@
 #'
 #' @export
 GSEA.CollapseDataset <-
-function(dataplatform = chip, gct = dataset, collapse.mode = collapsemode) {
+function(dataplatform, gct, collapse.mode) {
  probemap <- unique(dataplatform[, c("Probe.Set.ID", "Gene.Symbol")])
  annotate <- unique(dataplatform[, c("Gene.Symbol", "Gene.Title")])
  mappedgct <- merge(x = probemap, y = gct, by.x = 1, by.y = 1, all = FALSE, no.dups = FALSE)
