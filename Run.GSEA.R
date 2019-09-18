@@ -23,11 +23,20 @@ if (file_ext(inputds) != "rnk") {
 
 if (collapsedataset == TRUE & !is.na(collapsedataset)) {
  inputchip <- readline(prompt = ("Input path to CHIP platform file (or drop file into R window): "))
- collapsemode <- menu(c("Max_probe", "Median_of_probes", "Sum_of_Probes"), graphics = FALSE, 
-  title = "Collapsing mode for probe sets => 1 gene")
+ collapsetype <- menu(c("Max_probe", "Median_of_probes", "Mean_of_probes", "Sum_of_Probes"), 
+  graphics = FALSE, title = "Collapsing mode for probe sets => 1 gene")
+ if (collapsetype == 1) {
+  collapsemode <- "max"
+ } else if (collapsetype == 2) {
+  collapsemode <- "median"
+ } else if (collapsetype == 3) {
+  collapsemode <- "mean"
+ } else if (collapsetype == 4) {
+  collapsemode <- "sum"
+ }
 } else {
  inputchip <- "NOCHIP"
- collapsemode <- 0
+ collapsemode <- "NOCOLLAPSE"
 }
 
 if (file_ext(inputds) != "rnk") {

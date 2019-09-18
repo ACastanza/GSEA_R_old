@@ -1,10 +1,10 @@
-GSEA <- function(input.ds, input.cls, input.chip, gene.ann = "", gs.db, gs.ann = "", 
- output.directory, doc.string, non.interactive.run = F, reshuffling.type, nperm = 1000, 
+GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.db, gs.ann = "", 
+ output.directory = getwd(), doc.string = "gsea_result", non.interactive.run = F, reshuffling.type = "sample.labels", nperm = 1000, 
  weighted.score.type = 1, nom.p.val.threshold = -1, fwer.p.val.threshold = -1, 
- fdr.q.val.threshold = 0.25, topgs = 20, adjust.FDR.q.val = F, gs.size.threshold.min, 
- gs.size.threshold.max, reverse.sign = F, preproc.type = 0, random.seed, perm.type = 0, 
- fraction = 1, replace = F, collapse.dataset, collapse.mode, save.intermediate.results = F, 
- use.fast.enrichment.routine = T, runtype, rank.metric) {
+ fdr.q.val.threshold = 0.25, topgs = 20, adjust.FDR.q.val = F, gs.size.threshold.min = 15, 
+ gs.size.threshold.max = 500, reverse.sign = F, preproc.type = 0, random.seed = as.integer(as.POSIXct(Sys.time())), perm.type = 0, 
+ fraction = 1, replace = F, collapse.dataset = FALSE, collapse.mode = "NOCOLLAPSE", save.intermediate.results = F, 
+ use.fast.enrichment.routine = T, runtype = "GSEA", rank.metric = "S2N") {
  
  # This is a methodology for the analysis of global molecular profiles called Gene
  # Set Enrichment Analysis (GSEA). It determines whether an a priori defined set

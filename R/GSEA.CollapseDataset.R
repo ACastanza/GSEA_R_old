@@ -8,21 +8,26 @@ function(dataplatform = chip, gct = dataset, collapse.mode = collapsemode) {
  mappedgct[, c(2:ncol(mappedgct))] <- sapply(mappedgct[, c(2:ncol(mappedgct))],
   as.numeric)
 
- if (collapse.mode == 1)
+ if (collapse.mode == "max")   #MAX
   {
    mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(max) %>%
     data.frame()
-  }  #MAX
- if (collapse.mode == 2)
+  }
+ if (collapse.mode == "median")  #Median
   {
    mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(median) %>%
     data.frame()
-  }  #Median
- if (collapse.mode == 3)
+  } 
+if (collapse.mode == "mean") #Mean
+  {
+   mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(mean) %>%
+    data.frame()
+  } 
+ if (collapse.mode == "sum") #SUM
   {
    mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(sum) %>%
     data.frame()
-  }  #SUM
+  } 
  mappedexp_2 <- unique(merge(x = annotate, y = mappedexp, by.x = "Gene.Symbol",
   by.y = "Gene.Symbol"))
  colnames(mappedexp_2)[2] <- "Description"
