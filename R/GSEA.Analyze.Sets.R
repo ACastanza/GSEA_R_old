@@ -9,9 +9,12 @@
 #' @param height height dimension for leading edge analysis plots
 #' @param width width dimension for leading edge analysis plots
 #' @param gsea.type the gsea run type (either 'GSEA' or 'preranked')
-#' @param doc.string the file prefixed in the original analysis
+#' @param doc.string the file prefixed in the original analysis (typically user defined)
 #'
 #' @return Leading edge analysis plots and GCT files containing the leading edge subsets for each class
+#'
+#' @examples
+#' \dontrun{GSEA.Analyze.Sets(doc.string = "gsea_result")}
 #'
 #' @export
 GSEA.Analyze.Sets <- function(directory = getwd(), topgs = 20, height = 16, width = 16, 

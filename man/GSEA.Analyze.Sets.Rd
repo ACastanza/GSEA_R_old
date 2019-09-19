@@ -18,7 +18,7 @@ GSEA.Analyze.Sets(directory = getwd(), topgs = 20, height = 16,
 
 \item{gsea.type}{the gsea run type (either 'GSEA' or 'preranked')}
 
-\item{doc.string}{the file prefixed in the original analysis}
+\item{doc.string}{the file prefixed in the original analysis (typically user defined)}
 }
 \value{
 Leading edge analysis plots and GCT files containing the leading edge subsets for each class
@@ -28,4 +28,8 @@ Leading edge analysis plots and GCT files containing the leading edge subsets fo
 }
 \details{
 This function is designed to be invoked immediately after `GSEA` to run leading edge analysis.
+}
+\examples{
+\dontrun{GSEA.Analyze.Sets(doc.string = "gsea_result")}
+
 }

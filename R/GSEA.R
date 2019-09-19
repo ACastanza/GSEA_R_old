@@ -43,7 +43,7 @@
 #' @param save.intermediate.results save intermediate results files including ranks and permutations
 #' @param use.fast.enrichment.routine If true it uses a faster GSEA.EnrichmentScore2 to compute random perm. enrichment
 #' @param gsea.type Mode to run GSEA. Specify either 'GSEA' for standard mode, or 'preranked' to allow parsing of .RNK file
-#' @param rank.metric Method for ranking genes. Accepts either signal-to-noise ratio 'S2N' (default) or 'ttest' (default: S2N)
+#' @param rank.metric Method for ranking genes. Accepts either signal-to-noise ratio 'S2N' or 'ttest' (default: S2N)
 #' @return The results of the method are stored in the
 #' 'output.directory' specified by the user as part of the input parameters.  The
 #' results files are: - Two tab-separated global result text files (one for each
@@ -88,6 +88,14 @@
 #' result reports as data frames ($report1, $report2).  results1: Global output
 #' report for first phenotype result2: Global putput report for second phenotype
 #'
+#' @examples
+#' GSEA(input.ds = system.file('extdata', 'Leukemia_hgu95av2.gct', package = 'GSEA', mustWork = TRUE), 
+#' input.cls = system.file('extdata', 'Leukemia.cls', package = 'GSEA', mustWork = TRUE), 
+#' input.chip = system.file('extdata', 'Human_AFFY_HG_U95_MSigDB_7_0_final.chip', 
+#' package = 'GSEA', mustWork = TRUE), gs.db = system.file('extdata', 
+#' 'c2.cp.biocarta.v7.0.symbols.gmt', package = 'GSEA', mustWork = TRUE), 
+#' collapse.dataset = TRUE, collapse.mode = 'max')
+#'
 #' @importFrom grDevices colors dev.cur dev.off pdf rainbow savePlot
 #' @importFrom graphics axis image layout legend lines par plot points text
 #' @importFrom stats density dist hclust median pnorm sd
@@ -96,6 +104,7 @@
 #' @import dplyr
 #'
 #' @export
+
 GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.db, 
  gs.ann = "", output.directory = getwd(), doc.string = "gsea_result", reshuffling.type = "sample.labels", 
  nperm = 1000, weighted.score.type = 1, nom.p.val.threshold = -1, fwer.p.val.threshold = -1, 

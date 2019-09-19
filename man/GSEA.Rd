@@ -77,7 +77,7 @@ GSEA(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.db,
 
 \item{gsea.type}{Mode to run GSEA. Specify either 'GSEA' for standard mode, or 'preranked' to allow parsing of .RNK file}
 
-\item{rank.metric}{Method for ranking genes. Accepts either signal-to-noise ratio 'S2N' (default) or 'ttest' (default: S2N)}
+\item{rank.metric}{Method for ranking genes. Accepts either signal-to-noise ratio 'S2N' or 'ttest' (default: S2N)}
 }
 \value{
 The results of the method are stored in the
@@ -138,4 +138,13 @@ top or bottom of the list and thus may correspond to an important biological
 process. To assess significance the program uses an empirical permutation
 procedure to test deviation from random that preserves correlations between
 genes.  For details see Subramanian et al 2005.
+}
+\examples{
+GSEA(input.ds = system.file('extdata', 'Leukemia_hgu95av2.gct', package = 'GSEA', mustWork = TRUE), 
+input.cls = system.file('extdata', 'Leukemia.cls', package = 'GSEA', mustWork = TRUE), 
+input.chip = system.file('extdata', 'Human_AFFY_HG_U95_MSigDB_7_0_final.chip', 
+package = 'GSEA', mustWork = TRUE), gs.db = system.file('extdata', 
+'c2.cp.biocarta.v7.0.symbols.gmt', package = 'GSEA', mustWork = TRUE), 
+collapse.dataset = TRUE, collapse.mode = 'max')
+
 }
