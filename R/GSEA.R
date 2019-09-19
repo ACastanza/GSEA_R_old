@@ -91,6 +91,7 @@
 #' @importFrom graphics axis image layout legend lines par plot points text
 #' @importFrom stats density dist hclust median pnorm sd
 #' @importFrom utils read.delim read.table write.table
+#' @import dplyr
 #'
 #' @export
 GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.db, gs.ann = "", 

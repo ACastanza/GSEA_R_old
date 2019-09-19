@@ -4,6 +4,8 @@
 #'
 #' Internal `GSEA` function invoked if collapse.dataset == TRUE.
 #'
+#' @import dplyr
+#'
 #' @export
 GSEA.CollapseDataset <-
 function(dataplatform, gct, collapse.mode) {
