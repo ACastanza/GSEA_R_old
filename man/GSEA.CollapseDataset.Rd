@@ -6,6 +6,16 @@
 \usage{
 GSEA.CollapseDataset(dataplatform, gct, collapse.mode)
 }
+\arguments{
+\item{dataplatform}{Dataframe returned by `GSEA.ReadCHIPFile`}
+
+\item{gct}{Dataframe returned by `GSEA.Gct2Frame` after processing to remove unnecessary GCT header fields}
+
+\item{collapse.mode}{Method for collapsing the dataset, accepts "max", "median", "mean", "sum", (default: NOCOLLAPSE)}
+}
+\value{
+Gene by sample matrix converted into the namespace specified by the applied CHIP file
+}
 \description{
 `GSEA.CollapseDataset` applies a .CHIP file to the dataset to gene symbols using a specified collapse function
 }

@@ -40,9 +40,9 @@
 #' @param replace Resampling mode (replacement or not replacement). For experts only (default: F)
 #' @param collapse.dataset collapse dataset from user specified identifiers to Gene Symbols (default: FALSE)
 #' @param collapse.mode Method for collapsing the dataset, accepts "max", "median", "mean", "sum", (default: NOCOLLAPSE)
-#' @param use.fast.enrichment.routine if true it uses a faster GSEA.EnrichmentScore2 to compute random perm. enrichment
-#' @param gsea.type mode to run GSEA. Specify either "GSEA" for standard mode, or "preranked" to allow parsing of .RNK file
-#' @param rank.metric method for ranking genes. Accepts either signal-to-noise ratio "S2N" (default) or "ttest" (default: S2N)
+#' @param use.fast.enrichment.routine If true it uses a faster GSEA.EnrichmentScore2 to compute random perm. enrichment
+#' @param gsea.type Mode to run GSEA. Specify either "GSEA" for standard mode, or "preranked" to allow parsing of .RNK file
+#' @param rank.metric Method for ranking genes. Accepts either signal-to-noise ratio "S2N" (default) or "ttest" (default: S2N)
 #' @return The results of the method are stored in the
 #' 'output.directory' specified by the user as part of the input parameters.  The
 #' results files are: - Two tab-separated global result text files (one for each

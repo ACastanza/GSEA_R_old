@@ -4,9 +4,15 @@
 #'
 #' This function is designed to be invoked immediately after `GSEA` to run leading edge analysis. 
 
-#' @param directory the directory containing GSEA result files 
-#' @param  gsea.type the gsea run type (either "GSEA" or "preranked")
-#' @param  doc.string the file prefixed in the original analysis
+#' @param directory The directory containing GSEA result files 
+#' @param topgs Number of gene sets from GSEA output used for leading edge analysis (default: 20)
+#' @param non.interactive.run Run in interactive (i.e. R GUI) or batch (R command line) mode (default: F)
+#' @param height height dimension for leading edge analysis plots
+#' @param width width dimension for leading edge analysis plots
+#' @param gsea.type the gsea run type (either "GSEA" or "preranked")
+#' @param doc.string the file prefixed in the original analysis
+#'
+#' @return Leading edge analysis plots and GCT files containing the leading edge subsets for each class
 #'
 #' @export
 GSEA.Analyze.Sets <-

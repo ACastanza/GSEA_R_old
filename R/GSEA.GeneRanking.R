@@ -44,7 +44,7 @@
 #' Matrix with the orderings that will sort the columns of the rnk.matrix in 
 #' decreasing rnk order.
 #'
-#' @export
+
 GSEA.GeneRanking <-
 function(A, class.labels, gene.labels, nperm, permutation.type = 0, 
  sigma.correction = "GeneCluster", fraction = 1, replace = F, reverse.sign = F, 

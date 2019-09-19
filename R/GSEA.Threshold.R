@@ -4,7 +4,7 @@
 #'
 #' Internal `GSEA` function.
 #'
-#' @export
+
 GSEA.Threshold <-
 function(V, thres, ceil) {
 

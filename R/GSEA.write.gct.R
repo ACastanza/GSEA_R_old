@@ -4,7 +4,7 @@
 #'
 #' Internal `GSEA.Analyze.Sets` function.
 #'
-#' @export
+
 GSEA.write.gct <-
 function(gct, filename) {
  f <- file(filename, "w")

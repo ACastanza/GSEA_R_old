@@ -4,7 +4,7 @@
 #'
 #' Internal `GSEA` function.
 #'
-#' @export
+
 GSEA.ReadCHIPFile <-
 function(file = "NULL") {
 chipframe <- read.table(file, sep = "\t", comment.char = "", quote = "", stringsAsFactors = FALSE,

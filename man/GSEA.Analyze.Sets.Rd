@@ -9,11 +9,22 @@ GSEA.Analyze.Sets(directory = getwd(), topgs = 20,
   gsea.type = "GSEA", doc.string = "gsea_result")
 }
 \arguments{
-\item{directory}{the directory containing GSEA result files}
+\item{directory}{The directory containing GSEA result files}
+
+\item{topgs}{Number of gene sets from GSEA output used for leading edge analysis (default: 20)}
+
+\item{non.interactive.run}{Run in interactive (i.e. R GUI) or batch (R command line) mode (default: F)}
+
+\item{height}{height dimension for leading edge analysis plots}
+
+\item{width}{width dimension for leading edge analysis plots}
 
 \item{gsea.type}{the gsea run type (either "GSEA" or "preranked")}
 
 \item{doc.string}{the file prefixed in the original analysis}
+}
+\value{
+Leading edge analysis plots and GCT files containing the leading edge subsets for each class
 }
 \description{
 `GSEA.Analyze.Sets` returns leading edge plots and gcts extracted from a GSEA result folder

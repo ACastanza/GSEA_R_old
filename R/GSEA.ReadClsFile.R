@@ -5,7 +5,7 @@
 #' Read in a class vector CLS file to defines phenotype and class label
 #' vectors for the samples in a gene expression file (GCT format).
 #'
-#' @export
+
 GSEA.ReadClsFile <-
 function(file = "NULL") {
 

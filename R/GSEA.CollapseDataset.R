@@ -4,9 +4,15 @@
 #'
 #' Internal `GSEA` function invoked if collapse.dataset == TRUE.
 #'
+#' @param dataplatform Dataframe returned by `GSEA.ReadCHIPFile`
+#' @param gct Dataframe returned by `GSEA.Gct2Frame` after processing to remove unnecessary GCT header fields
+#' @param collapse.mode Method for collapsing the dataset, accepts "max", "median", "mean", "sum", (default: NOCOLLAPSE)
+#'
+#' @return Gene by sample matrix converted into the namespace specified by the applied CHIP file
+#'
 #' @import dplyr
 #'
-#' @export
+
 GSEA.CollapseDataset <-
 function(dataplatform, gct, collapse.mode) {
  probemap <- unique(dataplatform[, c("Probe.Set.ID", "Gene.Symbol")])

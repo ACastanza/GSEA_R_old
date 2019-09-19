@@ -68,11 +68,11 @@ GSEA(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.db,
 
 \item{collapse.mode}{Method for collapsing the dataset, accepts "max", "median", "mean", "sum", (default: NOCOLLAPSE)}
 
-\item{use.fast.enrichment.routine}{if true it uses a faster GSEA.EnrichmentScore2 to compute random perm. enrichment}
+\item{use.fast.enrichment.routine}{If true it uses a faster GSEA.EnrichmentScore2 to compute random perm. enrichment}
 
-\item{gsea.type}{mode to run GSEA. Specify either "GSEA" for standard mode, or "preranked" to allow parsing of .RNK file}
+\item{gsea.type}{Mode to run GSEA. Specify either "GSEA" for standard mode, or "preranked" to allow parsing of .RNK file}
 
-\item{rank.metric}{method for ranking genes. Accepts either signal-to-noise ratio "S2N" (default) or "ttest" (default: S2N)}
+\item{rank.metric}{Method for ranking genes. Accepts either signal-to-noise ratio "S2N" (default) or "ttest" (default: S2N)}
 
 \item{gs.file}{Gene set database in GMT format}
 

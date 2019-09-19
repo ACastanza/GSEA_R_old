@@ -4,7 +4,7 @@
 #'
 #' Internal function invoked by `GSEA.Analyze.Sets` to plot heatmaps of leading edge overlaps.
 #'
-#' @export
+
 GSEA.HeatMapPlot2 <-
 function(V, row.names = "NA", col.names = "NA", main = " ",
  sub = " ", xlab = " ", ylab = " ", color.map = "default") {

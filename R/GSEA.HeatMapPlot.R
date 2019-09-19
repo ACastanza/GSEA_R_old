@@ -4,7 +4,7 @@
 #'
 #' Internal `GSEA` function invoked if gsea.type="GSEA"
 #'
-#' @export
+
 GSEA.HeatMapPlot <-
 function(V, row.names = F, col.labels, col.classes, col.names = F,
  main = " ", xlab = " ", ylab = " ") {

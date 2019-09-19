@@ -4,7 +4,7 @@
 #'
 #' Unused function.
 #'
-#' @export
+
 GSEA.VarFilter <-
 function(V, fold, delta, gene.names = "NULL") {
 

@@ -4,7 +4,7 @@
 #'
 #' Internal `GSEA` function.
 #'
-#' @export
+
 GSEA.NormalizeRows <-
 function(V) {
 
