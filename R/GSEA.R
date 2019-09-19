@@ -40,11 +40,11 @@
 #' @param fraction Subsampling fraction. Set to 1.0 (no resampling). For experts only (default: 1.0)
 #' @param replace Resampling mode (replacement or not replacement). For experts only (default: F)
 #' @param collapse.dataset collapse dataset from user specified identifiers to Gene Symbols (default: FALSE)
-#' @param collapse.mode Method for collapsing the dataset, accepts "max", "median", "mean", "sum", (default: NOCOLLAPSE)
+#' @param collapse.mode Method for collapsing the dataset, accepts 'max', 'median', 'mean', 'sum', (default: NOCOLLAPSE)
 #' @param save.intermediate.results save intermediate results files including ranks and permutations
 #' @param use.fast.enrichment.routine If true it uses a faster GSEA.EnrichmentScore2 to compute random perm. enrichment
-#' @param gsea.type Mode to run GSEA. Specify either "GSEA" for standard mode, or "preranked" to allow parsing of .RNK file
-#' @param rank.metric Method for ranking genes. Accepts either signal-to-noise ratio "S2N" (default) or "ttest" (default: S2N)
+#' @param gsea.type Mode to run GSEA. Specify either 'GSEA' for standard mode, or 'preranked' to allow parsing of .RNK file
+#' @param rank.metric Method for ranking genes. Accepts either signal-to-noise ratio 'S2N' (default) or 'ttest' (default: S2N)
 #' @return The results of the method are stored in the
 #' 'output.directory' specified by the user as part of the input parameters.  The
 #' results files are: - Two tab-separated global result text files (one for each
@@ -97,12 +97,13 @@
 #' @import dplyr
 #'
 #' @export
-GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.db, gs.ann = "", 
- output.directory = getwd(), doc.string = "gsea_result", non.interactive.run = F, reshuffling.type = "sample.labels", nperm = 1000, 
- weighted.score.type = 1, nom.p.val.threshold = -1, fwer.p.val.threshold = -1, 
- fdr.q.val.threshold = 0.25, topgs = 20, adjust.FDR.q.val = F, gs.size.threshold.min = 15, 
- gs.size.threshold.max = 500, reverse.sign = F, preproc.type = 0, random.seed = as.integer(as.POSIXct(Sys.time())), perm.type = 0, 
- fraction = 1, replace = F, collapse.dataset = FALSE, collapse.mode = "NOCOLLAPSE", save.intermediate.results = F, 
+GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.db, 
+ gs.ann = "", output.directory = getwd(), doc.string = "gsea_result", non.interactive.run = F, 
+ reshuffling.type = "sample.labels", nperm = 1000, weighted.score.type = 1, nom.p.val.threshold = -1, 
+ fwer.p.val.threshold = -1, fdr.q.val.threshold = 0.25, topgs = 20, adjust.FDR.q.val = F, 
+ gs.size.threshold.min = 15, gs.size.threshold.max = 500, reverse.sign = F, preproc.type = 0, 
+ random.seed = as.integer(as.POSIXct(Sys.time())), perm.type = 0, fraction = 1, 
+ replace = F, collapse.dataset = FALSE, collapse.mode = "NOCOLLAPSE", save.intermediate.results = F, 
  use.fast.enrichment.routine = T, gsea.type = "GSEA", rank.metric = "S2N") {
  
  print(" *** Running Gene Set Enrichment Analysis...")
@@ -160,7 +161,9 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
     write(paste("input.chip=", input.chip, sep = " "), file = filename, 
       append = T)
    }
+   write(paste("collapse.mode=", collapse.mode, sep = " "), file = filename, append = T)
   }
+  
   write(paste("output.directory =", output.directory, sep = " "), file = filename, 
    append = T)
   write(paste("doc.string = ", doc.string, sep = " "), file = filename, append = T)
@@ -236,7 +239,8 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
    dataset <- dataset[-1, ]
    colnames(dataset) <- dataset[1, ]
    dataset <- dataset[-1, ]
-   collapseddataset <- GSEA.CollapseDataset(dataplatform = chip, gct = dataset, collapse.mode = collapse.mode)
+   collapseddataset <- GSEA.CollapseDataset(dataplatform = chip, gct = dataset, 
+    collapse.mode = collapse.mode)
    rownames(collapseddataset) <- collapseddataset[, 1]
    gene.map <- collapseddataset[, c(1, 2)]
    collapseddataset <- collapseddataset[, -1]
