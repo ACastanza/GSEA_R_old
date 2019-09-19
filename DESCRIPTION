@@ -12,3 +12,4 @@ License: Broad Institute Agreement
 RoxygenNote: 6.1.1
 Imports:
 	dplyr
+	rlang
