@@ -11,5 +11,5 @@ Description: This is a methodology for the analysis of global molecular profiles
 License: Broad Institute Agreement
 RoxygenNote: 6.1.1
 Imports:
-	dplyr
+	dplyr,
 	rlang
