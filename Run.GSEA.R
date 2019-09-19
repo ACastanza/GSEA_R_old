@@ -1,4 +1,4 @@
-# GSEA 1.1 -- Gene Set Enrichment Analysis / Broad Institute Executable R
+# GSEA 1.2 -- Gene Set Enrichment Analysis / Broad Institute Executable R
 # script to run GSEA Analysis
 library("utils")
 library("tools")

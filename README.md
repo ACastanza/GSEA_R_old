@@ -1,4 +1,4 @@
-# GSEA R Implementation v1.1
+# GSEA R Implementation v1.2
 ## Revisions to the GSEA-P R Application (Subramanian and Tamayo et al 2005)
 
 Preliminary revisions to the original GSEA implementation in R to enable it to run on modern R distributions.
