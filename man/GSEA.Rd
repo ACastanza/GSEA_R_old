@@ -144,7 +144,7 @@ GSEA(input.ds = system.file('extdata', 'Leukemia_hgu95av2.gct', package = 'GSEA'
 input.cls = system.file('extdata', 'Leukemia.cls', package = 'GSEA', mustWork = TRUE), 
 input.chip = system.file('extdata', 'Human_AFFY_HG_U95_MSigDB_7_0_final.chip', 
 package = 'GSEA', mustWork = TRUE), gs.db = system.file('extdata', 
-'c2.cp.biocarta.v7.0.symbols.gmt', package = 'GSEA', mustWork = TRUE), 
+'h.all.v7.0.symbols.gmt', package = 'GSEA', mustWork = TRUE), 
 collapse.dataset = TRUE, collapse.mode = 'max')
 
 }
