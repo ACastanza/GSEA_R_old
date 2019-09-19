@@ -6,9 +6,8 @@
 \usage{
 GSEA(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.db,
   gs.ann = "", output.directory = getwd(),
-  doc.string = "gsea_result", non.interactive.run = F,
-  reshuffling.type = "sample.labels", nperm = 1000,
-  weighted.score.type = 1, nom.p.val.threshold = -1,
+  doc.string = "gsea_result", reshuffling.type = "sample.labels",
+  nperm = 1000, weighted.score.type = 1, nom.p.val.threshold = -1,
   fwer.p.val.threshold = -1, fdr.q.val.threshold = 0.25, topgs = 20,
   adjust.FDR.q.val = F, gs.size.threshold.min = 15,
   gs.size.threshold.max = 500, reverse.sign = F, preproc.type = 0,
@@ -34,8 +33,6 @@ GSEA(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.db,
 \item{output.directory}{Directory where to store output and results (default: .)}
 
 \item{doc.string}{Documentation string used as a prefix to name result files (default: 'gsea_result')}
-
-\item{non.interactive.run}{Run in interactive (i.e. R GUI) or batch (R command line) mode (default: F)}
 
 \item{reshuffling.type}{Type of permutation reshuffling: 'sample.labels' or 'gene.labels' (default: 'sample.labels')}
 

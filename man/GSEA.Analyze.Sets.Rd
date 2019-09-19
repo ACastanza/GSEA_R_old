@@ -4,22 +4,19 @@
 \alias{GSEA.Analyze.Sets}
 \title{Performs leading edge analysis of a GSEA result}
 \usage{
-GSEA.Analyze.Sets(directory = getwd(), topgs = 20,
-  non.interactive.run = F, height = 16, width = 16,
-  gsea.type = "GSEA", doc.string = "gsea_result")
+GSEA.Analyze.Sets(directory = getwd(), topgs = 20, height = 16,
+  width = 16, gsea.type = "GSEA", doc.string = "gsea_result")
 }
 \arguments{
 \item{directory}{The directory containing GSEA result files}
 
 \item{topgs}{Number of gene sets from GSEA output used for leading edge analysis (default: 20)}
 
-\item{non.interactive.run}{Run in interactive (i.e. R GUI) or batch (R command line) mode (default: F)}
-
 \item{height}{height dimension for leading edge analysis plots}
 
 \item{width}{width dimension for leading edge analysis plots}
 
-\item{gsea.type}{the gsea run type (either "GSEA" or "preranked")}
+\item{gsea.type}{the gsea run type (either 'GSEA' or 'preranked')}
 
 \item{doc.string}{the file prefixed in the original analysis}
 }

@@ -21,7 +21,6 @@
 #' @param gs.ann Depreciated parameter. Gene Set database annotation file (default: none)
 #' @param output.directory Directory where to store output and results (default: .)
 #' @param doc.string Documentation string used as a prefix to name result files (default: 'gsea_result')
-#' @param non.interactive.run Run in interactive (i.e. R GUI) or batch (R command line) mode (default: F)
 #' @param reshuffling.type Type of permutation reshuffling: 'sample.labels' or 'gene.labels' (default: 'sample.labels')
 #' @param nperm Number of random permutations (default: 1000)
 #' @param weighted.score.type Enrichment correlation-based weighting: 0=no weight (KS), 1=standard weigth, 2 = over-weigth (default: 1) 
@@ -98,13 +97,13 @@
 #'
 #' @export
 GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.db, 
- gs.ann = "", output.directory = getwd(), doc.string = "gsea_result", non.interactive.run = F, 
- reshuffling.type = "sample.labels", nperm = 1000, weighted.score.type = 1, nom.p.val.threshold = -1, 
- fwer.p.val.threshold = -1, fdr.q.val.threshold = 0.25, topgs = 20, adjust.FDR.q.val = F, 
- gs.size.threshold.min = 15, gs.size.threshold.max = 500, reverse.sign = F, preproc.type = 0, 
- random.seed = as.integer(as.POSIXct(Sys.time())), perm.type = 0, fraction = 1, 
- replace = F, collapse.dataset = FALSE, collapse.mode = "NOCOLLAPSE", save.intermediate.results = F, 
- use.fast.enrichment.routine = T, gsea.type = "GSEA", rank.metric = "S2N") {
+ gs.ann = "", output.directory = getwd(), doc.string = "gsea_result", reshuffling.type = "sample.labels", 
+ nperm = 1000, weighted.score.type = 1, nom.p.val.threshold = -1, fwer.p.val.threshold = -1, 
+ fdr.q.val.threshold = 0.25, topgs = 20, adjust.FDR.q.val = F, gs.size.threshold.min = 15, 
+ gs.size.threshold.max = 500, reverse.sign = F, preproc.type = 0, random.seed = as.integer(as.POSIXct(Sys.time())), 
+ perm.type = 0, fraction = 1, replace = F, collapse.dataset = FALSE, collapse.mode = "NOCOLLAPSE", 
+ save.intermediate.results = F, use.fast.enrichment.routine = T, gsea.type = "GSEA", 
+ rank.metric = "S2N") {
  
  print(" *** Running Gene Set Enrichment Analysis...")
  
@@ -161,14 +160,13 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
     write(paste("input.chip=", input.chip, sep = " "), file = filename, 
       append = T)
    }
-   write(paste("collapse.mode=", collapse.mode, sep = " "), file = filename, append = T)
+   write(paste("collapse.mode=", collapse.mode, sep = " "), file = filename, 
+    append = T)
   }
   
   write(paste("output.directory =", output.directory, sep = " "), file = filename, 
    append = T)
   write(paste("doc.string = ", doc.string, sep = " "), file = filename, append = T)
-  write(paste("non.interactive.run =", non.interactive.run, sep = " "), file = filename, 
-   append = T)
   write(paste("reshuffling.type =", reshuffling.type, sep = " "), file = filename, 
    append = T)
   write(paste("nperm =", nperm, sep = " "), file = filename, append = T)
@@ -996,27 +994,9 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
  # Global plots
  
  if (output.directory != "") {
-  if (non.interactive.run == F) {
-   if (.Platform$OS.type == "windows") {
-    glob.filename <- paste(output.directory, doc.string, ".global.plots", 
-      sep = "", collapse = "")
-    windows(width = 10, height = 10)
-   } else if (.Platform$OS.type == "unix") {
-    glob.filename <- paste(output.directory, doc.string, ".global.plots.pdf", 
-      sep = "", collapse = "")
-    pdf(file = glob.filename, height = 10, width = 10)
-   }
-  } else {
-   if (.Platform$OS.type == "unix") {
-    glob.filename <- paste(output.directory, doc.string, ".global.plots.pdf", 
-      sep = "", collapse = "")
-    pdf(file = glob.filename, height = 10, width = 10)
-   } else if (.Platform$OS.type == "windows") {
-    glob.filename <- paste(output.directory, doc.string, ".global.plots.pdf", 
-      sep = "", collapse = "")
-    pdf(file = glob.filename, height = 10, width = 10)
-   }
-  }
+  glob.filename <- paste(output.directory, doc.string, ".global.plots.pdf", 
+   sep = "", collapse = "")
+  pdf(file = glob.filename, height = 10, width = 10)
  }
  
  nf <- layout(matrix(c(1, 2, 3, 4), 2, 2, byrow = T), c(1, 1), c(1, 1), TRUE)
@@ -1229,15 +1209,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
    lines(c(min(NES), max(NES)), c(fdr.q.val.threshold, fdr.q.val.threshold), 
     lwd = 1, lty = 2, col = 1)
    
-   if (non.interactive.run == F) {
-    if (.Platform$OS.type == "windows") {
-      savePlot(filename = glob.filename, type = "jpeg", device = dev.cur())
-    } else if (.Platform$OS.type == "unix") {
-      dev.off()
-    }
-   } else {
-    dev.off()
-   }
+   dev.off()
    
   }  # if Ng > 1
  
@@ -1323,27 +1295,9 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
       write.table(gene.report, file = filename, quote = FALSE, row.names = FALSE, 
      sep = "\t", na = "")
       
-      if (non.interactive.run == F) {
-     if (.Platform$OS.type == "windows") {
-       gs.filename <- paste(output.directory, doc.string, ".", gs.names[i], 
-      ".plot.", phen.tag, ".", loc, sep = "", collapse = "")
-       windows(width = 14, height = 6)
-     } else if (.Platform$OS.type == "unix") {
-       gs.filename <- paste(output.directory, doc.string, ".", gs.names[i], 
-      ".plot.", phen.tag, ".", loc, ".pdf", sep = "", collapse = "")
-       pdf(file = gs.filename, height = 6, width = 14)
-     }
-      } else {
-     if (.Platform$OS.type == "unix") {
-       gs.filename <- paste(output.directory, doc.string, ".", gs.names[i], 
-      ".plot.", phen.tag, ".", loc, ".pdf", sep = "", collapse = "")
-       pdf(file = gs.filename, height = 6, width = 14)
-     } else if (.Platform$OS.type == "windows") {
-       gs.filename <- paste(output.directory, doc.string, ".", gs.names[i], 
-      ".plot.", phen.tag, ".", loc, ".pdf", sep = "", collapse = "")
-       pdf(file = gs.filename, height = 6, width = 14)
-     }
-      }
+      gs.filename <- paste(output.directory, doc.string, ".", gs.names[i], 
+     ".plot.", phen.tag, ".", loc, ".pdf", sep = "", collapse = "")
+      pdf(file = gs.filename, height = 6, width = 14)
       
     }
     
@@ -1462,15 +1416,8 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
      col.classes = class.phen, col.names = sample.names, main = " Heat Map for Genes in Gene Set", 
      xlab = " ", ylab = " ")
     }
-    if (non.interactive.run == F) {
-      if (.Platform$OS.type == "windows") {
-     savePlot(filename = gs.filename, type = "jpeg", device = dev.cur())
-      } else if (.Platform$OS.type == "unix") {
-     dev.off()
-      }
-    } else {
-      dev.off()
-    }
+    dev.off()
+    
    }  # if p.vals thres
   
  }  # loop over gene sets
