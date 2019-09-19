@@ -3,7 +3,7 @@ Type: Package
 Title: Gene Set Enrichment Analysis (GSEA)
 Version: 1.1.1
 Date: 2019-09-16
-Authors@R: c(person("Aravind", "Subramanian", role="aut"), person("Pablo", "Tamayo", role="aut"), person("Anthony", "Castanza", email="acastanza@ucsd.edu", c("aut", "cre"))))
+Authors@R: c(person("Aravind", "Subramanian", role="aut"), person("Pablo", "Tamayo", role="aut"), person("Anthony", "Castanza", email="acastanza@ucsd.edu", c("aut", "cre")))
 Maintainer: Anthony S. Castanza <acastanza@ucsd.edu>
 Depends: R (>= 3.6.0), dplyr (>= 0.8.3)
 URL: http://gsea-msigdb.org
