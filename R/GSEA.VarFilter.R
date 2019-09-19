@@ -4,6 +4,8 @@
 #'
 #' Unused function.
 #'
+#' @keywords internal
+#'
 
 GSEA.VarFilter <-
 function(V, fold, delta, gene.names = "NULL") {

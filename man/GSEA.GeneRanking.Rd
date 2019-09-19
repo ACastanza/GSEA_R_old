@@ -54,3 +54,4 @@ the columns of the obs.rnk.matrix in decreasing rnk order obs.order.matrix:
 Matrix with the orderings that will sort the columns of the rnk.matrix in 
 decreasing rnk order.
 }
+\keyword{internal}

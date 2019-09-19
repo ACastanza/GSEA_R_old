@@ -13,3 +13,4 @@ GSEA.ConsPlot(V, col.names, main = " ", sub = " ", xlab = " ",
 \details{
 Invoked by `GSEA.Analyze.Sets` to plot the consense matrix of the leading edge analysis.
 }
+\keyword{internal}

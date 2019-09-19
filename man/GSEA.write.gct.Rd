@@ -12,3 +12,4 @@ GSEA.write.gct(gct, filename)
 \details{
 Internal `GSEA.Analyze.Sets` function.
 }
+\keyword{internal}

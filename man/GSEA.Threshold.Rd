@@ -12,3 +12,4 @@ GSEA.Threshold(V, thres, ceil)
 \details{
 Internal `GSEA` function.
 }
+\keyword{internal}

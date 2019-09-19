@@ -10,7 +10,10 @@
 #'
 #' @return Gene by sample matrix converted into the namespace specified by the applied CHIP file
 #'
+#' @keywords internal
+#'
 #' @import dplyr
+#' @importFrom rlang .data
 #'
 
 GSEA.CollapseDataset <-
@@ -25,22 +28,22 @@ function(dataplatform, gct, collapse.mode) {
 
  if (collapse.mode == "max")   #MAX
   {
-   mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(max) %>%
+   mappedexp <- mappedgct %>% group_by(.data$Gene.Symbol) %>% summarise_all(max) %>%
     data.frame()
   }
  if (collapse.mode == "median")  #Median
   {
-   mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(median) %>%
+   mappedexp <- mappedgct %>% group_by(.data$Gene.Symbol) %>% summarise_all(median) %>%
     data.frame()
   } 
 if (collapse.mode == "mean") #Mean
   {
-   mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(mean) %>%
+   mappedexp <- mappedgct %>% group_by(.data$Gene.Symbol) %>% summarise_all(mean) %>%
     data.frame()
   } 
  if (collapse.mode == "sum") #SUM
   {
-   mappedexp <- mappedgct %>% group_by(Gene.Symbol) %>% summarise_all(sum) %>%
+   mappedexp <- mappedgct %>% group_by(.data$Gene.Symbol) %>% summarise_all(sum) %>%
     data.frame()
   } 
  mappedexp_2 <- unique(merge(x = annotate, y = mappedexp, by.x = "Gene.Symbol",

@@ -12,3 +12,4 @@ GSEA.VarFilter(V, fold, delta, gene.names = "NULL")
 \details{
 Unused function.
 }
+\keyword{internal}

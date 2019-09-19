@@ -28,3 +28,4 @@ and +1) arg.ES: Location in gene.list where the peak running enrichment occurs
 enrichment score for all locations in the gene list tag.indicator: Binary
 vector indicating the location of the gene sets (1's) in the gene list
 }
+\keyword{internal}

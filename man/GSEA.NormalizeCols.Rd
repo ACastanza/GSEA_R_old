@@ -12,3 +12,4 @@ GSEA.NormalizeCols(V)
 \details{
 Internal `GSEA` function.
 }
+\keyword{internal}

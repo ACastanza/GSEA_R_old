@@ -22,3 +22,4 @@ Gene by sample matrix converted into the namespace specified by the applied CHIP
 \details{
 Internal `GSEA` function invoked if collapse.dataset == TRUE.
 }
+\keyword{internal}

@@ -19,6 +19,8 @@
 #' enrichment score for all locations in the gene list tag.indicator: Binary
 #' vector indicating the location of the gene sets (1's) in the gene list
 #'
+#' @keywords internal
+#'
 
 GSEA.EnrichmentScore <-
 function(gene.list, gene.set, weighted.score.type = 1, correl.vector = NULL) {

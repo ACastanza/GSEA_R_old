@@ -28,3 +28,4 @@ vector with the coorelations (e.g. signal to noise scores) corresponding to the
 genes in the gene list Outputs: ES: Enrichment score (real number between -1
 and +1)
 }
+\keyword{internal}

@@ -4,6 +4,8 @@
 #'
 #' Internal `GSEA` function.
 #'
+#' @keywords internal
+#'
 
 GSEA.Threshold <-
 function(V, thres, ceil) {

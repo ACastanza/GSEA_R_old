@@ -4,6 +4,8 @@
 #'
 #' Invoked by `GSEA.Analyze.Sets` to plot the consense matrix of the leading edge analysis.
 #'
+#' @keywords internal
+#'
 
 GSEA.ConsPlot <-
 function(V, col.names, main = " ", sub = " ", xlab = " ", ylab = " ") {

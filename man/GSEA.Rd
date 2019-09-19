@@ -25,7 +25,13 @@ GSEA(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.db,
 
 \item{input.chip}{If collapse.dataset = TRUE, read in a CHIP formatted gene mapping file to convert dataset to gene symbols}
 
-\item{gene.ann}{Gene microarray annotation file (Affymetrix Netaffyx *.csv format) (default: none)}
+\item{gene.ann}{Depreciated parameter. Gene microarray annotation file (Affymetrix Netaffyx *.csv format) (default: none)}
+
+\item{gs.db}{Gene set database in GMT format}
+
+\item{gs.ann}{Depreciated parameter. Gene Set database annotation file (default: none)}
+
+\item{output.directory}{Directory where to store output and results (default: .)}
 
 \item{doc.string}{Documentation string used as a prefix to name result files (default: 'gsea_result')}
 
@@ -68,15 +74,13 @@ GSEA(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.db,
 
 \item{collapse.mode}{Method for collapsing the dataset, accepts "max", "median", "mean", "sum", (default: NOCOLLAPSE)}
 
+\item{save.intermediate.results}{save intermediate results files including ranks and permutations}
+
 \item{use.fast.enrichment.routine}{If true it uses a faster GSEA.EnrichmentScore2 to compute random perm. enrichment}
 
 \item{gsea.type}{Mode to run GSEA. Specify either "GSEA" for standard mode, or "preranked" to allow parsing of .RNK file}
 
 \item{rank.metric}{Method for ranking genes. Accepts either signal-to-noise ratio "S2N" (default) or "ttest" (default: S2N)}
-
-\item{gs.file}{Gene set database in GMT format}
-
-\item{output.directory:}{Directory where to store output and results (default: .)}
 }
 \value{
 The results of the method are stored in the

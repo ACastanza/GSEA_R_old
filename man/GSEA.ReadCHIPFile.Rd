@@ -12,3 +12,4 @@ GSEA.ReadCHIPFile(file = "NULL")
 \details{
 Internal `GSEA` function.
 }
+\keyword{internal}

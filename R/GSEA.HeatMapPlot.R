@@ -4,6 +4,8 @@
 #'
 #' Internal `GSEA` function invoked if gsea.type="GSEA"
 #'
+#' @keywords internal
+#'
 
 GSEA.HeatMapPlot <-
 function(V, row.names = F, col.labels, col.classes, col.names = F,

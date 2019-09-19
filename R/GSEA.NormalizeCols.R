@@ -4,6 +4,8 @@
 #'
 #' Internal `GSEA` function.
 #'
+#' @keywords internal
+#'
 
 GSEA.NormalizeCols <-
 function(V) {

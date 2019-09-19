@@ -4,6 +4,8 @@
 #'
 #' Internal `GSEA` function.
 #'
+#' @keywords internal
+#'
 
 GSEA.ReadCHIPFile <-
 function(file = "NULL") {

@@ -4,6 +4,8 @@
 #'
 #' Internal `GSEA.Analyze.Sets` function.
 #'
+#' @keywords internal
+#'
 
 GSEA.write.gct <-
 function(gct, filename) {

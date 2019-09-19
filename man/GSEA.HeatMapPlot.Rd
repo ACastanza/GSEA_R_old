@@ -13,3 +13,4 @@ GSEA.HeatMapPlot(V, row.names = F, col.labels, col.classes,
 \details{
 Internal `GSEA` function invoked if gsea.type="GSEA"
 }
+\keyword{internal}

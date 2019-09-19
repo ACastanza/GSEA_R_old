@@ -44,6 +44,8 @@
 #' Matrix with the orderings that will sort the columns of the rnk.matrix in 
 #' decreasing rnk order.
 #'
+#' @keywords internal
+#'
 
 GSEA.GeneRanking <-
 function(A, class.labels, gene.labels, nperm, permutation.type = 0, 

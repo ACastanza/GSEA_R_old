@@ -12,3 +12,4 @@ GSEA.Gct2Frame(filename = "NULL")
 \details{
 Internal `GSEA` function.
 }
+\keyword{internal}

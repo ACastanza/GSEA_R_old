@@ -16,9 +16,10 @@
 #' @param input.ds Input gene expression dataset file in GCT format or RNK format if preranked is specified to gsea.type
 #' @param input.cls Input class vector (phenotype) file in CLS format
 #' @param input.chip If collapse.dataset = TRUE, read in a CHIP formatted gene mapping file to convert dataset to gene symbols
-#' @param gene.ann Gene microarray annotation file (Affymetrix Netaffyx *.csv format) (default: none)
-#' @param gs.file Gene set database in GMT format
-#' @param output.directory: Directory where to store output and results (default: .)
+#' @param gene.ann Depreciated parameter. Gene microarray annotation file (Affymetrix Netaffyx *.csv format) (default: none)
+#' @param gs.db Gene set database in GMT format
+#' @param gs.ann Depreciated parameter. Gene Set database annotation file (default: none)
+#' @param output.directory Directory where to store output and results (default: .)
 #' @param doc.string Documentation string used as a prefix to name result files (default: 'gsea_result')
 #' @param non.interactive.run Run in interactive (i.e. R GUI) or batch (R command line) mode (default: F)
 #' @param reshuffling.type Type of permutation reshuffling: 'sample.labels' or 'gene.labels' (default: 'sample.labels')
@@ -40,6 +41,7 @@
 #' @param replace Resampling mode (replacement or not replacement). For experts only (default: F)
 #' @param collapse.dataset collapse dataset from user specified identifiers to Gene Symbols (default: FALSE)
 #' @param collapse.mode Method for collapsing the dataset, accepts "max", "median", "mean", "sum", (default: NOCOLLAPSE)
+#' @param save.intermediate.results save intermediate results files including ranks and permutations
 #' @param use.fast.enrichment.routine If true it uses a faster GSEA.EnrichmentScore2 to compute random perm. enrichment
 #' @param gsea.type Mode to run GSEA. Specify either "GSEA" for standard mode, or "preranked" to allow parsing of .RNK file
 #' @param rank.metric Method for ranking genes. Accepts either signal-to-noise ratio "S2N" (default) or "ttest" (default: S2N)
@@ -91,6 +93,7 @@
 #' @importFrom graphics axis image layout legend lines par plot points text
 #' @importFrom stats density dist hclust median pnorm sd
 #' @importFrom utils read.delim read.table write.table
+#' @importFrom rlang .data
 #' @import dplyr
 #'
 #' @export
@@ -300,7 +303,7 @@ GSEA <- function(input.ds, input.cls, input.chip = "NOCHIP", gene.ann = "", gs.d
   dataset <- dataset[match(unique(dataset$NAME), dataset$NAME), ]
   dataset.ann <- as.data.frame(dataset[, 1], stringsAsFactors = FALSE, header = FALSE)
   rownames(dataset) <- dataset[, 1]
-  dataset = subset(dataset, select = -c(NAME))
+  dataset = subset(dataset, select = -c(.data$NAME))
   gene.labels <- row.names(dataset)
   dataset.ann <- cbind(dataset.ann, "NA", stringsAsFactors = FALSE)
   colnames(dataset.ann)[1] <- "Gene.Symbol"

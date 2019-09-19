@@ -19,6 +19,8 @@
 #' genes in the gene list Outputs: ES: Enrichment score (real number between -1
 #' and +1)
 #'
+#' @keywords internal
+#'
 
 GSEA.EnrichmentScore2 <-
 function(gene.list, gene.set, weighted.score.type = 1, correl.vector = NULL) {
